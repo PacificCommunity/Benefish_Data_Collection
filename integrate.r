@@ -59,8 +59,8 @@
       ##
       ##    Read all of Bob's spreadsheets into R
       ##
-         source("Programmes/Pdftools_Play.r")  
-         source("Programmes/Pdftools_Play.r")  
+        # source("Programmes/Pdftools_Play.r")  # This turns out to be less useful than I thought.
+         source("Programmes/Read_Spreadsheets.r")  
 
 
          
