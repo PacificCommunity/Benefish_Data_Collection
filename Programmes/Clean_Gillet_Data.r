@@ -595,9 +595,118 @@
             X$Time_Period <- 2021
             
             Cleaned[["Fisheries_HarvestXXSamoa"]] <- X
+         }  else if(i == "RAWDATA_Sheet1XX000_Tuvalu_graphs")
+         {
+            Fisheries_Harvest_Volume <- All_Data[[i]][,c(1,2)]
+            Fisheries_Harvest_Value  <- All_Data[[i]][,c(1,3)]
+            
+            Fisheries_Harvest_Volume$Measure <- "Volume"
+            Fisheries_Harvest_Value$Measure  <- "Value"
+
+            Fisheries_Harvest_Volume$Unit <- "Tonnes"
+            Fisheries_Harvest_Value$Unit  <- "AU$"
+
+            names(Fisheries_Harvest_Volume) <- c("Fishery", "Obs_Value", "Measure", "Unit")
+            names(Fisheries_Harvest_Value)  <- c("Fishery", "Obs_Value", "Measure", "Unit")
+
+            X <- rbind(Fisheries_Harvest_Volume, 
+                       Fisheries_Harvest_Value)
+            X$Fishery   <- str_trim(str_replace_all(X$Fishery, " \\(pcs\\)",""), side = "both")
+            
+            X$Obs_Value <- as.numeric(str_replace_all(X$Obs_Value, ",", ""))
+            X <- X[((X$Obs_Value != "") & !is.na(X$Obs_Value)),]
+            
+            X$Freq <- "A"
+            X$Time_Period <- 2021
+            
+            Cleaned[["Fisheries_HarvestXXTuvalu"]] <- X
+         }  else if(i == "RAWDATA_Sheet1XX000_Vanuatu_graphs")
+         {
+            Fisheries_Harvest_Volume <- All_Data[[i]][1:6,c(1,2)]
+            Fisheries_Harvest_Pieces <- All_Data[[i]][6,c(1,2)]
+            Fisheries_Harvest_Value  <- All_Data[[i]][1:6,c(1,3)]
+            
+            Fisheries_Harvest_Volume$Measure <- "Volume"
+            Fisheries_Harvest_Pieces$Measure <- "Volume"
+            Fisheries_Harvest_Value$Measure  <- "Value"
+
+            Fisheries_Harvest_Volume$Unit <- "Tonnes"
+            Fisheries_Harvest_Pieces$Unit <- "Pieces"
+            Fisheries_Harvest_Value$Unit  <- "VT"
+
+            names(Fisheries_Harvest_Volume) <- c("Fishery", "Obs_Value", "Measure", "Unit")
+            names(Fisheries_Harvest_Pieces) <- c("Fishery", "Obs_Value", "Measure", "Unit")
+            names(Fisheries_Harvest_Value)  <- c("Fishery", "Obs_Value", "Measure", "Unit")
+
+            ##
+            ##    Hardcoded difference between pdf and excel data
+            ##
+            Fisheries_Harvest_Pieces$Obs_Value[1] <- 4000
+            Fisheries_Harvest_Volume$Obs_Value[Fisheries_Harvest_Volume$Fishery == "Aquaculture"] <- 8
+
+            X <- rbind(Fisheries_Harvest_Volume, 
+                       Fisheries_Harvest_Pieces, 
+                       Fisheries_Harvest_Value)
+            X$Fishery   <- str_trim(str_replace_all(X$Fishery, " \\(pcs\\)",""), side = "both")
+            
+            X$Obs_Value <- as.numeric(str_replace_all(X$Obs_Value, ",", ""))
+            X <- X[((X$Obs_Value != "") & !is.na(X$Obs_Value)),]
+            
+            X$Freq <- "A"
+            X$Time_Period <- 2021
+            
+            Cleaned[["Fisheries_HarvestXXVanuatu"]] <- X
+         }  else if(i == "RAWDATA_Sheet1XX000_Wallis_graphs")
+         {
+            Fisheries_Harvest_Volume <- All_Data[[i]][1:6,c(1,2)]
+            Fisheries_Harvest_Value  <- All_Data[[i]][1:6,c(1,10)]
+            
+            Fisheries_Harvest_Volume$Measure <- "Volume"
+            Fisheries_Harvest_Value$Measure  <- "Value"
+
+            Fisheries_Harvest_Volume$Unit <- "Tonnes"
+            Fisheries_Harvest_Value$Unit  <- "XPF"
+
+            names(Fisheries_Harvest_Volume) <- c("Fishery", "Obs_Value", "Measure", "Unit")
+            names(Fisheries_Harvest_Value)  <- c("Fishery", "Obs_Value", "Measure", "Unit")
+
+            X <- rbind(Fisheries_Harvest_Volume, 
+                       Fisheries_Harvest_Value)
+            X$Fishery   <- str_trim(str_replace_all(X$Fishery, " \\(pcs\\)",""), side = "both")
+            
+            X$Obs_Value <- as.numeric(str_replace_all(X$Obs_Value, ",", ""))
+            X <- X[((X$Obs_Value != "") & !is.na(X$Obs_Value)),]
+            
+            X$Freq <- "A"
+            X$Time_Period <- 2021
+            
+            Cleaned[["Fisheries_HarvestXXWallis_and_Futuna"]] <- X
+         }  else if(i == "RAWDATA_Sheet1XX000_Wallis_graphs")
+         {
+            Fisheries_Harvest_Volume <- All_Data[[i]][1:6,c(1,2)]
+            Fisheries_Harvest_Value  <- All_Data[[i]][1:6,c(1,10)]
+            
+            Fisheries_Harvest_Volume$Measure <- "Volume"
+            Fisheries_Harvest_Value$Measure  <- "Value"
+
+            Fisheries_Harvest_Volume$Unit <- "Tonnes"
+            Fisheries_Harvest_Value$Unit  <- "XPF"
+
+            names(Fisheries_Harvest_Volume) <- c("Fishery", "Obs_Value", "Measure", "Unit")
+            names(Fisheries_Harvest_Value)  <- c("Fishery", "Obs_Value", "Measure", "Unit")
+
+            X <- rbind(Fisheries_Harvest_Volume, 
+                       Fisheries_Harvest_Value)
+            X$Fishery   <- str_trim(str_replace_all(X$Fishery, " \\(pcs\\)",""), side = "both")
+            
+            X$Obs_Value <- as.numeric(str_replace_all(X$Obs_Value, ",", ""))
+            X <- X[((X$Obs_Value != "") & !is.na(X$Obs_Value)),]
+            
+            X$Freq <- "A"
+            X$Time_Period <- 2021
+            
+            Cleaned[["Fisheries_HarvestXXWallis_and_Futuna"]] <- X
          }   
-  
-      
       }
       Cleaned
       
@@ -607,7 +716,7 @@
  [1] "RAWDATA_Feuil1XXFigure_32-6"                                                                                                         
 [16]                                     "RAWDATA_Sheet1XX000_Revised_New_Cal_graphs"                                                         
 [19]                                                                                                 
-[22] "RAWDATA_Sheet1XX000_Tuvalu_graphs"                                 "RAWDATA_Sheet1XX000_Vanuatu_graphs"                                "RAWDATA_Sheet1XX000_Wallis_graphs"                                
+[22]                                                                                                  
 [25] "RAWDATA_Sheet1XXCorrection_to_pie_charts_on_production_by_fishery" "RAWDATA_Sheet1XXEmployment_1"                                      "RAWDATA_Sheet1XXEmployment_graphs"                                
 [28] "RAWDATA_Sheet1XXGraphs_for_export_chapter"                         "RAWDATA_Sheet1XXGraphs_for_fish_consumption_chapter"               "RAWDATA_Sheet1XXGraphs_for_GDP_chapters"                          
 [31] "RAWDATA_Sheet1XXGraphs_for_govt_revenue_chapter"                   "RAWDATA_Sheet1XXGraphs_production_chapter"                         "RAWDATA_Sheet1XXMore_graphs_gdp_chapter"                          
