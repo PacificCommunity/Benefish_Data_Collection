@@ -49,6 +49,5 @@ po/*~
 rsconnect/
 *.rda
 *.pdf
-*.csv
 *.png
 

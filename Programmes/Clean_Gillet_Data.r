@@ -761,6 +761,7 @@
       
       unique(Fisheries_Harvest$Fishery)
       Fisheries_Harvest$Fishery[Fisheries_Harvest$Fishery == "Offshore Locally based"] <- "Offshore Locally-based"
+      unique(Fisheries_Harvest$Fishery)
       
       unique(Fisheries_Harvest$Unit)
       Fisheries_Harvest$Unit[Fisheries_Harvest$Unit == "Offshore Locally based"] <- "Offshore Locally-based"
@@ -782,6 +783,10 @@
       ##       "RAWDATA_Sheet1XXGraphs_for_govt_revenue_chapter"
       ##       "RAWDATA_Sheet1XXGraphs_production_chapter"
       ##       "RAWDATA_Sheet1XXMore_graphs_gdp_chapter"
+All_Data[["RAWDATA_Sheet1XXGraphs_for_export_chapter"]]      
+      
+      
+      
       
    save(Fisheries_Harvest, file = "Data_Intermediate/Fisheries_Harvest.rda") 
    save(All_Data, file = "Data_Intermediate/All_Data.rda") 
@@ -790,3 +795,7 @@
 ##
 ##    And we're done
 ##
+load("Data_Intermediate/Fisheries_Harvest.rda")
+write.table(Fisheries_Harvest, file="Data_Output/Fisheries_Harvest.csv", sep = ",", row.names = FALSE)
+
+ 
