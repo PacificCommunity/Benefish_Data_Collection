@@ -47,6 +47,6 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
-*.rda
-*.png
+#*.rda
+#*.png
 
