@@ -63,7 +63,129 @@
          source("Programmes/Read_Spreadsheets.r")  
          source("Programmes/Clean_Gillet_Data.r")  
 
-
+      ##
+      ##    Clean the manually entered data
+      ##
+         ##
+         ##   American Samoa                
+         ##
+            
+            
+         ##
+         ##   Cook Islands                  
+         ##
+            
+            
+         ##
+         ##   Federated States of Micronesia
+         ##
+            
+            
+         ##
+         ##   Fiji                          
+         ##
+            
+            
+         ##
+         ##   French Polynesia              
+         ##
+            
+            
+         ##
+         ##   Guam                          
+         ##
+            
+            
+         ##
+         ##   International Waters          
+         ##
+            
+            
+         ##
+         ##   Kiribati                      
+         ##
+            
+            
+         ##
+         ##   Marshall Islands              
+         ##
+            
+            
+         ##
+         ##   Nauru                         
+         ##
+            
+            
+         ##
+         ##   New Caledonia                 
+         ##
+            
+            
+         ##
+         ##   Niue                          
+         ##
+            
+            
+         ##
+         ##   Northern Marianas Islands     
+         ##
+            
+            
+         ##
+         ##   Palau                         
+         ##
+            
+            
+         ##
+         ##   Papau New Guinea              
+         ##
+            
+            
+         ##
+         ##   Pitcairn Islands              
+         ##
+            
+            
+         ##
+         ##   Samoa                         
+         ##
+            
+            
+         ##
+         ##   Solomon Islands               
+         ##
+            
+            
+         ##
+         ##   Summary Tables                
+         ##
+            
+            
+         ##
+         ##   Tokelau                       
+         ##
+            
+            
+         ##
+         ##   Tonga                         
+         ##
+            
+            
+         ##
+         ##   Tuvalu                        
+         ##
+            
+            
+         ##
+         ##   Vanuatu                       
+         ##
+            
+            
+         ##
+         ##   Wallis and Futuna           
+         ##
+            
+            
 
          
 ##
