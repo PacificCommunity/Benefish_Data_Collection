@@ -66,6 +66,7 @@
       ##
       ##    Clean the manually entered data
       ##
+         source("Programmes/Cut_Up_The_Data.r") # This turns the spreadsheets into lists of member countries, and their tables as data frames.
          ##
          ##   American Samoa                
          ##

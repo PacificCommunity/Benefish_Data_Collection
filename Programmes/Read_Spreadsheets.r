@@ -73,7 +73,7 @@
                                  ##
                                  ##     Stick everything back in an appropriately named data frame and save
                                  ##
-                                  X <- read.csv(paste0(str_replace_all(getwd(), "\\/", "\\\\\\\\"), "\\\\Data_Intermediate\\\\test.csv"), colClasses = c("character"))
+                                  X <- read.csv(paste0(str_replace_all(getwd(), "\\/", "\\\\\\\\"), "\\\\Data_Intermediate\\\\test.csv"), colClasses = c("character"),header = FALSE)
                                   X[] <- lapply(X, as.character)
                                   assign(paste0("RAWDATA_", Name, "XX", Directories$Save_Name[File]), X )
                                   save(list = paste0("RAWDATA_", Name, "XX", Directories$Save_Name[File]), 

@@ -14,22 +14,26 @@
    ##
    ##    Collect up the downloaded files
    ##
-      Contents <- as.data.frame(list.files(path = "Data_Intermediate/", pattern = "*Manually_Collected_Data_Version2.rda"))
-      names(Contents) <- "DataFrames"
-      Contents$Dframe <- str_split_fixed(Contents$DataFrames, "\\.", n=2)[,1]
+      load('Data_Intermediate/Country_Data.rda')
       
-      All_Data <- lapply(Contents$DataFrames, function(File){
-                           load(paste0("Data_Intermediate/", File))
-                           X <- get(str_split_fixed(File, "\\.", n=2)[,1])
-                           rm(list = c(as.character(File)))
-                           return(X)
-                        })
-      names(All_Data) <- Contents$Dframe
-        
-      Member_Country <- str_replace_all(str_split_fixed(Contents$Dframe, "XX",2)[,1], "RAWDATA_", "")
-      t(t(Member_Country))
-        
- [1,] "American_Samoa"                
+   ##
+   ##    Collect up and process the American_Samoa files
+   ##
+      American_Samoa <- Country_Data[["American_Samoa"]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  [2,] "Cook_Islands"                  
  [3,] "Federated_States_of_Micronesia"
  [4,] "Fiji"                          
