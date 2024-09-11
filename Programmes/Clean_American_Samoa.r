@@ -94,6 +94,25 @@
       Clean_American_Samoa[["Number of vessels - Longline"]] <- Z[,c("Measure","Table",            "Year", "Unit", "Value")]
 
 
+   ##
+   ##    Annual fisheries and aquaculture harvest - Table20-3
+   ##
+      X <- American_Samoa[[3]]
+      X_Name <- names(American_Samoa[3])
+      names(X) <- X[1,]
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Harvest sector"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",",""))
+      X$Harvest_Sector <- str_trim(X$`Harvest sector`)
+      X <- X[!is.na(X$Value),]
+      X <- X[!str_detect(X$Harvest_Sector, "Total"),]
+      X$Measure <- "Annual fisheries and aquaculture harvest"
+      X$Year    <- 2021
+      X$Unit  = ifelse(X$variable == "Volume (t)", "Tonnes", "US$")
+      Clean_American_Samoa[["Annual fisheries and aquaculture harvest"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+
+
 
    ##
    ## Save files our produce some final output of something

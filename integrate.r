@@ -70,7 +70,7 @@
          ##
          ##   American Samoa                
          ##
-            
+            source("Programmes/Clean_American_Samoa.r")  
             
          ##
          ##   Cook Islands                  
