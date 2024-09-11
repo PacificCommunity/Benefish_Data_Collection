@@ -60,9 +60,9 @@
                         Table_Name <- Next[2,which(Next[1,] == "Measure")]
                         Table_Name <- ifelse(str_detect(Table_Name,"Annual fisheries and aquaculture harvest"), "Annual fisheries and aquaculture harvest", 
                                        # ifelse(str_detect(Table_Name,"Fishing contribution to"),"Fishing contribution to GDP",
-                                        # ifelse(str_detect(Table_Name,"Estimates by the Benefish studies"),"Estimates by the Benefish studies of annual fisheries harvests",
-                                         # ifelse(str_detect(Table_Name,"Fish exports of") | str_detect(Table_Name,"Fisheries exports") | str_detect(Table_Name,"Fishery exports"),"Fish exports",
-                                           Table_Name)
+                                         ifelse(str_detect(Table_Name,"Estimates by the Benefish studies"),"Estimates by the Benefish studies of annual fisheries harvests",
+                                          ifelse(str_detect(Table_Name,"Fish exports of") | str_detect(Table_Name,"Fisheries exports") | str_detect(Table_Name,"Fishery exports"),"Fish exports",
+                                           Table_Name)))
                      
                      
                      Separated_Data[[paste(Table_Name, Next[2,length(Next)], sep = "XXTable")]] <- Next
@@ -78,9 +78,9 @@
                               Table_Name <- Next[2,which(Next[1,] == "Measure")]
                               Table_Name <- ifelse(str_detect(Table_Name,"Annual fisheries and aquaculture harvest"), "Annual fisheries and aquaculture harvest", 
                                              # ifelse(str_detect(Table_Name,"Fishing contribution to"),"Fishing contribution to GDP",
-                                              # ifelse(str_detect(Table_Name,"Estimates by the Benefish studies"),"Estimates by the Benefish studies of annual fisheries harvests",
-                                               # ifelse(str_detect(Table_Name,"Fish exports of") | str_detect(Table_Name,"Fisheries exports") | str_detect(Table_Name,"Fishery exports"),"Fish exports",
-                                                 Table_Name)
+                                               ifelse(str_detect(Table_Name,"Estimates by the Benefish studies"),"Estimates by the Benefish studies of annual fisheries harvests",
+                                                ifelse(str_detect(Table_Name,"Fish exports of") | str_detect(Table_Name,"Fisheries exports") | str_detect(Table_Name,"Fishery exports"),"Fish exports",
+                                                 Table_Name)))
                            
                            Separated_Data[[paste(Table_Name, Next[2,length(Next)], sep = "XXTable")]] <- Next
                         }                  
