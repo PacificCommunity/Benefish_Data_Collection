@@ -1,5 +1,5 @@
 ##
-##    Programme:  Clean_American_Samoa.R
+##    Programme:  Clean_Cook_Islands.R
 ##
 ##    Objective:  What is this programme designed to do?
 ##
@@ -17,36 +17,40 @@
       load('Data_Intermediate/Country_Data.rda')
       
    ##
-   ##    Collect up and process the American_Samoa files
+   ##    Collect up and process the Cook_Islands files
    ##
-      American_Samoa <- Country_Data[["American_Samoa"]]
+      Cook_Islands <- Country_Data[["Cook_Islands"]]
       
-      Clean_American_Samoa <- list()
+      Clean_Cook_Islands <- list()
    ##
-   ##    Catches of the major fisheries in American Samoa - Table20-1
+   ##    Catches of the major fisheries in Cook Islands - Table6-1 & Table6-2
    ##
-      X <- American_Samoa[[1]]
-      X_Name <- names(American_Samoa[1])
-      X$V1[1] <- "Year"
-      names(X) <- X[1,]
-      X <- reshape2::melt(X[2:nrow(X),],
-                          id.var = c("Measure","Table", "Method", "Year"),
-                          factorsAsStrings = FALSE)
-      X$value <- as.numeric(str_replace_all(X$value, ",",""))
-      X <- X[!is.na(X$value),]
-      X <- X[!str_detect(X$variable, "total"),]
-      X <- X[!str_detect(X$Method, "total"),]
-      X <- X[!str_detect(X$variable, "pounds"),]
-      X$Measure <- "Catches by Method"
-      X$Unit  = "Tonnes"
-      X$Value = X$value/1000 
-      Clean_American_Samoa[["Catches by Method"]] <- X[,c("Measure","Table", "Method", "Year", "Unit", "Value")]
+      ##
+      ##    Table 6-2
+      ##
+         X <- Cook_Islands[[2]]
+         X_Name <- names(Cook_Islands[2])
+         names(X) <- X[1,]
+         X$Year <- 2021
+         
+         X <- reshape2::melt(X[2:nrow(X),],
+                             id.var = c("Measure","Table", "Gear ", "Year"),
+                             factorsAsStrings = FALSE)
+         X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
+         X <- X[!is.na(X$Value),]
+         X <- X[!str_detect(X$variable, regex("total", ignore_case = TRUE)),]
+         X$Measure <- "Catches by Method"
+         X$Unit    <- ifelse(str_detect(X$value, "hooks"), "Hooks",
+                        ifelse(str_detect(X$value, "days"), "Days","Tonnes"))
+         X$Species <- 
+                     
+         Clean_Cook_Islands[["Catches by Method"]] <- X[,c("Measure","Table", "Method", "Year", "Unit", "Value")]
 
    ##
    ##    Catches by American Samoa longline vessels - Table20-2
    ##
-      X <- American_Samoa[[2]]
-      X_Name <- names(American_Samoa[2])
+      X <- Cook_Islands[[2]]
+      X_Name <- names(Cook_Islands[2])
       X$V1[2] <- "Species"
       Map <- data.frame(variable = as.character(names(X)),
                         Year = as.character(X[2,]))
@@ -89,15 +93,15 @@
       Z$Unit  = "Number"
       Z$Table  = "20-2b"
       
-      Clean_American_Samoa[["Catch Volume - Longline"]]      <- Y[,c("Measure","Table", "Species", "Year", "Unit", "Value")]
-      Clean_American_Samoa[["Number of vessels - Longline"]] <- Z[,c("Measure","Table",            "Year", "Unit", "Value")]
+      Clean_Cook_Islands[["Catch Volume - Longline"]]      <- Y[,c("Measure","Table", "Species", "Year", "Unit", "Value")]
+      Clean_Cook_Islands[["Number of vessels - Longline"]] <- Z[,c("Measure","Table",            "Year", "Unit", "Value")]
 
 
    ##
    ##    Annual fisheries and aquaculture harvest - Table20-3
    ##
-      X <- American_Samoa[[3]]
-      X_Name <- names(American_Samoa[3])
+      X <- Cook_Islands[[3]]
+      X_Name <- names(Cook_Islands[3])
       names(X) <- X[1,]
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Harvest sector"),
@@ -109,35 +113,45 @@
       X$Measure <- "Annual fisheries and aquaculture harvest"
       X$Year    <- 2021
       X$Unit  = ifelse(X$variable == "Volume (t)", "Tonnes", "US$")
-      Clean_American_Samoa[["Annual fisheries and aquaculture harvest"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Cook_Islands[["Annual fisheries and aquaculture harvest"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
 
    ##
-   ##    Estimates by the Benefish studies of annual fisheries harvests - Table20-4
+   ##    Estimates by the Benefish studies of annual fisheries harvests - Table6-4
    ##
-      X <- American_Samoa[[4]]
-      X_Name <- names(American_Samoa[4])
+      X <- Cook_Islands[[3]]
+      X_Name <- names(Cook_Islands[3])
       for(i in 2:nrow(X))
       {
          X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
       }
       names(X) <- X[1,]
- 
+      ##
+      ##    Aquaculture tonnes or pcs... Choose...
+      ##       Pieces
+      ##
+         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Estimate year` == 2007))] <- 190000
+         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Estimate year` == 2014))] <-  52000
+         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Estimate year` == 2021))] <-  81500
+         
+         
       X <- reshape2::melt(X[2:nrow(X),],
-                          id.var = c("Measure","Table", "Harvest sector", "Year"),
+                          id.var = c("Measure","Table", "Harvest sector", "Estimate year"),
                           factorsAsStrings = FALSE)
       X$Value <- as.numeric(str_replace_all(X$value, ",",""))
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
-      X$Unit  = ifelse(X$variable == "Volume (t)", "Tonnes", "US$")
-      Clean_American_Samoa[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      X$Year    <- X$`Estimate year`
+      X$Unit  = ifelse(X$variable == "Value (NZ$)", "NZ$", 
+                  ifelse(X$Harvest_Sector == "Aquaculture","Pieces", "Tonnes"))
+      Clean_Cook_Islands[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
    ##
    ##    Fishing contribution to American Samoa GDP in 2021 - Table20-5
    ##
-      X <- American_Samoa[[5]]
-      X_Name <- names(American_Samoa[5])
+      X <- Cook_Islands[[5]]
+      X_Name <- names(Cook_Islands[5])
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -150,13 +164,13 @@
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "US$")
-      Clean_American_Samoa[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Cook_Islands[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
 
    ##
    ## Save files our produce some final output of something
    ##
-      save(Clean_American_Samoa, file = 'Data_Intermediate/Clean_American_Samoa.rda')
+      save(Clean_Cook_Islands, file = 'Data_Intermediate/Clean_Cook_Islands.rda')
 ##
 ##    And we're done
 ##
