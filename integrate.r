@@ -75,12 +75,12 @@
          ##
          ##   Cook Islands                  
          ##
-            
+            source("Programmes/Clean_Cook_Islands.r")  
             
          ##
          ##   Federated States of Micronesia
          ##
-            
+            source("Programmes/Clean_Federated_States_of_Micronesia.r")  
             
          ##
          ##   Fiji                          

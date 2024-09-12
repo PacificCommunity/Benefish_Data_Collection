@@ -1,5 +1,5 @@
 ##
-##    Programme:  Clean_Cook_Islands.R
+##    Programme:  Clean_Federated_States_of_Micronesia.R
 ##
 ##    Objective:  What is this programme designed to do?
 ##
@@ -17,19 +17,19 @@
       load('Data_Intermediate/Country_Data.rda')
       
    ##
-   ##    Collect up and process the Cook_Islands files
+   ##    Collect up and process the Federated_States_of_Micronesia files
    ##
-      Cook_Islands <- Country_Data[["Cook_Islands"]]
+      Federated_States_of_Micronesia <- Country_Data[["Federated_States_of_Micronesia"]]
       
-      Clean_Cook_Islands <- list()
+      Clean_Federated_States_of_Micronesia <- list()
    ##
    ##    Catches of the major fisheries in Cook Islands - Table6-1 & Table6-2
    ##
       ##
       ##    Table 6-2
       ##
-         X <- Cook_Islands[[2]]
-         X_Name <- names(Cook_Islands[2])
+         X <- Federated_States_of_Micronesia[[2]]
+         X_Name <- names(Federated_States_of_Micronesia[2])
          names(X) <- X[1,]
          X$Year <- 2021
          
@@ -51,8 +51,8 @@
       ##
       ##    Table 6-1
       ##
-         Y <- Cook_Islands[[1]]
-         Y_Name <- names(Cook_Islands[1])
+         Y <- Federated_States_of_Micronesia[[1]]
+         Y_Name <- names(Federated_States_of_Micronesia[1])
          Y$V1[1] <- "Year"
          names(Y) <- Y[1,]
          Y <- reshape2::melt(Y[2:nrow(Y),],
@@ -68,13 +68,13 @@
 
          Combined_Table <- rbind.fill(X,Y)
                      
-         Clean_Cook_Islands[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
+         Clean_Federated_States_of_Micronesia[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
 
    ##
    ##    Estimates by the Benefish studies of annual fisheries harvests - Table6-4
    ##
-      X <- Cook_Islands[[3]]
-      X_Name <- names(Cook_Islands[3])
+      X <- Federated_States_of_Micronesia[[3]]
+      X_Name <- names(Federated_States_of_Micronesia[3])
       for(i in 2:nrow(X))
       {
          X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
@@ -99,13 +99,13 @@
       X$Year    <- X$`Estimate year`
       X$Unit  = ifelse(X$variable == "Value (NZ$)", "NZ$", 
                   ifelse(X$Harvest_Sector == "Aquaculture","Pieces", "Tonnes"))
-      Clean_Cook_Islands[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Federated_States_of_Micronesia[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
    ##
    ##    Fishing contribution to Cook Islands GDP in 2021 - Table6-5
    ##
-      X <- Cook_Islands[[4]]
-      X_Name <- names(Cook_Islands[4])
+      X <- Federated_States_of_Micronesia[[4]]
+      X_Name <- names(Federated_States_of_Micronesia[4])
       X$V1[1] <- "Harvest sector"
       names(X) <- X[1,]
  
@@ -120,14 +120,14 @@
       X$Measure <- "Fishing contribution to GDP"
       X <- X[X$Harvest_Sector == "Fishing (including pearls)",]
       X$Unit    <- "NZ$"
-      Clean_Cook_Islands[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Federated_States_of_Micronesia[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
 
    ##
    ##    Fishing contribution to  Cook Islands GDP in 2021 - Table20-5
    ##
-      X <- Cook_Islands[[6]]
-      X_Name <- names(Cook_Islands[6])
+      X <- Federated_States_of_Micronesia[[6]]
+      X_Name <- names(Federated_States_of_Micronesia[6])
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -140,14 +140,14 @@
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "NZ$")
-      Clean_Cook_Islands[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Federated_States_of_Micronesia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
 
    ##
    ##    Fishing Exports - Table6-8
    ##
-      X <- Cook_Islands[["Exports of fishery productionXXTable6-8"]]
-      X_Name <- names(Cook_Islands["Exports of fishery productionXXTable6-8"])
+      X <- Federated_States_of_Micronesia[["Exports of fishery productionXXTable6-8"]]
+      X_Name <- names(Federated_States_of_Micronesia["Exports of fishery productionXXTable6-8"])
       X$V1[1] <- "Year"
       names(X) <- X[1,]
  
@@ -159,13 +159,13 @@
       X$Fish_Commodity <- str_trim(X$variable)
       X$Unit  = ifelse(X$variable == "Fisheries as a % of total exports", "Proportion", "NZ$")
       X$Value <- ifelse(X$variable == "Fisheries as a % of total exports", X$Value/10000, X$Value)
-      Clean_Cook_Islands[["Exports of fishery production"]] <- X[,c("Measure","Table", "Fish_Commodity", "Year", "Unit", "Value")]
+      Clean_Federated_States_of_Micronesia[["Exports of fishery production"]] <- X[,c("Measure","Table", "Fish_Commodity", "Year", "Unit", "Value")]
 
    ##
    ##    Fishing Revenue - Table6-9
    ##
-      X <- Cook_Islands[["Fisheries revenue (NZ$ thousands)XXTable6-9"]]
-      X_Name <- names(Cook_Islands["Fisheries revenue (NZ$ thousands)XXTable6-9"])
+      X <- Federated_States_of_Micronesia[["Fisheries revenue (NZ$ thousands)XXTable6-9"]]
+      X_Name <- names(Federated_States_of_Micronesia["Fisheries revenue (NZ$ thousands)XXTable6-9"])
       X$V1[1] <- "Component"
       names(X) <- X[1,]
  
@@ -178,12 +178,12 @@
                   ifelse(X$variable == "2019/20 Actual", 2020, 2021))
       X$Unit  <- "NZ$"
       X$Measure <- "Fisheries revenue"
-      Clean_Cook_Islands[["Fisheries revenue"]] <- X[,c("Measure","Table", "Component", "Year", "Unit", "Value")]
+      Clean_Federated_States_of_Micronesia[["Fisheries revenue"]] <- X[,c("Measure","Table", "Component", "Year", "Unit", "Value")]
 
    ##
    ##    Number of households engaged in fishing - Table6-10
    ##
-      X <- Cook_Islands[["Number of households engaged in fishingXXTable6-10"]]
+      X <- Federated_States_of_Micronesia[["Number of households engaged in fishingXXTable6-10"]]
       X$V1[1] <- "Location"
       names(X) <- X[1,]
  
@@ -198,11 +198,11 @@
       X$Location <- str_trim(X$Location)
       X$Unit  = ifelse(X$Location == "% participation", "Proportion", "Number")
       X$Value <- ifelse(X$Location == "% participation", X$Value/10000, X$Value)
-      Clean_Cook_Islands[["Number of households engaged in fishing"]] <- X[,c("Measure","Table", "Location", "Fish_Activity", "Year", "Unit", "Value")]
+      Clean_Federated_States_of_Micronesia[["Number of households engaged in fishing"]] <- X[,c("Measure","Table", "Location", "Fish_Activity", "Year", "Unit", "Value")]
    ##
    ## Save files our produce some final output of something
    ##
-      save(Clean_Cook_Islands, file = 'Data_Intermediate/Clean_Cook_Islands.rda')
+      save(Clean_Federated_States_of_Micronesia, file = 'Data_Intermediate/Clean_Federated_States_of_Micronesia.rda')
 ##
 ##    And we're done
 ##
