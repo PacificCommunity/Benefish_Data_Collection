@@ -32,14 +32,13 @@
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Method", "Year"),
                           factorsAsStrings = FALSE)
-      X$value <- as.numeric(str_replace_all(X$value, ",",""))
-      X <- X[!is.na(X$value),]
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))/1000
+      X <- X[!is.na(X$Value),]
       X <- X[!str_detect(X$variable, "total"),]
       X <- X[!str_detect(X$Method, "total"),]
       X <- X[!str_detect(X$variable, "pounds"),]
       X$Measure <- "Catches by Method"
       X$Unit  = "Tonnes"
-      X$Value = X$value/1000 
       Clean_American_Samoa[["Catches by Method"]] <- X[,c("Measure","Table", "Method", "Year", "Unit", "Value")]
 
    ##
@@ -58,8 +57,8 @@
       X <- merge(X,
                  Map,
                  by = c("variable"))
-      X$value <- as.numeric(str_replace_all(X$value, ",",""))
-      X <- X[!is.na(X$value),]
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
+      X <- X[!is.na(X$Value),]
       X$V1 <- str_trim(X$V1, side = "both")
       X$V1 <- str_replace_all(X$V1, "\\,  NPO \\(t\\)", "")
       X$V1 <- str_replace_all(X$V1, "\\,  SPO \\(t\\)", "")
@@ -70,7 +69,7 @@
       X <- X[!str_detect(X$V1, "Species"),]
       
 		Y <- with(X[X$V1 != "Number of vessels",],
-              aggregate(list(Value = value),
+              aggregate(list(Value = Value),
                         list(Year = Year,
                              Species = V1,
                              Measure = V12),
@@ -80,7 +79,7 @@
       Y$Table  = "20-2a"
                         
 		Z <- with(X[X$V1 == "Number of vessels",],
-              aggregate(list(Value = value),
+              aggregate(list(Value = Value),
                         list(Year = Year,
                              Measure = V12,
                              Table = V13),
@@ -101,7 +100,7 @@
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Harvest sector"),
                           factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, ",",""))
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X <- X[!str_detect(X$Harvest_Sector, "Total"),]
@@ -124,7 +123,7 @@
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Harvest sector", "Year"),
                           factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, ",",""))
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
@@ -141,7 +140,7 @@
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Harvest sector"),
                           factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, ",",""))
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X <- X[!str_detect(X$Harvest_Sector, "Total"),]
