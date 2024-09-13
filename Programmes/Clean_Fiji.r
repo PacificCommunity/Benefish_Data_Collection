@@ -1,5 +1,5 @@
 ##
-##    Programme:  Clean_Federated_States_of_Micronesia.R
+##    Programme:  Clean_Fiji.R
 ##
 ##    Objective:  What is this programme designed to do?
 ##
@@ -17,18 +17,18 @@
       load('Data_Intermediate/Country_Data.rda')
       
    ##
-   ##    Collect up and process the Federated_States_of_Micronesia files
+   ##    Collect up and process the Fiji files
    ##
-      Federated_States_of_Micronesia <- Country_Data[["Federated_States_of_Micronesia"]]
+      Fiji <- Country_Data[["Fiji"]]
       
-      Clean_Federated_States_of_Micronesia <- list()
+      Clean_Fiji <- list()
    ##
    ##    Catches of the major fisheries in Cook Islands - Table6-1 & Table6-2
    ##
       ##
       ##    Table 6-2
       ##
-         X <- Federated_States_of_Micronesia[[2]]
+         X <- Fiji[[2]]
          X$V1[1] <- "Species"
          names(X) <- X[1,]
          
@@ -46,7 +46,7 @@
       ##
       ##    Table 6-1
       ##
-         Y <- Federated_States_of_Micronesia[[1]]
+         Y <- Fiji[[1]]
          Y$V1[1] <- "Species"
          names(Y) <- Y[1,]
          Y <- reshape2::melt(Y[2:nrow(Y),],
@@ -63,12 +63,12 @@
 
          Combined_Table <- rbind.fill(X,Y)
                      
-         Clean_Federated_States_of_Micronesia[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
+         Clean_Fiji[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
 
    ##
    ##    Estimates by the Benefish studies of annual fisheries harvests - Table6-4
    ##
-      X <- Federated_States_of_Micronesia[["Estimates by the Benefish studies of annual fisheries harvestsXXTable7-6"]]
+      X <- Fiji[["Estimates by the Benefish studies of annual fisheries harvestsXXTable7-6"]]
       for(i in 2:nrow(X))
       {
          X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
@@ -94,12 +94,12 @@
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
       X$Unit  = ifelse(X$variable == "Value (US$)", "US$", 
                   ifelse(X$Harvest_Sector == "Aquaculture","Pieces", "Tonnes"))
-      Clean_Federated_States_of_Micronesia[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Fiji[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
    ##
-   ##    Fishing contribution to Federated_States_of_Micronesia GDP in 2021 - Table7-7
+   ##    Fishing contribution to Fiji GDP in 2021 - Table7-7
    ##
-      X <- Federated_States_of_Micronesia[["Fisheries contribution to GDP (millions of US$)XXTable7-7"]]
+      X <- Fiji[["Fisheries contribution to GDP (millions of US$)XXTable7-7"]]
       X$V1[1] <- "Harvest sector"
       names(X) <- X[1,]
  
@@ -113,14 +113,14 @@
       X$Year    <- as.numeric(str_replace_all(X$variable, "\\D+", ""))
       X$Measure <- "Fishing contribution to GDP"
       X$Unit    <- "US$"
-      Clean_Federated_States_of_Micronesia[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Fiji[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
 
    ##
    ##    Fishing contribution to  Cook Islands GDP in 2021 - Table20-5
    ##
-      X <- Federated_States_of_Micronesia[[6]]
-      X_Name <- names(Federated_States_of_Micronesia[6])
+      X <- Fiji[[6]]
+      X_Name <- names(Fiji[6])
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -133,12 +133,12 @@
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "NZ$")
-      Clean_Federated_States_of_Micronesia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Fiji[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
    ##
    ##    Fishing contribution to Cook Islands GDP in 2021 - Table20-5
    ##
-      X <- Federated_States_of_Micronesia[["Fishing contribution to GDP in 2021 using an alternative approachXXTable7-8"]]
+      X <- Fiji[["Fishing contribution to GDP in 2021 using an alternative approachXXTable7-8"]]
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -152,12 +152,51 @@
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "US$")
       X$GDP_Dimension <- str_trim(X$variable)
-      Clean_Federated_States_of_Micronesia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+      Clean_Fiji[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
 
    ##
    ## Save files our produce some final output of something
    ##
-      save(Clean_Federated_States_of_Micronesia, file = 'Data_Intermediate/Clean_Federated_States_of_Micronesia.rda')
+      save(Clean_Fiji, file = 'Data_Intermediate/Clean_Fiji.rda')
+##
+##    And we're done
+##
+
+
+
+
+
+ [3,] "Fiji"
+ [4,] "Fiji"                          
+ [5,] "French_Polynesia"              
+ [6,] "Guam"                          
+ [7,] "International_Waters"          
+ [8,] "Kiribati"                      
+ [9,] "Marshall_Islands"              
+[10,] "Nauru"                         
+[11,] "New_Caledonia"                 
+[12,] "Niue"                          
+[13,] "Northern_Marianas_Islands"     
+[14,] "Palau"                         
+[15,] "Papau_New_Guinea"              
+[16,] "Pitcairn_Islands"              
+[17,] "Samoa"                         
+[18,] "Solomon_Islands"               
+[19,] "Summary_Tables"                
+[20,] "Tokelau"                       
+[21,] "Tonga"                         
+[22,] "Tuvalu"                        
+[23,] "Vanuatu"                       
+[24,] "Wallis_and_Futuna"  
+
+
+
+
+   ##
+   ## Save files our produce some final output of something
+   ##
+      save(xxxx, file = 'Data_Intermediate/xxxxxxxxxxxxx.rda')
+      save(xxxx, file = 'Data_Output/xxxxxxxxxxxxx.rda')
 ##
 ##    And we're done
 ##

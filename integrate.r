@@ -68,18 +68,10 @@
       ##
          source("Programmes/Cut_Up_The_Data.r") # This turns the spreadsheets into lists of member countries, and their tables as data frames.
          ##
-         ##   American Samoa                
+         ##   Clean the Country Data                
          ##
             source("Programmes/Clean_American_Samoa.r")  
-            
-         ##
-         ##   Cook Islands                  
-         ##
             source("Programmes/Clean_Cook_Islands.r")  
-            
-         ##
-         ##   Federated States of Micronesia
-         ##
             source("Programmes/Clean_Federated_States_of_Micronesia.r")  
             
          ##
