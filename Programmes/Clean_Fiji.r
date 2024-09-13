@@ -23,12 +23,12 @@
       
       Clean_Fiji <- list()
    ##
-   ##    Catches of the major fisheries in Cook Islands - Table6-1 & Table6-2
+   ##    Volumes and values of the catch of Fiji'92s longline fleet - Table8-2
    ##
       ##
-      ##    Table 6-2
+      ##    Table 8-2
       ##
-         X <- Fiji[[2]]
+         X <- Fiji[["Volumes and values of the catch of Fiji\x92s longline fleetXXTable8-2"]]
          X$V1[1] <- "Species"
          names(X) <- X[1,]
          
