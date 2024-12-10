@@ -51,9 +51,10 @@
    ##
    ##    Set working directory
    ##
-      setwd("C:/Users/jamesh/GIT/Benefish_Data_Collection")
+      setwd("C:/From BigDisk/GIT/Benefish_Data_Collection")
       setwd("C:/Work_Related_Projects/SPC/Benefish_Data_Collection")
-      
+  
+     
    ##
    ##    
    ##
@@ -74,11 +75,8 @@
             source("Programmes/Clean_American_Samoa.r")  
             source("Programmes/Clean_Cook_Islands.r")  
             source("Programmes/Clean_Federated_States_of_Micronesia.r")  
-            
-         ##
-         ##   Fiji                          
-         ##
-            
+            source("Programmes/Clean_Fiji.r")  
+
             
          ##
          ##   French Polynesia              

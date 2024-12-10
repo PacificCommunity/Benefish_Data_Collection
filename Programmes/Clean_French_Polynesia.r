@@ -99,6 +99,45 @@
       X$Unit    <- "F$"
       Clean_Fiji[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
+
+   ##
+   ##    Fishing contribution to GDP in 2021 using an alternative approach - Table7-8
+   ##
+      X <- Fiji[["Fishing contribution to GDP in 2021 using an alternative approachXXTable7-8"]]
+      X_Name <- names(Fiji[6])
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Harvest sector"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
+      X$Harvest_Sector <- str_trim(X$`Harvest sector`)
+      X <- X[!is.na(X$Value),]
+      X <- X[!str_detect(X$Harvest_Sector, "Total"),]
+      X$Year    <- 2021
+      X$Measure <- "Fishing contribution to GDP - VAR Method"
+      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "F$")
+      Clean_Fiji[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+
+   ##
+   ##    Fishing contribution to Cook Islands GDP in 2021 - Table20-5
+   ##
+      X <- Fiji[["Fishing contribution to GDP in 2021 using an alternative approachXXTable7-8"]]
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Harvest sector"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
+      X$Harvest_Sector <- str_trim(X$`Harvest sector`)
+      X <- X[!is.na(X$Value),]
+      X <- X[!str_detect(X$Harvest_Sector, "Total"),]
+      X$Year    <- 2021
+      X$Measure <- "Fishing contribution to GDP - VAR Method"
+      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "US$")
+      X$GDP_Dimension <- str_trim(X$variable)
+      Clean_Fiji[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+
    ##
    ## Save files our produce some final output of something
    ##
