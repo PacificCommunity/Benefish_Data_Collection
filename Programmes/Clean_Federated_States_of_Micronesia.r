@@ -23,7 +23,7 @@
       
       Clean_Federated_States_of_Micronesia <- list()
    ##
-   ##    Catches of the major fisheries in Cook Islands - Table6-1 & Table6-2
+   ##    Catches of the major fisheries in Federated_States_of_Micronesia - Table6-1 & Table6-2
    ##
       ##
       ##    Table 6-2
@@ -117,7 +117,7 @@
 
 
    ##
-   ##    Fishing contribution to  Cook Islands GDP in 2021 - Table20-5
+   ##    Fishing contribution to Federated_States_of_Micronesia GDP in 2021 - Table20-5
    ##
       X <- Federated_States_of_Micronesia[[6]]
       X_Name <- names(Federated_States_of_Micronesia[6])
@@ -136,7 +136,7 @@
       Clean_Federated_States_of_Micronesia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
    ##
-   ##    Fishing contribution to Cook Islands GDP in 2021 - Table20-5
+   ##    Fishing contribution to Federated_States_of_Micronesia GDP in 2021 - Table20-5
    ##
       X <- Federated_States_of_Micronesia[["Fishing contribution to GDP in 2021 using an alternative approachXXTable7-8"]]
       names(X) <- X[1,]

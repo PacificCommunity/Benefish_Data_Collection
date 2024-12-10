@@ -76,11 +76,8 @@
             source("Programmes/Clean_Cook_Islands.r")  
             source("Programmes/Clean_Federated_States_of_Micronesia.r")  
             source("Programmes/Clean_Fiji.r")  
-
-            
-         ##
-         ##   French Polynesia              
-         ##
+            source("Programmes/Clean_French_Polynesia.r")  
+            source("Programmes/Clean_Guam.r")  
             
             
          ##
