@@ -1,5 +1,5 @@
 ##
-##    Programme:  Clean_New_Caledonia.R
+##    Programme:  Clean_Niue.R
 ##
 ##    Objective:  What is this programme designed to do?
 ##
@@ -17,16 +17,16 @@
       load('Data_Intermediate/Country_Data.rda')
       
    ##
-   ##    Collect up and process the New_Caledonia files
+   ##    Collect up and process the Niue files
    ##
-      New_Caledonia <- Country_Data[["New_Caledonia"]]
+      Niue <- Country_Data[["Niue"]]
       
-      Clean_New_Caledonia <- list()
+      Clean_Niue <- list()
       
    ##
    ##    Estimates by the Benefish studies of annual fisheries harvests - Table6-4
    ##
-      X <- New_Caledonia[["Estimates by the Benefish studies of annual fisheries harvestsXXTable23-5"]]
+      X <- Niue[["Estimates by the Benefish studies of annual fisheries harvestsXXTable12-2"]]
       for(i in 2:nrow(X))
       {
          X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
@@ -50,15 +50,15 @@
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
-      X$Unit  = ifelse(X$variable == "Nominal value (XPF)", "XPF", 
+      X$Unit  = ifelse(X$variable == "Nominal value (NZ$)", "NZ$", 
                   ifelse(X$Harvest_Sector == "AquacultureX","Pieces", "Tonnes"))
-      Clean_New_Caledonia[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Niue[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
       
 
    ##
-   ##    Fishing contribution to New_Caledonia GDP in 2021 - Table20-5
+   ##    Fishing contribution to Niue GDP in 2021 - Table20-5
    ##
-      X <- New_Caledonia[["Fishing contribution to GDP in 2021 using an alternative approachXXTable23-6"]]
+      X <- Niue[["Fishing contribution to GDP 2021 using an alternative approachXXTable12-4"]]
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -70,18 +70,18 @@
       X <- X[!str_detect(X$Harvest_Sector, "Total"),]
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
-      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "XPF")
+      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "NZ$")
       X$GDP_Dimension <- str_trim(X$variable)
-      Clean_New_Caledonia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+      Clean_Niue[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
       
    ##
-   ##    Catches of the major fisheries in New_Caledonia - Table6-1 & Table6-2
+   ##    Catches of the major fisheries in Niue - Table6-1 & Table6-2
    ##
       ##
       ##    Table 6-2
       ##
-         X <- New_Caledonia[[2]]
+         X <- Niue[[2]]
          X$V1[1] <- "Species"
          names(X) <- X[1,]
          
@@ -99,7 +99,7 @@
       ##
       ##    Table 6-1
       ##
-         Y <- New_Caledonia[[1]]
+         Y <- Niue[[1]]
          Y$V1[1] <- "Species"
          names(Y) <- Y[1,]
          Y <- reshape2::melt(Y[2:nrow(Y),],
@@ -116,13 +116,13 @@
 
          Combined_Table <- rbind.fill(X,Y)
                      
-         Clean_New_Caledonia[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
+         Clean_Niue[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
 
 
    ##
-   ##    Fishing contribution to New_Caledonia GDP in 2021 - Table7-7
+   ##    Fishing contribution to Niue GDP in 2021 - Table7-7
    ##
-      X <- New_Caledonia[["Fisheries contribution to GDP (millions of US$)XXTable7-7"]]
+      X <- Niue[["Fisheries contribution to GDP (millions of US$)XXTable7-7"]]
       X$V1[1] <- "Harvest sector"
       names(X) <- X[1,]
  
@@ -136,14 +136,14 @@
       X$Year    <- as.numeric(str_replace_all(X$variable, "\\D+", ""))
       X$Measure <- "Fishing contribution to GDP"
       X$Unit    <- "US$"
-      Clean_New_Caledonia[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Niue[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
 
    ##
-   ##    Fishing contribution to New_Caledonia GDP in 2021 - Table20-5
+   ##    Fishing contribution to Niue GDP in 2021 - Table20-5
    ##
-      X <- New_Caledonia[[6]]
-      X_Name <- names(New_Caledonia[6])
+      X <- Niue[[6]]
+      X_Name <- names(Niue[6])
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -156,12 +156,12 @@
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "NZ$")
-      Clean_New_Caledonia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Niue[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
    ##
    ## Save files our produce some final output of something
    ##
-      save(Clean_New_Caledonia, file = 'Data_Intermediate/Clean_New_Caledonia.rda')
+      save(Clean_Niue, file = 'Data_Intermediate/Clean_Niue.rda')
 ##
 ##    And we're done
 ##
