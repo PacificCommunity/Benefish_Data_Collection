@@ -79,28 +79,11 @@
             source("Programmes/Clean_French_Polynesia.r")  
             source("Programmes/Clean_Guam.r")  
             source("Programmes/Clean_International_Waters.r")  
-            source("Programmes/Clean_Kiribati.r")  # Not Finished
-            
-            
-         ##
-         ##   Kiribati                      
-         ##
-            
-            
-         ##
-         ##   Marshall Islands              
-         ##
-            
-            
-         ##
-         ##   Nauru                         
-         ##
-            
-            
-         ##
-         ##   New Caledonia                 
-         ##
-            
+            source("Programmes/Clean_Kiribati.r")
+            source("Programmes/Clean_Marshall_Islands.r")
+            source("Programmes/Clean_Nauru.r")
+            source("Programmes/Clean_New_Caledonia.r")
+            source("Programmes/Clean_Niue.r")  # Not Finished
             
          ##
          ##   Niue                          

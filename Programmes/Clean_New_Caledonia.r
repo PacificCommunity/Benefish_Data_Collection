@@ -1,5 +1,5 @@
 ##
-##    Programme:  Clean_Kiribati.R
+##    Programme:  Clean_New_Caledonia.R
 ##
 ##    Objective:  What is this programme designed to do?
 ##
@@ -17,16 +17,16 @@
       load('Data_Intermediate/Country_Data.rda')
       
    ##
-   ##    Collect up and process the Kiribati files
+   ##    Collect up and process the New_Caledonia files
    ##
-      Kiribati <- Country_Data[["Kiribati"]]
+      New_Caledonia <- Country_Data[["New_Caledonia"]]
       
-      Clean_Kiribati <- list()
+      Clean_New_Caledonia <- list()
       
    ##
-   ##    Estimates by the Benefish studies of annual fisheries harvests - Table9-4
+   ##    Estimates by the Benefish studies of annual fisheries harvests - Table6-4
    ##
-      X <- Kiribati[["Estimates by the Benefish studies of annual fisheries harvestsXXTable9-4"]]
+      X <- New_Caledonia[["Estimates by the Benefish studies of annual fisheries harvestsXXTable23-5"]]
       for(i in 2:nrow(X))
       {
          X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
@@ -38,27 +38,27 @@
       ##    Aquaculture tonnes or pcs... Choose...
       ##       Pieces
       ##
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2007))] <- 100
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2014))] <- 8642
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2021))] <- 2
+         #X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2007))] <- 16000
+         #X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2014))] <- 37400
+         #X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2021))] <- 65000
+         
          
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Harvest sector", "Year"),
                           factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
-      X$Unit  = ifelse(X$variable == "Nominal value (A$)", "A$", 
-                  ifelse(X$Harvest_Sector == "Aquaculture","Pieces", "Tonnes"))
-      Clean_Kiribati[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
-
+      X$Unit  = ifelse(X$variable == "Nominal value (XPF)", "XPF", 
+                  ifelse(X$Harvest_Sector == "AquacultureX","Pieces", "Tonnes"))
+      Clean_New_Caledonia[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      
 
    ##
-   ##    Fishing contribution to Kiribati GDP in 2021 - Table20-5
+   ##    Fishing contribution to New_Caledonia GDP in 2021 - Table20-5
    ##
-      X <- Kiribati[["Fishing contribution to GDP in 2021 using an alternative approachXXTable9-6"]]
-      X_Name <- names(Kiribati[6])
+      X <- New_Caledonia[["Fishing contribution to GDP in 2021 using an alternative approachXXTable23-6"]]
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -70,14 +70,15 @@
       X <- X[!str_detect(X$Harvest_Sector, "Total"),]
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
-      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "A$")
-      Clean_Kiribati[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "XPF")
+      X$GDP_Dimension <- str_trim(X$variable)
+      Clean_New_Caledonia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
-
+      
    ##
    ## Save files our produce some final output of something
    ##
-      save(Clean_Kiribati, file = 'Data_Intermediate/Clean_Kiribati.rda')
+      save(Clean_New_Caledonia, file = 'Data_Intermediate/Clean_New_Caledonia.rda')
 ##
 ##    And we're done
 ##
