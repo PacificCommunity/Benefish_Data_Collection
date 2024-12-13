@@ -83,41 +83,14 @@
             source("Programmes/Clean_Marshall_Islands.r")
             source("Programmes/Clean_Nauru.r")
             source("Programmes/Clean_New_Caledonia.r")
-            source("Programmes/Clean_Niue.r")  # Not Finished
-            
-         ##
-         ##   Niue                          
-         ##
-            
-            
-         ##
-         ##   Northern Marianas Islands     
-         ##
-            
-            
-         ##
-         ##   Palau                         
-         ##
-            
-            
-         ##
-         ##   Papau New Guinea              
-         ##
-            
-            
-         ##
-         ##   Pitcairn Islands              
-         ##
-            
-            
-         ##
-         ##   Samoa                         
-         ##
-            
-            
-         ##
-         ##   Solomon Islands               
-         ##
+            source("Programmes/Clean_Niue.r") 
+            source("Programmes/Clean_Northern_Marianas_Islands.r")
+            source("Programmes/Clean_Palau.r")  
+            source("Programmes/Clean_Papau_New_Guinea.r")
+            source("Programmes/Clean_Pitcairn_Islands.r")
+            source("Programmes/Clean_Samoa.r")
+            source("Programmes/Clean_Solomon_Islands.r")
+            source("Programmes/Clean_Tokelau.r")
             
             
          ##
