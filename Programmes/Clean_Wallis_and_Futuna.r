@@ -1,5 +1,5 @@
 ##
-##    Programme:  Clean_Tuvalu.R
+##    Programme:  Clean_Wallis_and_Futuna.R
 ##
 ##    Objective:  What is this programme designed to do?
 ##
@@ -17,16 +17,16 @@
       load('Data_Intermediate/Country_Data.rda')
       
    ##
-   ##    Collect up and process the Tuvalu files
+   ##    Collect up and process the Wallis_and_Futuna files
    ##
-      Tuvalu <- Country_Data[["Tuvalu"]]
+      Wallis_and_Futuna <- Country_Data[["Wallis_and_Futuna"]]
       
-      Clean_Tuvalu <- list()
+      Clean_Wallis_and_Futuna <- list()
       
    ##
    ##    Estimates by the Benefish studies of annual fisheries harvests - Table6-4
    ##
-      X <- Tuvalu[["Estimates by the Benefish studies of annual fisheries harvestsXXTable18-3"]]
+      X <- Wallis_and_Futuna[["Estimates by the Benefish studies of annual fisheries harvestsXXTable27-5"]]
       for(i in 2:nrow(X))
       {
          X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
@@ -38,9 +38,9 @@
       ##    Aquaculture tonnes or pcs... Choose...
       ##       Pieces
       ##
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2007))] <- 0
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2014))] <- .5
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2021))] <- 0
+         #X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2007))] <- 0
+         #X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2014))] <- 0
+         #X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2021))] <- 0
          
          
       X <- reshape2::melt(X[2:nrow(X),],
@@ -51,15 +51,15 @@
       X <- X[!is.na(X$Value),]
       X$variable <- as.character(X$variable)
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
-      X$Unit  = ifelse(X$variable == "Nominal value  ", "A$", 
-                  ifelse(X$Harvest_Sector == "Aquaculture","Pieces", "Tonnes"))
-      Clean_Tuvalu[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      X$Unit  = ifelse(X$variable == "Nominal value (XPF)", "XPF", 
+                  ifelse(X$Harvest_Sector == "AquacultureX","Pieces", "Tonnes"))
+      Clean_Wallis_and_Futuna[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
       
 
    ##
-   ##    Fishing contribution to Tuvalu GDP in 2021 - Table20-5
+   ##    Fishing contribution to Wallis_and_Futuna GDP in 2021 - Table20-5
    ##
-      X <- Tuvalu[["Fishing contribution to GDP in 2021 using an alternative approachXXTable18-5"]]
+      X <- Wallis_and_Futuna[["Fishing contribution to the Wallis and Futuna GDP in 2021XXTable27-6"]]
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -71,14 +71,14 @@
       X <- X[!str_detect(X$Harvest_Sector, "Total"),]
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
-      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "A$")
+      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "XPF")
       X$GDP_Dimension <- str_trim(X$variable)
-      Clean_Tuvalu[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+      Clean_Wallis_and_Futuna[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
    ##
    ## Save files our produce some final output of something
    ##
-      save(Clean_Tuvalu, file = 'Data_Intermediate/Clean_Tuvalu.rda')
+      save(Clean_Wallis_and_Futuna, file = 'Data_Intermediate/Clean_Wallis_and_Futuna.rda')
 ##
 ##    And we're done
 ##

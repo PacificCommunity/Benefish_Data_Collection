@@ -94,17 +94,17 @@
             source("Programmes/Clean_Summary_Tables.r")
             source("Programmes/Clean_Tonga.r")
             source("Programmes/Clean_Tuvalu.r")
-            
-         ##
-         ##   Vanuatu                       
-         ##
+            source("Programmes/Clean_Vanuatu.r")
+            source("Programmes/Clean_Wallis_and_Futuna.r")
             
             
-         ##
-         ##   Wallis and Futuna           
-         ##
-            
-            
+      ##
+      ##    Hoover it all back up again
+      ##
+         source("Programmes/Hoover_Up_Cleaned_Data.r") # This reads back in all of the cleaned data, and identifies excluded tables
+
+
+
 
          
 ##
