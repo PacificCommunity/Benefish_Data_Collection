@@ -91,17 +91,7 @@
             source("Programmes/Clean_Samoa.r")
             source("Programmes/Clean_Solomon_Islands.r")
             source("Programmes/Clean_Tokelau.r")
-            
-            
-         ##
-         ##   Summary Tables                
-         ##
-            
-            
-         ##
-         ##   Tokelau                       
-         ##
-            
+            source("Programmes/Clean_Summary_Tables.r")
             
          ##
          ##   Tonga                         
