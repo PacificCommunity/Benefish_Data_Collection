@@ -92,16 +92,8 @@
             source("Programmes/Clean_Solomon_Islands.r")
             source("Programmes/Clean_Tokelau.r")
             source("Programmes/Clean_Summary_Tables.r")
-            
-         ##
-         ##   Tonga                         
-         ##
-            
-            
-         ##
-         ##   Tuvalu                        
-         ##
-            
+            source("Programmes/Clean_Tonga.r")
+            source("Programmes/Clean_Tuvalu.r")
             
          ##
          ##   Vanuatu                       
