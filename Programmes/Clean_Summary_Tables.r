@@ -52,7 +52,7 @@
                  Mapping_Table,
                  by = c("variable"))
       X$Measure <- "Volume of production in 2021"
-      X$Table   <- "Table29-1"
+      X$Table   <- "29-1"
       X$Unit    <- ifelse(str_detect(X$Metric, "Pieces"), "Pieces", "Tonnes")
       Clean_Summary_Tables[["Volume of production in 2021"]] <- X[,c("Measure", "Table", "Metric", "Unit", "PICT", "Value")]
 
@@ -79,7 +79,7 @@
                  Mapping_Table,
                  by = c("variable"))
       X$Measure <- "Value of production in 2021"
-      X$Table   <- "Table29-2"
+      X$Table   <- "29-2"
       X$Unit    <- "US$"
       Clean_Summary_Tables[["Value of production in 2021"]] <- X[,c("Measure", "Table", "Metric", "Unit", "PICT", "Value")]
        ##
@@ -99,7 +99,7 @@
       X$PICT <- str_trim(X$PICT)
       X$Metric <- as.character(X$variable)
       X$Measure <- "Volume of fishery production by PICT"
-      X$Table   <- "Table29-7"
+      X$Table   <- "29-7"
       X$Unit <- "Tonnes"
       X <- X[X$Metric != "Total",]
       X <- X[!is.na(X$Value),]

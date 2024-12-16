@@ -75,21 +75,26 @@
                              Measure = V12),
                         sum,
                         na.rm = TRUE))    
-      Y$Unit  = "Tonnes"
-      Y$Table  = "20-2a"
-                        
-		Z <- with(X[X$V1 == "Number of vessels",],
-              aggregate(list(Value = Value),
-                        list(Year = Year,
-                             Measure = V12,
-                             Table = V13),
-                        sum,
-                        na.rm = TRUE))      
-      Z$Unit  = "Number"
-      Z$Table  = "20-2b"
+      Y$Unit   = "Tonnes"
+      Y$Table  = "20-2"
+      Y$Method = 'longline'
       
-      Clean_American_Samoa[["Catch Volume - Longline"]]      <- Y[,c("Measure","Table", "Species", "Year", "Unit", "Value")]
+                        
+		# Z <- with(X[X$V1 == "Number of vessels",],
+              # aggregate(list(Value = Value),
+                        # list(Year = Year,
+                             # Measure = V12,
+                             # Table = V13),
+                        # sum,
+                        # na.rm = TRUE))      
+      # Z$Unit  = "Number"
+      # Z$Table  = "20-2b"
+      
+      Clean_American_Samoa[["Catches by Method"]]      <- Y[,c("Measure", "Table", "Method", "Species", "Year", "Unit", "Value")]
       Clean_American_Samoa[["Number of vessels - Longline"]] <- Z[,c("Measure","Table",            "Year", "Unit", "Value")]
+
+
+
 
    ##
    ##    Annual fisheries and aquaculture harvest - Table20-3

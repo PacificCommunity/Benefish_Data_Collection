@@ -72,6 +72,8 @@
          ##
          ##   Clean the Country Data                
          ##
+            unlink("Data_Intermediate/Clean_*.rda")
+            
             source("Programmes/Clean_American_Samoa.r")  
             source("Programmes/Clean_Cook_Islands.r")  
             source("Programmes/Clean_Federated_States_of_Micronesia.r")  
