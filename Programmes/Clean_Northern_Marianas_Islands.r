@@ -72,6 +72,24 @@
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "US$")
       Clean_Northern_Marianas_Islands[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+   ##
+   ##    Price Measures
+   ##
+      X <- Northern_Marianas_Islands[["Fish prices in WPacFIN\x92s Best Estimated Total Commercial LandingsXXTable24-2"]]
+      names(X) <- X[1,]
+      names(X)[1] <- "Year"
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Year"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Landed Price"
+      X$Dimension_Value <- str_split_fixed(X$variable, "\\(", 2)[,1]
+      X$Unit <- str_replace_all(str_split_fixed(X$variable, "\\(", 2)[,2], "\\)","")
+      X$Unit <- ifelse(X$Unit == "", "US$/Pound", X$Unit)
+      X$Measure <- "Fish Prices"
+      Clean_Northern_Marianas_Islands[["Price Measures"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 
    
    ##

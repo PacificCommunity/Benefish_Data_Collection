@@ -7,7 +7,7 @@
 ##
 ##
    ##
-   ##    Clear the memory
+   ##    Clear the memorZ
    ##
       rm(list=ls(all=TRUE))
       
@@ -115,6 +115,70 @@
       X$Unit  = "Mean daily grams per capita"
       Clean_Solomon_Islands[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
       
+      
+   ##
+   ##    Fish Exports
+   ##
+      ##
+      ##    Exports 
+      ##
+         X <- Solomon_Islands[["HS 03 Exports of the Solomon IslandsXXTable16-11"]]
+         names(X) <- X[1,]
+         names(X)[1] <- "Year"
+    
+         X <- reshape2::melt(X[2:nrow(X),],
+                             id.var = c("Measure","Table", "Year"),
+                             factorsAsStrings = FALSE)
+         X$Value <- as.numeric(str_replace_all(X$value, ",", ""))*1000
+         X <- X[!is.na(X$Value),]
+         X$Dimension       <- "Aggregate Commodity"
+         X$Dimension_Value <-X$variable
+         X$Measure <- "Fish Exports"
+         X$Unit    <- "ST$"
+      ##
+      ##    I don't know... the other Exports?
+      ##
+         Y <- Solomon_Islands[["Fish exportsXXTable16-12"]]
+         names(Y) <- Y[1,]
+         names(Y)[1] <- "Year"
+    
+         Y <- reshape2::melt(Y[3:nrow(Y),],
+                             id.var = c("Measure","Table", "Year"),
+                             factorsAsStrings = FALSE)
+         Y$Value <- as.numeric(str_replace_all(Y$value, ",", ""))*1000000
+         Y <- Y[!is.na(Y$Value),]
+         
+         Y$Dimension       <- "Aggregate Commodity"
+         Y$Dimension_Value <- str_trim(Y$variable)
+         Y$Unit            <- str_split_fixed(str_trim(Y$variable), "XX",2)[,2]
+         Y$Unit    <- "ST$"
+         Y$Measure <- "Fish Exports"
+         
+      ##
+      ##    Whatever this is
+      ##
+         Z <- Solomon_Islands[["Summary of the MFMR Fishery Export DatabaseXXTable16-13"]]
+         names(Z) <- Z[1,]
+         names(Z)[1] <- "Year"
+    
+         Z <- reshape2::melt(Z[3:nrow(Z),],
+                             id.var = c("Measure","Table", "Year"),
+                             factorsAsStrings = FALSE)
+         Z$Value <- as.numeric(str_replace_all(Z$value, ",", ""))*1000000
+         Z <- Z[!is.na(Z$Value),]
+         
+         Z$Dimension       <- "Aggregate Commodity"
+         Z$Dimension_Value <- str_trim(Z$variable)
+         Z$Unit            <- str_split_fixed(str_trim(Z$variable), "XX",2)[,2]
+         Z$Unit <- ifelse(str_detect(Z$variable, "Pieces"), "Pieces", 
+                   ifelse(str_detect(Z$variable, "Volume"), "KGs","SI$"))
+         Z$Measure <- "Fish Exports"
+         
+         A <- rbind.fill(X,Y)
+         A <- rbind.fill(A,Z)
+         #X <- X[!str_detect(X$Dimension_Value, "Total"),]
+
+      Clean_Solomon_Islands[["Fish Exports"]] <- A[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
         
   
    ##

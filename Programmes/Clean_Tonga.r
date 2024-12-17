@@ -75,6 +75,25 @@
       X$GDP_Dimension <- str_trim(X$variable)
       Clean_Tonga[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
+   ##
+   ##    Fish Exports
+   ##
+      X <- Tonga[["Fish exportsXXTable17-7"]]
+      names(X) <- X[1,]
+      names(X)[1] <- "Aggregate Commodity"
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Aggregate Commodity"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Aggregate Commodity"
+      X$Dimension_Value <- str_trim(X$`Aggregate Commodity`)
+      X$Measure <- "Fish Exports"
+      X$Unit    <- "Y$"
+      X$Year    <- as.numeric(str_trim(X$variable))
+      Clean_Tonga[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
       
    ##
    ## Save files our produce some final output of something

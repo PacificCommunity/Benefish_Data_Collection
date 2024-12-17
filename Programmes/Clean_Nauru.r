@@ -132,6 +132,26 @@
       X$Measure <- "Fishing Employment"
       X$Unit  = "Headcount"
       Clean_Nauru[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+   ##
+   ##    Price Measures
+   ##
+      X <- Nauru[["2021 fish prices in NauruXXTable11-1"]]
+      for(i in 2:nrow(X))
+      {
+         X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
+      }
+      names(X) <- X[1,]
+      names(X)[1] <- "Fish Type"
+ 
+      X$Value <- as.numeric(str_replace_all(X$`Estimated price  per kg (A$)`, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Measure <- "Fish Prices"
+      X$Dimension       <- "Landed Price"
+      X$Unit    <- str_trim(X$`Selling unit`)
+      X$Dimension_Value <- str_trim(X$Commodity)
+      X$Year  <- 2021
+      Clean_Nauru[["Price Measures"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
       
    ##
    ## Save files our produce some final output of something

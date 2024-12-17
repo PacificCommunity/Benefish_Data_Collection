@@ -43,6 +43,26 @@
 "Vanuatu","'19-2",13,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
 "Wallis_and_Futuna","'27-5",47,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
 "Cook_Islands","'6-8",61,"Exports of fishery production",1,"Exports of fishery production","Captured"
+"American_Samoa","'20-6",78,"Value of fishery product exports",1,"Fish Exports","Captured"
+"Federated_States_of_Micronesia","'7-9",65,"Fishery exports and total exports of FSM",1,"Fish Exports","Captured"
+"Fiji","'8-10",56,"Fish Exports",1,"Fish Exports","Captured"
+"French_Polynesia","'21-10",119,"Detailed information on the pearl exports of French Polynesia is given the DRM Statistical Bulletin ",1,"Fish Exports","Captured"
+"French_Polynesia","'21-9",104,"Non-pearl fishery exports of French Polynesia",1,"Fish Exports","Captured"
+"Kiribati","'9-7",68,"Fishery exports of Kiribati (thousands of A$)",1,"Fish Exports","Captured"
+"Marshall_Islands","'10-8",67,"Fish exports of the Marshall Islands (US$ millions)",1,"Fish Exports","Captured"
+"Marshall_Islands","'10-9",73,"Marshall Islands exports of aquarium products",1,"Fish Exports","Captured"
+"New_Caledonia","'23-8",91,"Fisheries exports of New Caledonia by value (millions of XPF) ",1,"Fish Exports","Captured"
+"New_Caledonia","'23-7",80,"Fisheries exports of New Caledonia by volume (t)",1,"Fish Exports","Captured"
+"Palau","'13-10",89,"Value of the fishery exports of Palau (thousands of US$)",1,"Fish Exports","Captured"
+"Palau","'13-9",84,"Volume of fishery exports of Palau (pounds)",1,"Fish Exports","Captured"
+"Papau_New_Guinea","'14-9",82,"Fishery exports of PNG",1,"Fish Exports","Captured"
+"Samoa","'15-6",62,"Fish exports of Samoa",1,"Fish Exports","Captured"
+"Samoa","'15-7",69,"Pelagic and non-pelagic fish exports of Samoa",1,"Fish Exports","Captured"
+"Solomon_Islands","'16-12",100,"Fish exports of the Solomon Islands from CBSI reports",1,"Fish Exports","Captured"
+"Solomon_Islands","'16-11",91,"HS 03 Exports of the Solomon Islands",1,"Fish Exports","Captured"
+"Solomon_Islands","'16-13",107,"Summary of the MFMR Fishery Export Database",1,"Fish Exports","Captured"
+"Tonga","'17-7",74,"Fish exports of Tonga",1,"Fish Exports","Captured"
+"Vanuatu","'19-5",54,"Fishery exports of Vanuatu (million VT)",1,"Fish Exports","Captured"
 "Cook_Islands","'6-9",72,"Fisheries revenue (NZ$ thousands)",1,"Fisheries revenue","MAKE THIS GOVT REVENUE METRIC"
 "Cook_Islands","'6-5",40,"Fishing contribution to GDP (NZ$ millions)",1,"Fishing contribution to GDP","Captured"
 "Federated_States_of_Micronesia","'7-7",52,"Fisheries contribution to GDP (millions of US$)",1,"Fishing contribution to GDP","Captured"
@@ -84,19 +104,14 @@
 "Summary_Tables","'29-7",55,"Volume of fishery production by PICT, 2007 vs 2014 vs 2021 (t)",1,"Volume of fishery production by PICT","Captured"
 "Summary_Tables","'29-1",2,"Volume of production in 2021",1,"Volume of production in 2021","Captured"
 "American_Samoa","'20-1",2,"Catches of the major fisheries in American Samoa",1,NA,NA
-"American_Samoa","'20-6",78,"Value of fishery product exports",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Cook_Islands","'6-11",85,"Exchange rates",1,NA,NA
 "Cook_Islands","'6-6",45,"value-added components of the fishing sector",1,NA,NA
 "Federated_States_of_Micronesia","'7-4",22,"Annual aquaculture production from the Kosrae Facility (pieces)",1,NA,NA
-"Federated_States_of_Micronesia","'7-9",65,"Fishery exports and total exports of FSM",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Fiji","'8-3",6,"Aquaculture production in Fiji in 2021",1,NA,NA
-"Fiji","'8-10",56,"Fish Exports",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "French_Polynesia","'21-6",56,"Annual fisheries and aquaculture harvest in French Polynesia in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "French_Polynesia","'21-11",127,"Annual supply of fish from domestic sources",1,NA,NA
-"French_Polynesia","'21-10",119,"Detailed information on the pearl exports of French Polynesia is given the DRM Statistical Bulletin ",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "French_Polynesia","'21-2",14,"Estimate of the volume and value of commercial fishing in French Polynesia in 2021",1,NA,NA
 "French_Polynesia","'21-5",45,"French Polynesia aquaculture production in 2021",1,NA,NA
-"French_Polynesia","'21-9",104,"Non-pearl fishery exports of French Polynesia",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "French_Polynesia","'21-3",23,"Size categories of the offshore fleet in 2021",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
 "Guam","'22-3",21,"Annual fisheries and aquaculture harvest in Guam in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Guam","'22-5",58,"Fishing contribution to Guam GDP in 2021",1,NA,NA
@@ -105,28 +120,23 @@
 "International_Waters","'28-3",11,"Value of catches in international waters",1,NA,NA
 "Kiribati","'9-3",14,"Annual fisheries and aquaculture harvest in Kiribati in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Kiribati","'9-2",8,"Catches by foreign-based vessels in the Kiribati zone",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
-"Kiribati","'9-7",68,"Fishery exports of Kiribati (thousands of A$)",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Kiribati","'9-1",2,"Locally based offshore catches in the waters of Kiribati",1,NA,NA
 "Kiribati","'9-8",75,"The number of people aged 5 and above participating in various types of fishing",1,NA,NA
 "Marshall_Islands","'10-10",84,"Access fees received by MIMRA (US$)",1,NA,"MAKE THIS GOVT REVENUE METRIC"
 "Marshall_Islands","'10-4",16,"Annual fisheries and aquaculture harvest in Marshall Islands in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Marshall_Islands","'10-3",11,"Catches of foreign-based offshore vessels",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
 "Marshall_Islands","'10-1",2,"Catches of the Majuro-based offshore vessels",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
-"Marshall_Islands","'10-8",67,"Fish exports of the Marshall Islands (US$ millions)",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Marshall_Islands","'10-2",6,"Foreign-based vessels licensed to fish in the Marshall Islands exclusive economic zone (EEZ)",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
-"Marshall_Islands","'10-9",73,"Marshall Islands exports of aquarium products",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Marshall_Islands","'10-11",90,"Non-access revenue received by MIMRA (US$)",1,NA,"MAKE THIS GOVT REVENUE METRIC"
 "Nauru","'11-3",19,"Catch and effort of Nauru’s national fleet in the Convention Area",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
 "Nauru","'11-4",27,"Foreign fleet catches in Nauru’s EEZ (t)",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
-"Nauru","'11-9",88,"Nauru’s access fees (A$)",1,NA,"MAKE THIS GOVT REVENUE METRIC"
 "Nauru","'11-1",2,"2021 fish prices in Nauru",1,NA,"MAKE THIS AN PRICE MEASURE"
+"Nauru","'11-9",88,"Nauru’s access fees (A$)",1,NA,"MAKE THIS GOVT REVENUE METRIC"
 "Nauru","'11-5",35,"Annual fisheries and aquaculture harvest in Nauru in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Nauru","'11-2",12,"National fleet structure in 2021",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
 "New_Caledonia","'23-4",32,"Annual fisheries and aquaculture harvest in New Caledonia in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "New_Caledonia","'23-2",10,"Composition of the coastal commercial catch (t)",1,NA,NA
 "New_Caledonia","'23-9",102,"Destination of the offshore fishery production in 2020",1,NA,NA
-"New_Caledonia","'23-8",91,"Fisheries exports of New Caledonia by value (millions of XPF) ",1,NA,"MAKE THIS AN EXPORT MEASURE"
-"New_Caledonia","'23-7",80,"Fisheries exports of New Caledonia by volume (t)",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "New_Caledonia","'23-3",19,"Locally based offshore catches (t)",1,NA,NA
 "New_Caledonia","'23-10",110,"Number and types of registered coastal professional fishers in 2020",1,NA,NA
 "New_Caledonia","'23-1",2,"Summary details of coastal commercial fishing ",1,NA,NA
@@ -141,28 +151,20 @@
 "Palau","'13-5",35,"Annual fisheries and aquaculture harvest in Palau in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Palau","'13-1",2,"Estimates of the primary components of the coastal commercial fisheries production  and distribution in Palau",1,NA,NA
 "Palau","'13-2",14,"Number of foreign-based offshore fishing vessels in the Palau EEZ",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
-"Palau","'13-10",89,"Value of the fishery exports of Palau (thousands of US$)",1,NA,"MAKE THIS AN EXPORT MEASURE"
-"Palau","'13-9",84,"Volume of fishery exports of Palau (pounds)",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Papau_New_Guinea","'14-4",23,"Annual fisheries and aquaculture harvest in PNG in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Papau_New_Guinea","'14-8",76,"Comparing the value added of the official and alternative estimates",1,NA,NA
-"Papau_New_Guinea","'14-9",82,"Fishery exports of PNG",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Pitcairn_Islands","'25-1",2,"Annual fisheries and aquaculture harvest in Pitcairn in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Pitcairn_Islands","'25-3",21,"Fishing contribution to Pitcairn GDP in 2021",1,NA,NA
 "Samoa","'15-1",2,"Catches by the locally based tuna vessels",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
-"Samoa","'15-6",62,"Fish exports of Samoa",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Samoa","'15-2",11,"Fisheries and aquaculture harvest in Samoa in 2021",1,NA,NA
 "Samoa","'15-4",48,"Official contribution of fishing to GDP (ST$ millions)",1,NA,NA
-"Samoa","'15-7",67,"Pelagic and non-pelagic fish exports of Samoa",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Solomon_Islands","'16-14",116,"Access fees received for offshore fishing in 2020",1,NA,"MAKE THIS GOVT REVENUE METRIC"
 "Solomon_Islands","'16-5",24,"Annual fisheries and aquaculture harvest in Solomon Islands in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Solomon_Islands","'16-4",19,"Aquaculture production in 2021",1,NA,NA
 "Solomon_Islands","'16-8",65,"Calculating the 2020 fishing sector contribution to GDP",1,NA,NA
-"Solomon_Islands","'16-12",100,"Fish exports of the Solomon Islands from CBSI reports",1,NA,"MAKE THIS AN EXPORT MEASURE"
-"Solomon_Islands","'16-11",91,"HS 03 Exports of the Solomon Islands",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Solomon_Islands","'16-2",8,"In-zone value of the domestic fleet catch",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
 "Solomon_Islands","'16-15",123,"Other government revenue from fisheries in 2020",1,NA,"MAKE THIS GOVT REVENUE METRIC"
 "Solomon_Islands","'16-1",2,"Solomon Islands domestic fleet catch (t)",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
-"Solomon_Islands","'16-13",107,"Summary of the MFMR Fishery Export Database",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Solomon_Islands","'16-10",85,"Value added of the two approaches",1,NA,NA
 "Solomon_Islands","'16-3",14,"Volume and value of the catches of foreign-based vessels",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
 "Summary_Tables","'30-1",124,"Official estimates of GDP and fishing contribution to GDP ",1,NA,NA
@@ -173,7 +175,6 @@
 "Tonga","'17-2",10,"Annual fisheries and aquaculture harvest in Tonga in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Tonga","'17-5",52,"Components of the fishing contribution to GDP",1,NA,NA
 "Tonga","'17-9",96,"Disposal of tuna from locally based longliners (t)",1,NA,NA
-"Tonga","'17-7",74,"Fish exports of Tonga",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Tonga","'17-8",86,"Participation in various fishery sub-sectors in 2015",1,NA,NA
 "Tonga","'17-4",47,"Tonga fishing sector contribution to GDP",1,NA,NA
 "Tonga","'17-1",2,"Tuna and bycatch catches of the Tonga national fleet",1,NA,"MAKE THIS AN FLEET SIZE MEASURE"
@@ -183,7 +184,6 @@
 "Tuvalu","'18-1",2,"Number of bilateral licenses issued for fishing in Tuvalu waters",1,NA,NA
 "Tuvalu","'18-6",60,"Transshipment statistics",1,NA,NA
 "Vanuatu","'19-1",2,"Annual fisheries and aquaculture harvest in Vanuatu in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
-"Vanuatu","'19-5",54,"Fishery exports of Vanuatu (million VT)",1,NA,"MAKE THIS AN EXPORT MEASURE"
 "Vanuatu","'19-6",62,"Household income from Fisheries",1,NA,NA
 "Wallis_and_Futuna","'27-4",37,"Annual fisheries and aquaculture harvest in Wallis and Futuna in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Wallis_and_Futuna","'27-3",31,"Disposal of fish on Wallis and Futuna",1,NA,NA

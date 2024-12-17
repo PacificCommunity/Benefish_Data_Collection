@@ -99,19 +99,19 @@
       ##    I don't know... the other Exports?
       ##
          Y <- Samoa[["Pelagic and non-pelagic fish exports of SamoaXXTable15-7"]]
-         names(Y) <- c("Non-pelagicXXVolume","Non-pelagicXXValue","PelagicXXVolume","PelagicXXValue","TotalXXVolume","TotalXXValue","Measure","Table")
+         names(Y) <- Y[1,]
     
          Y <- reshape2::melt(Y[3:nrow(Y),],
-                             id.var = c("Measure","Table"),
+                             id.var = c("Measure","Table", "Year"),
                              factorsAsStrings = FALSE)
          Y$Value <- as.numeric(str_replace_all(Y$value, ",", ""))
          Y <- Y[!is.na(Y$Value),]
          
          Y$Dimension       <- "Aggregate Commodity"
-         Y$Dimension_Value <- str_trim(Y$`Aggregate Commodity`)
-         Y$Year    <- str_trim(Y$variable)
+         Y$Dimension_Value <- str_split_fixed(str_trim(Y$variable), "XX",2)[,1]
+         Y$Unit            <- str_split_fixed(str_trim(Y$variable), "XX",2)[,2]
+         Y$Unit <- ifelse(Y$Unit == "Volume", "Tonnes", "ST$")
          Y$Measure <- "Fish Exports"
-         Y$Unit    <- "XPF"
          
          X <- rbind.fill(X,Y)
          X <- X[!str_detect(X$Dimension_Value, "Total"),]

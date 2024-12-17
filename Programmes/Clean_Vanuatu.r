@@ -116,6 +116,24 @@
       X$Unit  = "Mean daily grams per capita"
       Clean_Vanuatu[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
       
+      
+   ##
+   ##    Fish Exports
+   ##
+      X <- Vanuatu[["Fish exportsXXTable19-5"]]
+      names(X) <- X[1,]
+      names(X)[1] <- "Year"
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Year"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))*1000000
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Aggregate Commodity"
+      X$Dimension_Value <- str_trim(X$variable)
+      X$Measure <- "Fish Exports"
+      X$Unit    <- "VT$"
+      Clean_Vanuatu[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 
 
    ##
