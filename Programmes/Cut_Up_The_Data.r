@@ -49,6 +49,7 @@
                                  )
             
             Separated_Data <- list()
+            Blank_Rows <- c(Blank_Rows, 1000)
             for(i in 1:length(Blank_Rows))
             {
                if(length(Separated_Data) == 0)

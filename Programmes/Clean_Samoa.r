@@ -74,6 +74,50 @@
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "ST$")
       X$GDP_Dimension <- str_trim(X$variable)
       Clean_Samoa[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+      
+   ##
+   ##    Fish Exports
+   ##
+      ##
+      ##    Exports 
+      ##
+         X <- Samoa[["Fish exportsXXTable15-6"]]
+         names(X) <- X[1,]
+         names(X)[1] <- "Aggregate Commodity"
+    
+         X <- reshape2::melt(X[2:nrow(X),],
+                             id.var = c("Measure","Table", "Aggregate Commodity"),
+                             factorsAsStrings = FALSE)
+         X$Value <- as.numeric(str_replace_all(X$value, ",", ""))*1000
+         X <- X[!is.na(X$Value),]
+         X$Year            <- as.numeric(str_replace_all(X$variable, "\\D+", ""))
+         X$Dimension       <- "Aggregate Commodity"
+         X$Dimension_Value <- X$`Aggregate Commodity`
+         X$Measure <- "Fish Exports"
+         X$Unit    <- "ST$"
+      ##
+      ##    I don't know... the other Exports?
+      ##
+         Y <- Samoa[["Pelagic and non-pelagic fish exports of SamoaXXTable15-7"]]
+         names(Y) <- c("Non-pelagicXXVolume","Non-pelagicXXValue","PelagicXXVolume","PelagicXXValue","TotalXXVolume","TotalXXValue","Measure","Table")
+    
+         Y <- reshape2::melt(Y[3:nrow(Y),],
+                             id.var = c("Measure","Table"),
+                             factorsAsStrings = FALSE)
+         Y$Value <- as.numeric(str_replace_all(Y$value, ",", ""))
+         Y <- Y[!is.na(Y$Value),]
+         
+         Y$Dimension       <- "Aggregate Commodity"
+         Y$Dimension_Value <- str_trim(Y$`Aggregate Commodity`)
+         Y$Year    <- str_trim(Y$variable)
+         Y$Measure <- "Fish Exports"
+         Y$Unit    <- "XPF"
+         
+         X <- rbind.fill(X,Y)
+         X <- X[!str_detect(X$Dimension_Value, "Total"),]
+
+      Clean_Samoa[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
 
    ##
    ## Save files our produce some final output of something

@@ -91,7 +91,7 @@
       # Z$Table  = "20-2b"
       
       Clean_American_Samoa[["Catches by Method"]]      <- Y[,c("Measure", "Table", "Method", "Species", "Year", "Unit", "Value")]
-      Clean_American_Samoa[["Number of vessels - Longline"]] <- Z[,c("Measure","Table",            "Year", "Unit", "Value")]
+      #Clean_American_Samoa[["Number of vessels - Longline"]] <- Z[,c("Measure","Table",            "Year", "Unit", "Value")]
 
 
 
@@ -145,7 +145,7 @@
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Harvest sector"),
                           factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X <- X[!str_detect(X$Harvest_Sector, "Total"),]
@@ -154,6 +154,29 @@
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "US$")
       X$GDP_Dimension <- str_trim(X$variable)
       Clean_American_Samoa[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+
+      
+   ##
+   ##    Fish Exports
+   ##
+      X <- American_Samoa[["Value of fishery product exportsXXTable20-6"]]
+      names(X) <- X[1,]
+      names(X)[1] <- "Aggregate Commodity"
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Aggregate Commodity"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Aggregate Commodity"
+      X$Dimension_Value <- str_trim(X$`Aggregate Commodity`)
+      #X <- X[!str_detect(X$`Number of People Employed`, regex("Total", ignore_case = TRUE)),]
+      X$Year  <- X$variable
+      X$Measure <- "Fish Exports"
+      X$Unit    <- "US$"
+      Clean_American_Samoa[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
+
 
    ##
    ## Save files our produce some final output of something

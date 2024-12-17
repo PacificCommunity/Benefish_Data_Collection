@@ -75,6 +75,48 @@
       X$GDP_Dimension <- str_trim(X$variable)
       Clean_Solomon_Islands[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
   
+
+   ##
+   ##    Fishing contribution to Solomon_Islands GDP in 2021 - Table7-7
+   ##
+      X <- Solomon_Islands[["Fishing contribution to GDP in the Solomon IslandsXXTable16-7"]]
+      X$V1[1] <- "Harvest sector"
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Harvest sector"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))*1000000
+      X$Harvest_Sector <- str_trim(X$`Harvest sector`)
+      X <- X[!is.na(X$Value),]
+      X <- X[str_detect(X$Harvest_Sector, "Fishing contribution"),]
+      X$Year    <- as.numeric(str_replace_all(X$variable, "\\D+", ""))
+      X$Measure <- "Fishing contribution to GDP"
+      X$Unit    <- "SI$"
+      Clean_Solomon_Islands[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      
+   ##
+   ##    Fish Consumption
+   ##
+      X <- Solomon_Islands[["Mean daily per capita consumption of aquatic foods in the Solomon IslandsXXTable16-16"]]
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Aquatic food group"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(str_split_fixed(X$value, " ",2)[,1], ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Type of fish consumed"
+      X$Dimension_Value <- str_trim(X$`Aquatic food group`)
+      X <- X[!str_detect(X$Dimension_Value, "total"),]
+      X$Metric  <- X$variable
+      X$Year    <- 2021
+      X$Measure <- "Fishing Consumption"
+      X$Unit  = "Mean daily grams per capita"
+      Clean_Solomon_Islands[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+      
+        
+  
    ##
    ## Save files our produce some final output of something
    ##

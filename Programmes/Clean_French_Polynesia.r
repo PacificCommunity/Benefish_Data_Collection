@@ -122,6 +122,51 @@
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "XPF")
       Clean_French_Polynesia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
+      
+   ##
+   ##    Fish Exports
+   ##
+      ##
+      ##    Pearls
+      ##
+         X <- French_Polynesia[["Detailed information on the pearl exports of French Polynesia is given the DRM Statistical Bulletin XXTable21-10"]]
+         names(X) <- X[1,]
+         names(X)[1] <- "Year"
+    
+         X <- reshape2::melt(X[2:nrow(X),],
+                             id.var = c("Measure","Table", "Year"),
+                             factorsAsStrings = FALSE)
+         X$Value <- as.numeric(str_replace_all(X$value, ",", ""))*1000000
+         X <- X[!is.na(X$Value),]
+         X$Dimension       <- "Aggregate Commodity"
+         X$Dimension_Value <- "Pearls"
+         X$Measure <- "Fish Exports"
+         X$Unit    <- "XPF"
+      ##
+      ##    Non - Pearls
+      ##
+         Y <- French_Polynesia[["Non-pearl fishery exports of French PolynesiaXXTable21-9"]]
+         names(Y) <- Y[1,]
+         names(Y)[1] <- "Aggregate Commodity"
+    
+         Y <- reshape2::melt(Y[2:nrow(Y),],
+                             id.var = c("Measure","Table", "Aggregate Commodity"),
+                             factorsAsStrings = FALSE)
+         Y$Value <- as.numeric(str_replace_all(Y$value, ",", ""))*1000000
+         Y <- Y[!is.na(Y$Value),]
+         Y$Dimension       <- "Aggregate Commodity"
+         Y$Dimension_Value <- str_trim(Y$`Aggregate Commodity`)
+         Y$Year    <- str_trim(Y$variable)
+         Y$Measure <- "Fish Exports"
+         Y$Unit    <- "XPF"
+         
+         X <- rbind.fill(X,Y)
+         X <- X[!str_detect(X$Dimension_Value, "Total"),]
+
+      Clean_French_Polynesia[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
+
+
    ##
    ## Save files our produce some final output of something
    ##

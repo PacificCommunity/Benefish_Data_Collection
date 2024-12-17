@@ -89,7 +89,7 @@
                                                       return(X)
                                                    })
                                       )
-      Capture_Countries_and_Tables$In_Captures <- 1
+      Capture_Countries_and_Tables$In_Captured <- "Captured"
       
       ##
       ##    What tables have we been able to salvage?
@@ -99,110 +99,25 @@
                         Capture_Countries_and_Tables,
                         by = c("Country", "Table"),
                         all = TRUE)
+      ##
+      ##    Do the why exclude bits
+      ##
+      Together$In_Captured <- ifelse(Together$Table %in% c('20-3','24-3','21-6','22-3','9-3','10-4','11-5','23-4','12-1','13-5','25-1','14-4','16-5','26-4','17-2','18-2','19-1','27-4'),"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'", 
+                              ifelse(is.na(Together$In_Captured) & str_detect(Together$BeneFish_Table_Name, regex("export", ignore_case = TRUE)), "MAKE THIS AN EXPORT MEASURE", 
+                              
+                              ifelse(is.na(Together$In_Captured) & str_detect(Together$BeneFish_Table_Name, regex("Employ", ignore_case = TRUE)), "MAKE THIS AN EMPLOYMENT MEASURE", 
+                              ifelse(is.na(Together$In_Captured) & str_detect(Together$BeneFish_Table_Name, regex("consum", ignore_case = TRUE)), "MAKE THIS AN CONSUMPTION MEASURE", 
+                              ifelse(is.na(Together$In_Captured) & str_detect(Together$BeneFish_Table_Name, regex("price", ignore_case = TRUE)),  "MAKE THIS AN PRICE MEASURE", 
+                              ifelse(is.na(Together$In_Captured) & (str_detect(Together$BeneFish_Table_Name, regex("fleet", ignore_case = TRUE)) |
+                                                                    str_detect(Together$BeneFish_Table_Name, regex("vess", ignore_case = TRUE))),  "MAKE THIS AN FLEET SIZE MEASURE", 
+                              
+                              ifelse(Together$Table %in% c('10-11','11-9','12-5','6-9','10-10','16-14','16-15','26-8','13-11'), "MAKE THIS GOVT REVENUE METRIC",Together$In_Captured)))))))
+
+      Together$Table <- paste0("'", Together$Table)
       
       Together <- Together[order(Together$Standardised_Table_Name, Together$Country, Together$BeneFish_Table_Name),]
       write.table(Together, file = "Data_Output/Mapping_Tables_To_Standard.csv", row.names = FALSE, sep= ",")
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-   ##
-   ##    Collect up and process the A_Member_Country files
-   ##
-      Country_Data <- list()
-      
-      for(MC in Member_Country)
-      {
-         A_Member_Country <- All_Data[[MC]]
-         ##
-         ##    Find all of the blank rows - these are separations between tables
-         ##
-            Blank_Rows <- do.call(c, sapply(1:nrow(A_Member_Country), function(Row)
-                                             {
-                                                if(all(A_Member_Country[Row,1:(length(A_Member_Country)-1)] == "") == TRUE) return(Row)
-                                                else return(NULL)
-                                             })
-                                 )
-            
-            Separated_Data <- list()
-            for(i in 1:length(Blank_Rows))
-            {
-               if(length(Separated_Data) == 0)
-                  {
-                     Next <- A_Member_Country[1:Blank_Rows[i],1:which(A_Member_Country[1,] == "Table")]
-                     ##
-                     ##    Clean up some of these table names
-                     ##
-                        Table_Name <- Next[2,which(Next[1,] == "Measure")]
-                        Table_Name <- ifelse(str_detect(Table_Name,"Annual fisheries and aquaculture harvest"), "Annual fisheries and aquaculture harvest", 
-                                       # ifelse(str_detect(Table_Name,"Fishing contribution to"),"Fishing contribution to GDP",
-                                         ifelse(str_detect(Table_Name,"Estimates by the Benefish studies"),"Estimates by the Benefish studies of annual fisheries harvests",
-                                          ifelse(str_detect(Table_Name,"Fish exports of") | str_detect(Table_Name,"Fisheries exports") | str_detect(Table_Name,"Fishery exports"),"Fish exports",
-                                           Table_Name)))
-                     
-                     
-                     Separated_Data[[paste(Table_Name, Next[2,length(Next)], sep = "XXTable")]] <- Next
-                     
-                  } else {
-                     if((Blank_Rows[(i-1)]+1) != Blank_Rows[i])
-                        {
-                           Next <- A_Member_Country[(Blank_Rows[(i-1)]+1):Blank_Rows[i],] 
-                           Next <- Next[,1:which(Next[1,] == "Table")] 
-                           ##
-                           ##    Clean up some of these table names
-                           ##
-                              Table_Name <- Next[2,which(Next[1,] == "Measure")]
-                              Table_Name <- ifelse(str_detect(Table_Name,"Annual fisheries and aquaculture harvest"), "Annual fisheries and aquaculture harvest", 
-                                             # ifelse(str_detect(Table_Name,"Fishing contribution to"),"Fishing contribution to GDP",
-                                               ifelse(str_detect(Table_Name,"Estimates by the Benefish studies"),"Estimates by the Benefish studies of annual fisheries harvests",
-                                                ifelse(str_detect(Table_Name,"Fish exports of") | str_detect(Table_Name,"Fisheries exports") | str_detect(Table_Name,"Fishery exports"),"Fish exports",
-                                                 Table_Name)))
-                           
-                           Separated_Data[[paste(Table_Name, Next[2,length(Next)], sep = "XXTable")]] <- Next
-                        }                  
-                  }
-            }
-         ##
-         ##    Accumulate the data 
-         ##
-         Country_Data[[MC]] <- Separated_Data
-      }
-      
-   ##
-   ##    What sort of coverage do we have?
-   ##
-      Country_and_Tables <- do.call(rbind,lapply(names(Country_Data), function(Countries){
-                                                 return(data.frame(Tables    = str_split_fixed(names(Country_Data[[Countries]]),"XX",2)[,1],
-                                                                   Countries = rep(Countries, length(names(Country_Data[[Countries]])))))
-                                                })
-                                   )
-      Country_and_Tables <- Country_and_Tables[order(Country_and_Tables$Tables),]
-      table(Country_and_Tables$Tables, Country_and_Tables$Countries)                  
-      
-      
-   ##
-   ## Save files our produce some final output of something
-   ##
-      save(Country_Data, file = 'Data_Intermediate/Country_Data.rda')
 ##
 ##    And we're done
 ##

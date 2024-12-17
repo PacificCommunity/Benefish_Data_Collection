@@ -153,6 +153,32 @@
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "US$")
       X$GDP_Dimension <- str_trim(X$variable)
       Clean_Federated_States_of_Micronesia[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+      
+   ##
+   ##    Fish Exports
+   ##
+      X <- Federated_States_of_Micronesia[["Fish exportsXXTable7-9"]]
+      for(i in 2:nrow(X))
+      {
+         X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
+      }
+      
+      names(X) <- X[1,]
+      names(X)[1] <- "Aggregate Commodity"
+      names(X)[2] <- "Unit"
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Aggregate Commodity", "Unit"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Aggregate Commodity"
+      X$Dimension_Value <- str_trim(X$`Aggregate Commodity`)
+      #X <- X[!str_detect(X$`Number of People Employed`, regex("Total", ignore_case = TRUE)),]
+      X$Year  <- X$variable
+      X$Measure <- "Fish Exports"
+      #X$Unit    <- "US$"
+      Clean_Federated_States_of_Micronesia[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 
    ##
    ## Save files our produce some final output of something

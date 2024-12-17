@@ -74,7 +74,28 @@
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "XPF")
       X$GDP_Dimension <- str_trim(X$variable)
       Clean_Wallis_and_Futuna[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
-      
+   
+   ##
+   ##    Fish Consumption
+   ##
+      X <- Wallis_and_Futuna[["Frequency of consuming fishery products in 2020XXTable27-7"]]
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Product"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, "\\%", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Type of fish consumed"
+      X$Dimension_Value <- str_trim(X$`Product`)
+      X <- X[!str_detect(X$Dimension_Value, "total"),]
+      #X$Metric  <- X$variable
+      X$Metric  <- NA
+      X$Year    <- 2021
+      X$Measure <- "Fishing Consumption"
+      X$Unit  = "Percentage of households that reported consuming"
+      Clean_Wallis_and_Futuna[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+            
    ##
    ## Save files our produce some final output of something
    ##

@@ -138,6 +138,73 @@
       X$Measure <- "Fishing contribution to GDP"
       X$Unit    <- "US$"
       Clean_Palau[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+  
+      
+   ##
+   ##    Fish Employment
+   ##
+      X <- Palau[["Formal employment in the fisheries sectorXXTable13-12"]]
+      names(X) <- X[1,]
+      names(X)[1] <- "Number of People Employed"
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Number of People Employed"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Employed"
+      #X$Dimension_Value <- str_trim(X$`Village `)
+      X$Dimension_Value <- "Number of People Employed"
+      X <- X[!str_detect(X$`Number of People Employed`, regex("Total", ignore_case = TRUE)),]
+      X$Year  <- X$variable
+      X$Measure <- "Fishing Employment"
+      X$Unit    <- "Headcount"
+      X$Metric  <- NA
+      Clean_Palau[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+      
+   ##
+   ##    Fish Exports
+   ##
+      ##
+      ##    Volume
+      ##
+         X <- Palau[["Volume of fishery exports of Palau (pounds)XXTable13-9" ]]
+         names(X) <- X[1,]
+         names(X)[1] <- "Aggregate Commodity"
+    
+         X <- reshape2::melt(X[2:nrow(X),],
+                             id.var = c("Measure","Table", "Aggregate Commodity"),
+                             factorsAsStrings = FALSE)
+         X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+         X <- X[!is.na(X$Value),]
+         X$Dimension       <- "Aggregate Commodity"
+         X$Dimension_Value <- str_trim(X$`Aggregate Commodity`)
+         #X <- X[!str_detect(X$`Number of People Employed`, regex("Total", ignore_case = TRUE)),]
+         X$Year  <- X$variable
+         X$Measure <- "Fish Exports"
+         X$Unit    <- "Pounds"
+
+      ##
+      ##    Value
+      ##
+         Y <- Palau[["Value of the fishery exports of Palau (thousands of US$)XXTable13-10"]]
+         names(Y) <- Y[1,]
+         names(Y)[1] <- "Year"
+    
+         Y <- reshape2::melt(Y[2:nrow(Y),],
+                             id.var = c("Measure","Table", "Year"),
+                             factorsAsStrings = FALSE)
+         Y$Value <- as.numeric(str_replace_all(Y$value, ",", ""))*1000
+         Y <- Y[!is.na(Y$Value),]
+         Y$Dimension       <- "Aggregate Commodity"
+         Y$Dimension_Value <- str_trim(Y$variable)
+         Y$Measure <- "Fish Exports"
+         Y$Unit    <- "US$"
+         
+         X <- rbind.fill(X,Y)
+         X <- X[!str_detect(X$Dimension_Value, regex("total", ignore_case = TRUE)),]
+
+      Clean_Palau[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 
    ##
    ## Save files our produce some final output of something

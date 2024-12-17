@@ -163,6 +163,30 @@
 
 
    ##
+   ##    Fish Exports
+   ##
+      X <- Papau_New_Guinea[["Fish exportsXXTable14-9"]]
+      X[2,c(1,8,9)] <- c("Product","Measure","Table")
+      names(X) <- X[2,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Product"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X$Dimension       <- "Aggregate Commodity"
+      X$Dimension_Value <- str_trim(X$Product)
+      X$Year <- str_trim(X$variable)
+      X <- X[!is.na(X$Value),]
+      X <- X[X$Year != "",]
+      X$Measure <- "Fish Exports"
+      X$Unit    <- "K$"
+      X <- X[!str_detect(X$Dimension_Value, regex("Product", ignore_case = TRUE)),]
+      Clean_Papau_New_Guinea[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
+
+
+
+   ##
    ## Save files our produce some final output of something
    ##
       save(Clean_Papau_New_Guinea, file = 'Data_Intermediate/Clean_Papau_New_Guinea.rda')

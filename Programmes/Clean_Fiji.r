@@ -99,6 +99,87 @@
       X$Unit    <- "F$"
       Clean_Fiji[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
+
+   ##
+   ##    Fishing contribution to Fiji GDP in 2021 - Table20-5
+   ##
+      X <- Fiji[["Fishing contribution to GDP in 2021 using an alternative approachXXTable7-8"]]
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Harvest sector"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X$Harvest_Sector <- str_trim(X$`Harvest sector`)
+      X <- X[!is.na(X$Value),]
+      X <- X[!str_detect(X$Harvest_Sector, "Total"),]
+      X$Year    <- 2021
+      X$Measure <- "Fishing contribution to GDP - VAR Method"
+      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "F$")
+      X$GDP_Dimension <- str_trim(X$variable)
+      Clean_Fiji[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+      
+   ##
+   ##    Fish Consumption
+   ##
+      X <- Fiji[[" Fishery product consumption at PROCFish sitesXXTable8-14"]]
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Village "),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Location"
+      X$Dimension_Value <- str_trim(X$`Village `)
+      X <- X[!str_detect(X$Dimension_Value, "Average"),]
+      X$Metric  <- X$variable
+      X$Year    <- 2021
+      X$Measure <- "Fishing Consumption"
+      X$Unit  = "Kgs per capital per annum"
+      Clean_Fiji[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+      
+      
+   ##
+   ##    Fish Employment
+   ##
+      X <- Fiji[["Employment in Fiji\x92s tuna industryXXTable8-13"]]
+      names(X) <- X[1,]
+      names(X)[1] <- "Number of People Employed"
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Number of People Employed"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Employed"
+      #X$Dimension_Value <- str_trim(X$`Village `)
+      X$Dimension_Value <- "Number of People Employed"
+      X <- X[!str_detect(X$Dimension_Value, "Average"),]
+      X$Year  <- X$variable
+      X$Measure <- "Fishing Employment"
+      X$Unit    <- "Headcount"
+      X$Metric  <- NA
+      Clean_Fiji[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+      
+   ##
+   ##    Fish Exports
+   ##
+      X <- Fiji[["Fish ExportsXXTable8-10"]]
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Year"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Dimension       <- "Aggregate Commodity"
+      X$Dimension_Value <- str_trim(X$variable)
+      X$Measure <- "Fish Exports"
+      X$Unit    <- "F$"
+      Clean_Fiji[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
+
    ##
    ## Save files our produce some final output of something
    ##

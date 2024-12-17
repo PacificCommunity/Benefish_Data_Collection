@@ -92,6 +92,49 @@
       Clean_Marshall_Islands[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
  
    ##
+   ##    Fish Exports
+   ##
+      ##
+      ##    Aquarium Fish
+      ##
+         X <- Marshall_Islands[["Marshall Islands exports of aquarium productsXXTable10-9"]]
+         names(X) <- c("Year", "Live aquarium fish", "Biff", "Invertebrates", "Biff", "Giant clams", "Biff", "Corals", "Measure", "Table")
+         X <- X[,names(X) != "Biff"]
+    
+         X <- reshape2::melt(X[2:nrow(X),],
+                             id.var = c("Measure","Table", "Year"),
+                             factorsAsStrings = FALSE)
+         X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+         X <- X[!is.na(X$Value),]
+         X$Dimension       <- "Aggregate Commodity"
+         X$Dimension_Value <- str_trim(X$variable)
+         X$Measure <- "Fish Exports"
+         X$Unit    <- "Pieces"
+      ##
+      ##    Non - Pearls
+      ##
+         Y <- Marshall_Islands[["Fish exportsXXTable10-8"]]
+         names(Y) <- Y[1,]
+         names(Y)[1] <- "Aggregate Commodity"
+    
+         Y <- reshape2::melt(Y[2:nrow(Y),],
+                             id.var = c("Measure","Table", "Aggregate Commodity"),
+                             factorsAsStrings = FALSE)
+         Y$Value <- as.numeric(str_replace_all(Y$value, ",", ""))*1000000
+         Y <- Y[!is.na(Y$Value),]
+         Y$Dimension       <- "Aggregate Commodity"
+         Y$Dimension_Value <- str_trim(Y$`Aggregate Commodity`)
+         Y$Year    <-  as.numeric(str_replace_all(str_trim(Y$variable), "\\D+", ""))
+         Y$Measure <- "Fish Exports"
+         Y$Unit    <- "US$"
+         
+         X <- rbind.fill(X,Y)
+         X <- X[!str_detect(X$Dimension_Value, "Total"),]
+
+      Clean_Marshall_Islands[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+ 
+ 
+   ##
    ## Save files our produce some final output of something
    ##
       save(Clean_Marshall_Islands, file = 'Data_Intermediate/Clean_Marshall_Islands.rda')
