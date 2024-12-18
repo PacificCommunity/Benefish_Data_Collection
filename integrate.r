@@ -14,8 +14,7 @@
 ##    Important:  
 ##    Linkages :  
 ##
-##    Authors  :  James Hogan, FAME - The Pacific Community (SPC)
-##                Giulio Dalla Riva, SDD - The Pacific Community (SPC)
+##    Authors  :  James Hogan, FAME - The Pacific Community (SPC), finished 18 December 2024
 ##
 ##    Peer     :  <PROGRAMMER>, <TEAM>, <PEER REVIEWED COMPLETED>
 ##    Reviewer :
