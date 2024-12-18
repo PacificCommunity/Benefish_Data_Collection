@@ -82,15 +82,15 @@
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
-                          id.var = c("Measure","Table", "Product"),
+                          id.var = c("Measure","Table", "Product", "Origin of product"),
                           factorsAsStrings = FALSE)
       X$Value <- as.numeric(str_replace_all(X$value, "\\%", ""))
       X <- X[!is.na(X$Value),]
       X$Dimension       <- "Type of fish consumed"
       X$Dimension_Value <- str_trim(X$`Product`)
       X <- X[!str_detect(X$Dimension_Value, "total"),]
-      #X$Metric  <- X$variable
-      X$Metric  <- "MISSING"
+      X$Metric  <- X$`Origin of product`
+      #X$Metric  <- "MISSING"
       X$Year    <- 2021
       X$Measure <- "Domestic Fish Consumption"
       X$Unit  = "Percentage of households that reported consuming"
