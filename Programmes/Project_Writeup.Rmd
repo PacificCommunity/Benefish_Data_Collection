@@ -1,0 +1,89 @@
+---
+title: Capturing Benefish4 in Data
+subtitle: Final Version
+author: James Hogan, FAME - SPC
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+   bookdown::word_document2:
+      reference_docx: "C:/From BigDisk/GIT/Benefish_Data_Collection/Product_Output/SPC_R_Template.docx"
+      toc: true  
+      number_sections: false   
+---
+\newpage
+
+
+```{r setup, cache=FALSE, include=FALSE}
+
+   ##
+   ##    Core libraries
+   ##
+      library(ggplot2)
+      library(plyr)
+      library(stringr)
+      library(reshape2)
+      library(lubridate)
+      library(calibrate)
+      library(Hmisc)
+      library(RColorBrewer)
+      library(stringi)
+      library(sqldf)
+      library(scales)
+      library(RDCOMClient)
+      library(extrafont)
+      library(tictoc)
+   ##
+   ##    Project-specific libraries
+   ##
+      library(data.table)
+
+      library(knitr)
+      library(htmlTable)
+      library(png)
+      library(bookdown)
+      library(kableExtra)
+      library(pander)
+      library(officer)
+
+##
+##    Grab the reporting datasets
+##
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Output/Final_Cleaned_Benefish4_Data.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Cleaned_Data.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/All_Tables.rda")
+
+
+   options(xtable.comment = FALSE)
+
+   BaseDir <- "C:/From BigDisk/GIT/Benefish_Data_Collection/Graphical_Output/"
+   
+
+```
+
+   
+
+<!-- 
+##
+##       This bit below is the commentary written in R Markup
+--> 
+
+# Overview
+
+the P
+
+
+\newpage
+
+# Findings
+
+
+
+\newpage
+
+# Recommendations
+
+
+
+\newpage
+
+# References
+

@@ -51,8 +51,6 @@
    ##    Set working directory
    ##
       setwd("C:/From BigDisk/GIT/Benefish_Data_Collection")
-      setwd("C:/Work_Related_Projects/SPC/Benefish_Data_Collection")
-  
      
    ##
    ##    
@@ -102,6 +100,13 @@
       ##    Hoover it all back up again, and make the final tables ready for Giulio
       ##
          source("Programmes/Hoover_Up_Cleaned_Data.r") # This reads back in all of the cleaned data, and identifies excluded tables
+         
+         
+      ##
+      ##    Report write ups
+      ##
+         rmarkdown::render("Programmes/Project_Writeup.rmd", output_file = "C:/From BigDisk/GIT/Benefish_Data_Collection/Product_Output/Project_Writeup.docx")
+
          
 ##
 ##   End of programme

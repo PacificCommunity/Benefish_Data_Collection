@@ -258,7 +258,11 @@
       
       write.table(Standard_Dimensions[["Estimates by the Benefish studies of annual fisheries harvests"]], file = "Data_Output/OUTPUT_Estimates_by_the_Benefish_studies_of_annual_fisheries_harvests.csv", row.names = FALSE, sep= ",")
 
+
+
       save(Standard_Dimensions, file = "Data_Output/Final_Cleaned_Benefish4_Data.rda")
+      save(Cleaned_Data,        file = "Data_Intermediate/Cleaned_Data.rda")
+      save(All_Tables,          file = "Data_Intermediate/All_Tables.rda")
  
 ##
 ##    And we're done
