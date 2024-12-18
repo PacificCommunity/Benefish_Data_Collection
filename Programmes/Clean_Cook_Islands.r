@@ -197,7 +197,7 @@
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Revenue_Source"),
                           factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))*1000
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))*1000
       X <- X[!is.na(X$Value),]
       X$Year  <- ifelse(X$variable == "2018/19 Actual", 2019, 
                  ifelse(X$variable == "2019/20 Actual", 2020, 2021))
