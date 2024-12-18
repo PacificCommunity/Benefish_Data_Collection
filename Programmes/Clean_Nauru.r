@@ -70,7 +70,8 @@
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "A$")
-      Clean_Nauru[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      X$GDP_Dimension <- str_trim(X$variable)
+      Clean_Nauru[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
       
    ##
@@ -108,7 +109,7 @@
       #X <- X[!str_detect(X$Location, "Average"),]
       X$Metric  <- X$variable
       X$Year    <- 2021
-      X$Measure <- "Fishing Consumption"
+      X$Measure <- "Domestic Fish Consumption"
       X$Unit  = "Number of Households"
       Clean_Nauru[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
       
@@ -127,11 +128,10 @@
       X$Dimension       <- "Employed"
       X$Dimension_Value <- str_trim(X$Sex)
       X <- X[!str_detect(X$Dimension_Value, "Total"),]
-      X$Metric  <- X$variable
       X$Year  <- 2021
       X$Measure <- "Fishing Employment"
       X$Unit  = "Headcount"
-      Clean_Nauru[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+      Clean_Nauru[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
    ##
    ##    Price Measures
    ##
@@ -145,12 +145,35 @@
  
       X$Value <- as.numeric(str_replace_all(X$`Estimated price  per kg (A$)`, ",", ""))
       X <- X[!is.na(X$Value),]
-      X$Measure <- "Fish Prices"
+      X$Measure <- "Price Measures"
       X$Dimension       <- "Landed Price"
       X$Unit    <- str_trim(X$`Selling unit`)
       X$Dimension_Value <- str_trim(X$Commodity)
       X$Year  <- 2021
       Clean_Nauru[["Price Measures"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
+   ##
+   ##    Fisheries Revenue
+   ##
+      X <- Nauru[["Nauru\x92s access fees (A$)XXTable11-9"]]
+      X$V1[1] <- "Revenue_Source"
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Revenue_Source"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
+      X <- X[!is.na(X$Value),]
+      X$Year  <- ifelse(X$variable == "2017/18", 2018, 
+                 ifelse(X$variable == "2018/19", 2019, 
+                 ifelse(X$variable == "2019/20", 2020, 
+                 ifelse(X$variable == "2020/21", 2021,2022))))
+      X$Measure <- "Fisheries Revenue"
+      X$Unit    <- "A$"
+      X <- X[!str_detect(X$Revenue_Source, "Total"),]
+      
+      Clean_Nauru[["Fisheries Revenue"]] <- X[,c("Measure","Table", "Revenue_Source", "Year", "Unit", "Value")]
+
 
       
    ##

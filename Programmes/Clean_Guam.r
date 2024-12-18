@@ -64,7 +64,7 @@
       X <- X[!is.na(X$Value),]
       X$Dimension       <- "Landed Price"
       X$Dimension_Value <- str_replace_all(X$variable, " \\(US\\$\\)", "")
-      X$Measure <- "Fish Prices"
+      X$Measure <- "Price Measures"
       X$Unit    <- "US$"
       Clean_Guam[["Price Measures"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 

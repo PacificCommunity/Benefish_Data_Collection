@@ -88,7 +88,7 @@
       X$Dimension_Value <- str_split_fixed(X$variable, "\\(", 2)[,1]
       X$Unit <- str_replace_all(str_split_fixed(X$variable, "\\(", 2)[,2], "\\)","")
       X$Unit <- ifelse(X$Unit == "", "US$/Pound", X$Unit)
-      X$Measure <- "Fish Prices"
+      X$Measure <- "Price Measures"
       Clean_Northern_Marianas_Islands[["Price Measures"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 
    

@@ -130,6 +130,21 @@
          Clean_Tokelau[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
 
    ##
+   ##    Fisheries Revenue
+   ##
+      X <- Tokelau[["Tokelau offshore fisheries revenueXXTable26-8"]]
+      names(X) <- X[1,]
+      X$Value <- as.numeric(str_replace_all(X$`Revenue (US$)`, "\\D+", ""))*10000
+      X <- X[!is.na(X$Value),]
+      X$Revenue_Source <- "Fisheries Revenue"
+      X$Measure <- "Fisheries Revenue"
+      X$Unit    <- "US$" 
+      X <- X[2:nrow(X),]
+      X$Year    <- as.numeric(X$Year)     
+      Clean_Tokelau[["Fisheries Revenue"]] <- X[,c("Measure","Table", "Revenue_Source", "Year", "Unit", "Value")]
+
+
+   ##
    ## Save files our produce some final output of something
    ##
       save(Clean_Tokelau, file = 'Data_Intermediate/Clean_Tokelau.rda')

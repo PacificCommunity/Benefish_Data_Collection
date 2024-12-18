@@ -91,8 +91,7 @@
       X$Year  <- X$variable
       X$Measure <- "Fishing Employment"
       X$Unit    <- "Headcount"
-      X$Metric  <- NA
-      Clean_New_Caledonia[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+      Clean_New_Caledonia[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
       
    ##
    ##    Fish Exports

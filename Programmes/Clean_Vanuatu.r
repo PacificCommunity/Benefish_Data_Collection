@@ -112,7 +112,7 @@
       X <- X[!str_detect(X$Dimension_Value, "total"),]
       X$Metric  <- X$variable
       X$Year    <- 2021
-      X$Measure <- "Fishing Consumption"
+      X$Measure <- "Domestic Fish Consumption"
       X$Unit  = "Mean daily grams per capita"
       Clean_Vanuatu[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
       

@@ -90,9 +90,9 @@
       X$Dimension_Value <- str_trim(X$`Product`)
       X <- X[!str_detect(X$Dimension_Value, "total"),]
       #X$Metric  <- X$variable
-      X$Metric  <- NA
+      X$Metric  <- "MISSING"
       X$Year    <- 2021
-      X$Measure <- "Fishing Consumption"
+      X$Measure <- "Domestic Fish Consumption"
       X$Unit  = "Percentage of households that reported consuming"
       Clean_Wallis_and_Futuna[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
             

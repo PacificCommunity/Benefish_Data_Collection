@@ -111,7 +111,7 @@
       X <- X[!str_detect(X$Dimension_Value, "total"),]
       X$Metric  <- X$variable
       X$Year    <- 2021
-      X$Measure <- "Fishing Consumption"
+      X$Measure <- "Domestic Fish Consumption"
       X$Unit  = "Mean daily grams per capita"
       Clean_Solomon_Islands[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
       
@@ -179,6 +179,46 @@
          #X <- X[!str_detect(X$Dimension_Value, "Total"),]
 
       Clean_Solomon_Islands[["Fish Exports"]] <- A[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+        
+        
+
+   ##
+   ##    Fisheries Revenue
+   ##
+      X <- Solomon_Islands[["Access fees received for offshore fishing in 2020XXTable16-14"]]
+      X$V1[1] <- "Revenue_Source"
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Revenue_Source"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X <- X[!is.na(X$Value),]
+      X$Revenue_Source <- str_trim(X$Revenue_Source)
+      X$Measure <- "Fisheries Revenue"
+      X$Unit    <- "SI$"      
+      X$Year    <- 2020
+      
+      
+      Y <- Solomon_Islands[["Other government revenue from fisheries in 2020XXTable16-15"]]
+      Y$V1[1] <- "Revenue_Source"
+      names(Y) <- Y[1,]
+ 
+      Y <- reshape2::melt(Y[2:nrow(Y),],
+                          id.var = c("Measure","Table", "Revenue_Source"),
+                          factorsAsStrings = FALSE)
+      Y$Value <- as.numeric(str_replace_all(Y$value, "\\D+", ""))
+      Y <- Y[!is.na(Y$Value),]
+      Y$Year  <- str_trim(Y$variable)
+      Y$Measure <- "Fisheries Revenue"
+      Y$Unit    <- "SI$"
+      X$Year    <- 2020
+      
+      X <- rbind(X, Y)
+      X <- X[!str_detect(X$Revenue_Source, "Total"),]
+      
+      Clean_Solomon_Islands[["Fisheries Revenue"]] <- X[,c("Measure","Table", "Revenue_Source", "Year", "Unit", "Value")]
+
         
   
    ##

@@ -110,7 +110,7 @@
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X <- X[str_detect(X$Harvest_Sector, "Fisheries contribution to GDP"),]
-      X$Year    <- as.numeric(str_replace_all(X$variable, "\\D+", ""))
+      X$Year    <- as.numeric(str_replace_all(X$variable, ",", ""))
       X$Measure <- "Fishing contribution to GDP"
       X$Unit    <- "US$"
       Clean_Federated_States_of_Micronesia[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]

@@ -159,8 +159,7 @@
       X$Year  <- X$variable
       X$Measure <- "Fishing Employment"
       X$Unit    <- "Headcount"
-      X$Metric  <- NA
-      Clean_Palau[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+      Clean_Palau[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
       
    ##
    ##    Fish Exports
@@ -205,6 +204,24 @@
          X <- X[!str_detect(X$Dimension_Value, regex("total", ignore_case = TRUE)),]
 
       Clean_Palau[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+
+   ##
+   ##    Fisheries Revenue
+   ##
+      X <- Palau[["Access fees (US$ millions) compared to total government revenue (%)XXTable13-11"]]
+      X$V1[1] <- "Year"
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Year"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))*1000000
+      X$Value <- as.numeric(str_replace_all(X$Value, "\\%", ""))
+      X <- X[!is.na(X$Value),]
+      X$Revenue_Source <- str_trim(X$variable)
+      X$Measure <- "Fisheries Revenue"
+      X$Unit    <- "US$"      
+      Clean_Palau[["Fisheries Revenue"]] <- X[,c("Measure","Table", "Revenue_Source", "Year", "Unit", "Value")]
 
    ##
    ## Save files our produce some final output of something

@@ -135,7 +135,7 @@
       X <- X[!str_detect(X$Dimension_Value, "Average"),]
       X$Metric  <- X$variable
       X$Year    <- 2021
-      X$Measure <- "Fishing Consumption"
+      X$Measure <- "Domestic Fish Consumption"
       X$Unit  = "Kgs per capital per annum"
       Clean_Fiji[["Domestic Fish Consumption"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
       
@@ -159,8 +159,7 @@
       X$Year  <- X$variable
       X$Measure <- "Fishing Employment"
       X$Unit    <- "Headcount"
-      X$Metric  <- NA
-      Clean_Fiji[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Metric", "Year", "Unit", "Value")]
+      Clean_Fiji[["Fishing Employment"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
       
    ##
    ##    Fish Exports

@@ -73,6 +73,31 @@
       X$GDP_Dimension <- str_trim(X$variable)
       Clean_Niue[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
 
+
+   ##
+   ##    Fisheries Revenue
+   ##
+      X <- Niue[["Fisheries access revenue XXTable12-5"]]
+      X$V1[1] <- "Year"
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Year"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X$Value <- as.numeric(str_replace_all(X$Value, "\\%", ""))
+      X <- X[!is.na(X$Value),]
+      X$Year  <- ifelse(X$Year == "2017/18", 2018, 
+                 ifelse(X$Year == "2018/19", 2019, 
+                 ifelse(X$Year == "2019/20", 2020, 
+                 ifelse(X$Year == "2020/21", 2021,2022))))
+      X$Revenue_Source <- str_trim(X$variable)
+      X$Measure <- "Fisheries Revenue"
+      X$Unit    <- "NZ$"      
+      Clean_Niue[["Fisheries Revenue"]] <- X[,c("Measure","Table", "Revenue_Source", "Year", "Unit", "Value")]
+
+
+
    ##
    ## Save files our produce some final output of something
    ##

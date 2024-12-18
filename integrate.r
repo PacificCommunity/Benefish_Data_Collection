@@ -99,15 +99,10 @@
             source("Programmes/Clean_Vanuatu.r")
             source("Programmes/Clean_Wallis_and_Futuna.r")
             
-            
       ##
-      ##    Hoover it all back up again
+      ##    Hoover it all back up again, and make the final tables ready for Giulio
       ##
          source("Programmes/Hoover_Up_Cleaned_Data.r") # This reads back in all of the cleaned data, and identifies excluded tables
-
-
-
-
          
 ##
 ##   End of programme

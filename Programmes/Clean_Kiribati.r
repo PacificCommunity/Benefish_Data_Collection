@@ -71,7 +71,8 @@
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "A$")
-      Clean_Kiribati[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      X$GDP_Dimension <- str_trim(X$variable)
+      Clean_Kiribati[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
    ##
    ##    Fishing contribution to Kiribati GDP in 2021 - Table7-7

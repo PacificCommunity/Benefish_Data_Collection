@@ -133,7 +133,7 @@
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Harvest sector"),
                           factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
       X$Harvest_Sector <- str_trim(X$`Harvest sector`)
       X <- X[!is.na(X$Value),]
       X <- X[!str_detect(X$Harvest_Sector, "Total"),]
@@ -158,28 +158,14 @@
       X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
       X <- X[!is.na(X$Value),]
       X$Fish_Commodity <- str_trim(X$variable)
+      
+      X$Dimension       <- "Aggregate Commodity"
+      X$Dimension_Value <- str_trim(X$variable)
+      
       X$Unit  = ifelse(X$variable == "Fisheries as a % of total exports", "Proportion", "NZ$")
       X$Value <- ifelse(X$variable == "Fisheries as a % of total exports", X$Value/10000, X$Value)
-      Clean_Cook_Islands[["Exports of fishery production"]] <- X[,c("Measure","Table", "Fish_Commodity", "Year", "Unit", "Value")]
-
-   ##
-   ##    Fishing Revenue - Table6-9
-   ##
-      X <- Cook_Islands[["Fisheries revenue (NZ$ thousands)XXTable6-9"]]
-      X_Name <- names(Cook_Islands["Fisheries revenue (NZ$ thousands)XXTable6-9"])
-      X$V1[1] <- "Component"
-      names(X) <- X[1,]
- 
-      X <- reshape2::melt(X[2:nrow(X),],
-                          id.var = c("Measure","Table", "Component"),
-                          factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))*1000
-      X <- X[!is.na(X$Value),]
-      X$Year  <- ifelse(X$variable == "2018/19 Actual", 2019, 
-                  ifelse(X$variable == "2019/20 Actual", 2020, 2021))
-      X$Unit  <- "NZ$"
-      X$Measure <- "Fisheries revenue"
-      Clean_Cook_Islands[["Fisheries revenue"]] <- X[,c("Measure","Table", "Component", "Year", "Unit", "Value")]
+      X$Measure <- "Fish Exports"
+      Clean_Cook_Islands[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 
    ##
    ##    Number of households engaged in fishing - Table6-10
@@ -200,6 +186,27 @@
       X$Unit  = ifelse(X$Location == "% participation", "Proportion", "Number")
       X$Value <- ifelse(X$Location == "% participation", X$Value/10000, X$Value)
       Clean_Cook_Islands[["Number of households engaged in fishing"]] <- X[,c("Measure","Table", "Location", "Fish_Activity", "Year", "Unit", "Value")]
+
+   ##
+   ##    Fisheries Revenue
+   ##
+      X <- Cook_Islands[["Fisheries revenue (NZ$ thousands)XXTable6-9" ]]
+      X$V1[1] <- "Revenue_Source"
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Revenue_Source"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))*1000
+      X <- X[!is.na(X$Value),]
+      X$Year  <- ifelse(X$variable == "2018/19 Actual", 2019, 
+                 ifelse(X$variable == "2019/20 Actual", 2020, 2021))
+      X$Measure <- "Fisheries Revenue"
+      X$Unit    <- "NZ$"
+      Clean_Cook_Islands[["Fisheries Revenue"]] <- X[,c("Measure","Table", "Revenue_Source", "Year", "Unit", "Value")]
+
+
+
    ##
    ## Save files our produce some final output of something
    ##

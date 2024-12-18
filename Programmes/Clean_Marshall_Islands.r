@@ -70,7 +70,8 @@
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "US$")
-      Clean_Marshall_Islands[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      X$GDP_Dimension <- str_trim(X$variable)
+      Clean_Marshall_Islands[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
    ##
    ##    Fishing contribution to Marshall_Islands GDP in 2021 - Table7-7
@@ -133,6 +134,43 @@
 
       Clean_Marshall_Islands[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
  
+
+   ##
+   ##    Fisheries Revenue
+   ##
+      X <- Marshall_Islands[["Access fees received by MIMRA (US$)XXTable10-10"]]
+      X$V1[1] <- "Revenue_Source"
+      names(X) <- X[1,]
+ 
+      X <- reshape2::melt(X[2:nrow(X),],
+                          id.var = c("Measure","Table", "Revenue_Source"),
+                          factorsAsStrings = FALSE)
+      X$Value <- as.numeric(str_replace_all(X$value, "\\D+", ""))
+      X <- X[!is.na(X$Value),]
+      X$Year  <- str_trim(X$variable)
+      X$Measure <- "Fisheries Revenue"
+      X$Unit    <- "US$"
+      
+      
+      Y <- Marshall_Islands[["Non-access revenue received by MIMRA (US$)XXTable10-11"]]
+      Y$V1[1] <- "Revenue_Source"
+      names(Y) <- Y[1,]
+ 
+      Y <- reshape2::melt(Y[2:nrow(Y),],
+                          id.var = c("Measure","Table", "Revenue_Source"),
+                          factorsAsStrings = FALSE)
+      Y$Value <- as.numeric(str_replace_all(Y$value, "\\D+", ""))
+      Y <- Y[!is.na(Y$Value),]
+      Y$Year  <- str_trim(Y$variable)
+      Y$Measure <- "Fisheries Revenue"
+      Y$Unit    <- "US$"
+      
+      X <- rbind(X, Y)
+      X <- X[!str_detect(X$Revenue_Source, "Total"),]
+      
+      Clean_Marshall_Islands[["Fisheries Revenue"]] <- X[,c("Measure","Table", "Revenue_Source", "Year", "Unit", "Value")]
+
+
  
    ##
    ## Save files our produce some final output of something
