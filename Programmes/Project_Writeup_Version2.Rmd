@@ -1,0 +1,215 @@
+---
+title: Capturing Benefish4 in Data
+subtitle: Draft write up
+author: James Hogan, FAME - SPC
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+   bookdown::word_document2:
+      reference_docx: "C:/From BigDisk/GIT/Benefish_Data_Collection/Product_Output/SPC_R_Template.docx"
+      toc: false  
+      number_sections: false   
+
+references:
+- id: Benefish4
+  title: Fisheries in the economies of Pacific Island countries and territories (Benefish Study 4)
+  author: 
+   - family: Gillett 
+     given: R
+   - family: Fong
+     given: M
+  URL: 'https:// purl.org/spc/digilib/doc/ppizh'
+  publisher: The Pacific Community 
+  issued:
+    year: 2023
+---
+\newpage
+
+
+```{r setup, cache=FALSE, include=FALSE}
+
+   ##
+   ##    Core libraries
+   ##
+      library(ggplot2)
+      library(plyr)
+      library(stringr)
+      library(reshape2)
+      library(lubridate)
+      library(calibrate)
+      library(Hmisc)
+      library(RColorBrewer)
+      library(stringi)
+      library(sqldf)
+      library(scales)
+      library(RDCOMClient)
+      library(extrafont)
+      library(tictoc)
+   ##
+   ##    Project-specific libraries
+   ##
+      library(data.table)
+
+      library(knitr)
+      library(htmlTable)
+      library(png)
+      library(bookdown)
+      library(kableExtra)
+      library(pander)
+      library(officer)
+
+##
+##    Grab the reporting datasets
+##
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Output/Final_Cleaned_Benefish4_Data.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Cleaned_Data.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/All_Tables.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Cleaned_Table_Names.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Together.rda")
+   
+   
+   options(xtable.comment = FALSE)
+
+   BaseDir <- "C:/From BigDisk/GIT/Benefish_Data_Collection/Graphical_Output/"
+   
+   Together <- Together[order(Together$In_Captured, Together$Standardised_Table_Name, Together$Country, Together$BeneFish_Table_Name),]
+   Together$Table <- str_replace_all(Together$Table,"'","")
+   
+   Together$BeneFish_Table_Name <- str_replace_all(Together$BeneFish_Table_Name,"\x92","")
+   Together$BeneFish_Table_Name <- str_replace_all(Together$BeneFish_Table_Name,"\\%","")
+   Together$BeneFish_Table_Name <- str_replace_all(Together$BeneFish_Table_Name,"\\(","")
+   Together$BeneFish_Table_Name <- str_replace_all(Together$BeneFish_Table_Name,"\\)","")
+   Together$BeneFish_Table_Name <- textclean::replace_non_ascii(Together$BeneFish_Table_Name)
+   Together$BeneFish_Table_Name <- str_replace_all(Together$BeneFish_Table_Name,"_"," ")
+   Together$BeneFish_Table_Name <- str_replace_all(Together$BeneFish_Table_Name,"_"," ")
+   Together$Country <- str_replace_all(Together$Country,"_"," ")
+   Together$BeneFish_Table_Name <- str_replace_all(Together$BeneFish_Table_Name,"_"," ")
+   
+   Together$Standardised_Table_Name <- ifelse(is.na(Together$Standardised_Table_Name) & !is.na(Together$BeneFish_Table_Name), "Duplicate Data", Together$Standardised_Table_Name)
+   
+
+```
+[^authors]: Robert Gillett and Merelesita Fong
+
+<!-- 
+##
+##       This bit below is the commentary written in R Markup
+--> 
+
+# Overview
+
+The scale and diversity within the Pacific region is something that only becomes apparent when you consistently measuring its different aspects. For understanding the importance of the role of fishing across the entire breadth of pacific economies and communities, the most comprehensive and definitive set of metrics derive from the Benefish reports, the lastest being its fourth iteration, the @Benefish4 publication.
+
+Significant effort went into the _FISHERIES in the ECONOMIES of Pacific Island Countries and Territories_, Benefish Study 4 (Benefish4) report, and its contents cover:
+
+* A fisheries-oriented discussion of macroeconomics, 
+
+* Country information on specific topics (fisheries production, contribution to gross domestic product [GDP], etc.), 
+
+* A discussion of important topics across all countries (e.g. the regional significance of access and exports of fishery products), 
+
+* Comparisons with results of previous Benefish studies, some important features of the benefits from fisheries that have emerged from this study, and 
+
+* Recommendations on improving the measurement of fisheries benefits and assuring the continuity of those benefits. 
+
+The data compiliation process involved two consultants[^authors] visiting the fisheries and statistical agencies of 24 Pacific Island Countries and Territories (PICTs) to collect and ground-truth the myriad of different metrics they sought to collect. In-country time was limited to a couple of days within each PICT, together with lead up and post-visit engagement with the specialists from each area.
+
+## Comprehensive but statistical methodologically inconsistent
+
+Weighing in at 705 pages, Benefish4 is indeed a meaty tomb, which is simultaneously its advantage and its disadvantage.
+
+FAME's Director has observed the local chapter for each book is "well-thumbed" when he has visited regional fisheries departments. Local experts find value in their country chapters. But, those same country experts are not "well-thumbing" other country's chapters. As a tool for stimulating evidence-based cross-country learnings, its lack of cross-country common classifications and standards, and its variable definitional inconsistancy lessenes its utility.
+
+While comprehensive about _each country_, Benefish4 is inconsistent _between country_ metrics. Where possible, the authors have sought to standardise metrics where common definitions exist; for example, for economic value-added. However, where common taxonomies and classifications do not exist, each country's metrics reflect back how those country's define different measures.
+
+## Resource intensive with a four-year repeat cycle
+
+The first Benefish reports were produced in 2001 and 2008 from Asian Development Bank funding. The third report started in 2014, and was completed in 2016. The fourth report commenced in September 2022, and was completed in April 2023.
+
+
+## A paper-based report for a digital age
+
+The publication is published in a PDF format, restricting its publication to book format only. Very little data analytics are possible because of the format of the data. There is a lot of "heavy data lifting" before an interested investigator could even get close to making inferences using Benefish4 information. And most of that heavy lifting directly relates to the publication medium, and its lack of machine-readable data.
+
+## Project breif
+
+This project's focus is on extracting as much data as possible from Benefish4 and making it available electronically. During the process, inconsistancies have been addressed as much as practical. 
+
+
+# Recommendations for Future Reports.
+
+The Benefish publications, as a single report, is too broad to do justice to the topics inside it. 
+
+Quite simply, its packed with too much stuff. In addition, its unclear whether the topics inside the report at the correct topics which need profiled. Future reports should consider the scope of what's being collected, and focus more attention on collecting data from each. Table \@ref(tab:ThermaticTopics) below contains the thematic topics extracted from the data.
+
+```{r ThermaticTopics, echo=FALSE}
+
+Thermatics <- data.frame(Thermatics = unique(Together$Standardised_Table_Name))
+Thermatics <- data.frame(Thermatics = Thermatics[order(Thermatics$Thermatics),])
+
+knitr::kable(Thermatics[Thermatics$Thermatics != "Duplicate Data",],
+             row.names = FALSE,
+             format = "markdown",
+             align = c('llllll'),
+             booktabs = TRUE,
+             caption= "Benefish4 Thematic Topics")
+             
+```
+
+
+Some of these metrics are best replaced with measures from FAME's administrative data sources; for example, "Catches by Method" might be derived from FAME's Catch and Effort statistics and our coastal data.
+
+Similarly, SDD might have better, more timely and more comprehensive measures of Fish Exports than currently collected through the Benefish publications.
+
+Other aspects of the report to explore are whether the topics in Table \@ref(tab:ThermaticTopics) are the correct topics for data collection around. Fishing contributions to GDP, with two different approaches might be metrics collected through SDD efforts related to expanding National Accounting collections within the Pacific. 
+
+Metrics missing from the current Benefish publications, but maybe which should be included, are fishing activity measures; for example, the vessel numbers and change like Figure \@ref(fig:PurseSeineBoats) below from our FAME data
+
+
+```{r PurseSeineBoats, echo=FALSE, fig.pos='h', out.width = '100%', fig.cap = 'Number of Purse Seine Vessels Operating in the WCPFO Purse Seine Fishery'}
+
+knitr::include_graphics(paste0(BaseDir, "Number_of_Purse_Seine_Vessels_Operating_within_the_WCPFC_NoTitles.png"))
+
+```
+
+
+# Next Steps
+At the start of this project, the plan was to upload the cleaned Benefish data int SPC's .Stat system. However, after discussions with SDD, the cleaned data might be better suited being uploaded into SPC's Data Hub as the CSV files they're currently existing as. The move from .Stat to the Data Hub recognises the variables within the tables are still quite idiosyncratic for each country source, despite being grouped thermatically.
+
+Secondly, more planning around the structure and the content of the next Benefish report is needed, to be able to identify which elements might be replaced with administrative data, which components can come from other sources, like SDD, and which components need a dedicated data collection system developed that supports the on-going collection of data.
+
+\newpage
+# Results
+The following are the Benefish4 tables, and how they've been collected together into a thermatic topic.
+
+
+```{r Captured, echo=FALSE}
+
+knitr::kable(Together[!is.na(Together$In_Captured),c("Country","Table", "BeneFish_Table_Name", "Standardised_Table_Name")],
+             row.names = FALSE,
+             format = "markdown",
+             align = c('llllll'),
+             booktabs = TRUE,
+             caption= "Treatment of Benefish4 Tables")
+             
+```
+
+\newpage
+Not all of the Benefish4 tables could be collected together. These are tables which were either too idiosyncratic in content, or replicated elsewhere.
+
+```{r Missed, echo=FALSE}
+
+knitr::kable(Together[is.na(Together$In_Captured),c("Country","Table", "BeneFish_Table_Name")],
+             row.names = FALSE,
+             format = "markdown",
+             align = c('llllll'),
+             booktabs = TRUE,
+             caption= "Tables that Couldn't be Compared")
+             
+```
+
+
+
+\newpage
+
+# References
+
