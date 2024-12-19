@@ -1,13 +1,26 @@
 ---
 title: Capturing Benefish4 in Data
-subtitle: Final Version
+subtitle: Draft write up
 author: James Hogan, FAME - SPC
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output: 
    bookdown::word_document2:
       reference_docx: "C:/From BigDisk/GIT/Benefish_Data_Collection/Product_Output/SPC_R_Template.docx"
-      toc: true  
+      toc: false  
       number_sections: false   
+
+references:
+- id: Benefish4
+  title: Fisheries in the economies of Pacific Island countries and territories (Benefish Study 4)
+  author: 
+   - family: Gillett 
+     given: R
+   - family: Fong
+     given: M
+  URL: 'https:// purl.org/spc/digilib/doc/ppizh'
+  publisher: The Pacific Community 
+  issued:
+    year: 2023
 ---
 \newpage
 
@@ -51,15 +64,17 @@ output:
    load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Cleaned_Data.rda")
    load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/All_Tables.rda")
 
-
    options(xtable.comment = FALSE)
 
    BaseDir <- "C:/From BigDisk/GIT/Benefish_Data_Collection/Graphical_Output/"
    
 
 ```
-
-   
+[^authors]: Robert Gillett and Merelesita Fong
+[^FijiConsumption]: Table 8-14, Benefish4
+[^SolomonsConsumption]: Table 16-16, Benefish4
+[^Consumption]: Benefish4 actually devotes considerable effort in chapter 34 to make fish consumption comparable between countries. Significant third-party-derived historical information is presented together in order to try and draw some sensible cross-country conclusions about fish consumption change. The effort is, to some extent, also evidence that the topic needs more research attention than could be provided by two researchers collecting consumption metrics as part of a range of fisheries metrics across 24 PICTs.
+[^PIFData]: https://forumsec.org/sites/default/files/2024-09/Pacific%20Regional%20Statistics%20Priorities.pdf
 
 <!-- 
 ##
@@ -68,12 +83,74 @@ output:
 
 # Overview
 
-the P
+The scale and diversity within the Pacific region is something that only becomes apparent when you consistently measuring its different aspects. For understanding the importance of the role of fishing across the entire breadth of pacific economies and communities, the most comprehensive and definitive set of metrics derive from the Benefish reports, the lastest being its fourth iteration, the @Benefish4 publication.
+
+Significant effort went into the _FISHERIES in the ECONOMIES of Pacific Island Countries and Territories_, Benefish Study 4 (Benefish4) report, and its contents cover:
+
+* A fisheries-oriented discussion of macroeconomics, 
+
+* Country information on specific topics (fisheries production, contribution to gross domestic product [GDP], etc.), 
+
+* A discussion of important topics across all countries (e.g. the regional significance of access and exports of fishery products), 
+
+* Comparisons with results of previous Benefish studies, some important features of the benefits from fisheries that have emerged from this study, and 
+
+* Recommendations on improving the measurement of fisheries benefits and assuring the continuity of those benefits. 
+
+The data compiliation process involved two consultants[^authors] visiting the fisheries and statistical agencies of 24 Pacific Island Countries and Territories (PICTs) to collect and ground-truth the myriad of different metrics they sought to collect. In-country time was limited to a couple of days within each PICT, together with lead up and post-visit engagement with the specialists from each area.
+
+## Comprehensive but statistical methodologically inconsistent
+
+Weighing in at 705 pages, Benefish4 is indeed a meaty tomb, which is simultaneously its advantage and its disadvantage.
+
+FAME's Director has observed the local chapter for each book is "well-thumbed" when he has visited regional fisheries departments. Local experts find value in their country chapters. But, those same country experts are not "well-thumbing" other country's chapters. As a tool for stimulating evidence-based cross-country learnings, its lack of cross-country common classifications and standards, and its variable definitional inconsistancy lessenes its utility.
+
+While comprehensive about _each country_, Benefish4 is inconsistent _between country_ metrics. Where possible, the authors have sought to standardise metrics where common definitions exist; for example, for economic value-added. However, where common taxonomies and classifications do not exist, each country's metrics reflect back how those country's define different measures.
+
+"Domestic Fish Consumption" is a typical example of statistical methodological inconsistency. Fijian fish consumption metrics are split between fresh fish, invertebrates, and canned fish groups, and reported as per capita kilograms per annum measures for four "village" locations.[^FijiConsumption] However, the Solomon Islands "Domestic Fish Consumption" is split into five aggregate fish groupings, and reported as mean daily grams per capita.[^SolomonsConsumption] Despite reported consumption statistics available for each country, it is not clear whether Fijians are consume more or less fish compared to Solomon Islanders.[^Consumption]
+
+## A paper-based report for a digital age
+
+The publication is published in a PDF format, restricting its publication to book format only. Very little data analytics are possible because of the format of the data. There is a lot of "heavy data lifting" before an interested investigator could even get close to making inferences using Benefish4 information. And most of that heavy lifting directly relates to the publication medium, and its lack of machine-readable data.
+
+For example, the "Domestic Fish Consumption" metrics cannot be compared to the average life expectancy or other health measures to draw inferences about how fisheries activity effects health outcomes. Using the Benefish4 data for data analysis would require the investigator working through the pdf report country-by-country, compiling the relevant table into a single measure table for the pacific. After compiliation, the data would need to be adjusted for country-specific differences before being enriched with similar compiled and adjusted health measures for each country. The data transformation process is well-known to most investigation, but the paper-based format of the publication makes the process just that much more harder.
+
+## Resource intensive with a four-year repeat cycle
+
+The first Benefish reports were produced in 2001 and 2008 from Asian Development Bank funding. The third report started in 2014, and was completed in 2016. The fourth report commenced in September 2022, and was completed in April 2023.
+
+Part of
+
+
 
 
 \newpage
 
 # Findings
+
+Benefish4 is too broad: its too many things, and future reports need to be scaled down. 
+
+Future Benefish reports:
+
+1. Need more statistical structure around what is being collected, and data collection systems planned and developed accordingly
+
+2. More use needs to be made of administrative data, especially around measures possible from FAME data sources. 
+
+3. Data collection needs to be co-ordinated across Pacific actors who are more active in each area. 
+The work of organisations like the Pacific Island Forum,[^PIFData] and 
+
+
+
+
+New metrics starters-for-10 measures include:
+
+1. Vessels 
+
+
+
+
+bitten off more than it can chew.
+
 
 
 
