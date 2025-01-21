@@ -783,13 +783,26 @@
       ##       "RAWDATA_Sheet1XXGraphs_for_govt_revenue_chapter"
       ##       "RAWDATA_Sheet1XXGraphs_production_chapter"
       ##       "RAWDATA_Sheet1XXMore_graphs_gdp_chapter"
-All_Data[["RAWDATA_Sheet1XXGraphs_for_export_chapter"]]      
+
+      ##
+      ##    Do the exchange rates
+      ##
+      load("Data_Intermediate/RAWDATA_Exchange_RatesXXManually_Collected_Data_Version2.rda")
+      names(RAWDATA_Exchange_RatesXXManually_Collected_Data_Version2) <- RAWDATA_Exchange_RatesXXManually_Collected_Data_Version2[1,]
+      Exchange_Rates <- reshape2::melt(RAWDATA_Exchange_RatesXXManually_Collected_Data_Version2,
+                                       id = c("Currency"),
+                                       variable.name = "Year")
+      Exchange_Rates$ToUSDollar <- as.numeric(Exchange_Rates$value)
       
-      
-      
+      Exchange_Rates <- Exchange_Rates[!is.na(Exchange_Rates$ToUSDollar),]
+      Exchange_Rates <- Exchange_Rates[Exchange_Rates$Currency != "Currency",]
+      Exchange_Rates <- Exchange_Rates[order(Exchange_Rates$Currency, Exchange_Rates$Year),]
+      Exchange_Rates <- Exchange_Rates[,c("Currency","Year","ToUSDollar")]
       
    save(Fisheries_Harvest, file = "Data_Intermediate/Fisheries_Harvest.rda") 
    save(All_Data, file = "Data_Intermediate/All_Data.rda") 
+   save(Exchange_Rates, file = "Data_Output/Exchange_Rates.rda") 
+   write.table(Exchange_Rates, file="Data_Output/Exchange_Rates.csv", sep = ",", row.names = FALSE)
 
  
 ##

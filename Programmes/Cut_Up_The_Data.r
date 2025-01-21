@@ -20,6 +20,7 @@
       Contents <- as.data.frame(list.files(path = "Data_Intermediate/", pattern = "*Manually_Collected_Data_Version2.rda"))
       names(Contents) <- "DataFrames"
       Contents$Dframe <- str_split_fixed(Contents$DataFrames, "\\.", n=2)[,1]
+      Contents <- Contents[!str_detect(Contents$Dframe, "Exchange_Rates"),]
       
       All_Data <- lapply(Contents$DataFrames, function(File){
                            load(paste0("Data_Intermediate/", File))

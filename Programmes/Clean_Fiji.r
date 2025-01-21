@@ -63,21 +63,32 @@
                              id.var = c("Measure","Table", "Harvest_Sector", "Year"),
                              factorsAsStrings = FALSE)
          ##
-         ##    Aquaculture tonnes or pcs... Choose...
-         ##       Pieces
+         ##    Aquaculture - split between tonnes AND pieces. Keep the value the same for each and look at allocating at the end
          ##
-            Y$value[((Y$Harvest_Sector == "Aquaculture") & (Y$Year == 2007) & (Y$variable == "Volume"))] <- 85236
-            Y$value[((Y$Harvest_Sector == "Aquaculture") & (Y$Year == 2014) & (Y$variable == "Volume"))] <- 48100
-            Y$value[((Y$Harvest_Sector == "Aquaculture") & (Y$Year == 2021) & (Y$variable == "Volume"))] <- 20000
-                             
+            Aquaculture <- Y[(Y$`Harvest_Sector` == "Aquaculture"),]
+            Aquaculture$Tonnes <- ifelse(str_detect(Aquaculture$value, "t") & str_detect(Aquaculture$value, "pcs"), str_split_fixed(Aquaculture$value, " and ", 2)[,1],
+                                  ifelse(str_detect(Aquaculture$value, "t"), Aquaculture$value, ""))
+                                  
+            Aquaculture$Pieces <- ifelse(str_detect(Aquaculture$value, "t") & str_detect(Aquaculture$value, "pcs"), str_split_fixed(Aquaculture$value, " and ", 2)[,2],
+                                  ifelse(str_detect(Aquaculture$value, "pcs"), Aquaculture$value, ""))
+            Aquaculture$Tonnes <- as.numeric(str_replace_all(str_replace_all(Aquaculture$Tonnes, "t", ""), ",",""))
+            Aquaculture$Pieces <- as.numeric(str_replace_all(str_replace_all(Aquaculture$Pieces, "pcs", ""), ",",""))
+            
+            Aquaculture <- reshape2::melt(Aquaculture,
+                                          id.var = c("Harvest_Sector", "Year", "Measure", "Table"))   
+            Aquaculture <- Aquaculture[!(Aquaculture$variable %in% c("variable")),]
+            
+            
+         Y <- rbind(Y[(Y$`Harvest_Sector` != "Aquaculture"),], 
+                    Aquaculture)                             
          Y$Year <- as.numeric(as.character(Y$Year))
          Y$Value <- as.numeric(str_replace_all(Y$value, ",", ""))
          Y <- Y[!is.na(Y$Value),]
          
          Y$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
-         Y$Unit  = ifelse(Y$variable == "Value (F$)", "F$", 
-                     ifelse(Y$Harvest_Sector == "Aquaculture","Pieces", "Tonnes"))
-                     
+         Y$Unit  = ifelse(Y$variable %in% c("value", "Nominal_Value"), "F$", 
+                   ifelse(Y$Harvest_Sector == "Aquaculture",as.character(Y$variable), "Tonnes"))
+                           
          Clean_Fiji[["Estimates by the Benefish studies of annual fisheries harvests"]] <- Y[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
 

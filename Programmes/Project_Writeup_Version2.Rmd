@@ -89,6 +89,10 @@ references:
 
 ```
 [^authors]: Robert Gillett and Merelesita Fong
+[^datapolicy]: https://www.spc.int/digitallibrary/get/o4wf6
+[^IDI]: https://www.stats.govt.nz/integrated-data/
+[^Admin]: https://www.stats.govt.nz/corporate/cabinet-papers-modernising-and-transforming-the-2028-census-public-consultation-on-an-administrative-data-first-approach-for-census/
+[^caseforchange]: https://www.stats.govt.nz/assets/Uploads/Corporate/Cabinet-papers/Modernising-our-approach-to-the-2028-Census/2.Appendix-1_-Modernising-and-transforming-the-approach-to-census.pdf
 
 <!-- 
 ##
@@ -97,9 +101,9 @@ references:
 
 # Overview
 
-The scale and diversity within the Pacific region is something that only becomes apparent when you consistently measuring its different aspects. For understanding the importance of the role of fishing across the entire breadth of pacific economies and communities, the most comprehensive and definitive set of metrics derive from the Benefish reports, the lastest being its fourth iteration, the @Benefish4 publication.
+The most comprehensive and definitive set of metrics on the importance of the fisheries for Pacific Countries is the Benefish reports, with @Benefish4's _FISHERIES in the ECONOMIES of Pacific Island Countries and Territories_ being the latest publication in a series of four. Significant effort went into compiling and publishing the report. Weighing in at 705 pages, Benefish4 is indeed a meaty tomb.
 
-Significant effort went into the _FISHERIES in the ECONOMIES of Pacific Island Countries and Territories_, Benefish Study 4 (Benefish4) report, and its contents cover:
+The process involved two consultants[^authors] visiting the fisheries and statistical agencies of 24 Pacific Island Countries and Territories (PICTs) to collect and ground-truth the myriad of different metrics they sought to collect. In-country time was limited to a couple of days within each PICT, together with lead up and post-visit engagement with the specialists from each area; however, the _scale_ of the report included: 
 
 * A fisheries-oriented discussion of macroeconomics, 
 
@@ -111,35 +115,41 @@ Significant effort went into the _FISHERIES in the ECONOMIES of Pacific Island C
 
 * Recommendations on improving the measurement of fisheries benefits and assuring the continuity of those benefits. 
 
-The data compiliation process involved two consultants[^authors] visiting the fisheries and statistical agencies of 24 Pacific Island Countries and Territories (PICTs) to collect and ground-truth the myriad of different metrics they sought to collect. In-country time was limited to a couple of days within each PICT, together with lead up and post-visit engagement with the specialists from each area.
 
-## Comprehensive but statistical methodologically inconsistent
+This project focused on extracting as much data as possible from Benefish4 pdf publication and making it available electronically. During the process, inconsistancies have been addressed as much as practical.
 
-Weighing in at 705 pages, Benefish4 is indeed a meaty tomb, which is simultaneously its advantage and its disadvantage.
-
-FAME's Director has observed the local chapter for each book is "well-thumbed" when he has visited regional fisheries departments. Local experts find value in their country chapters. But, those same country experts are not "well-thumbing" other country's chapters. As a tool for stimulating evidence-based cross-country learnings, its lack of cross-country common classifications and standards, and its variable definitional inconsistancy lessenes its utility.
-
-While comprehensive about _each country_, Benefish4 is inconsistent _between country_ metrics. Where possible, the authors have sought to standardise metrics where common definitions exist; for example, for economic value-added. However, where common taxonomies and classifications do not exist, each country's metrics reflect back how those country's define different measures.
-
-## Resource intensive with a four-year repeat cycle
-
-The first Benefish reports were produced in 2001 and 2008 from Asian Development Bank funding. The third report started in 2014, and was completed in 2016. The fourth report commenced in September 2022, and was completed in April 2023.
-
-
-## A paper-based report for a digital age
-
-The publication is published in a PDF format, restricting its publication to book format only. Very little data analytics are possible because of the format of the data. There is a lot of "heavy data lifting" before an interested investigator could even get close to making inferences using Benefish4 information. And most of that heavy lifting directly relates to the publication medium, and its lack of machine-readable data.
-
-## Project breif
-
-This project's focus is on extracting as much data as possible from Benefish4 and making it available electronically. During the process, inconsistancies have been addressed as much as practical. 
-
+\newpage
 
 # Recommendations for Future Reports.
 
-The Benefish publications, as a single report, is too broad to do justice to the topics inside it. 
+1. The Benefish publications, as a single report, is too broad to do justice to all the topics inside it. Quite simply the report contains too much stuff. Its breadth comes at the cost of being _comprehensive_ on its covered topics; for example, the treatment of aquaculture.  
 
-Quite simply, its packed with too much stuff. In addition, its unclear whether the topics inside the report at the correct topics which need profiled. Future reports should consider the scope of what's being collected, and focus more attention on collecting data from each. Table \@ref(tab:ThermaticTopics) below contains the thematic topics extracted from the data.
+Future reports should consider the scope of what's being collected, and focus more attention on collecting data from each. The report itself, in "Chapter 36 Recommendations", reaches a similar conclusion.
+
+2. Alternative data collection processes need to be developed to both shorten the compiliation time, and improve data quality, again echoing Chapter 36.2 of the report.
+
+Every report involves a large amount of lead-up time and in-country data collection. Four year data collection processes introduce the high risk that every new Benefish report is like a new box of chocolates to the member country supply data into SPC: you just never know what will be found. Repeated data collections are needed to build up both a feel inside of SPC and memeber countries for what the true metrics are, and "muscle memory" associated with regular statistical reporting according to a common set of metrics. 
+
+3. More use of administrative data sources need considered. For example, FAME data on data sheet log collections, and Vessel Monitoring Systems should be able to reconcile with PICT systems. If they do, then reporting from FAME data sources might replace in-country data collection processes.
+
+Before the project could head down this path, significant effort needs to be invested in data collection systems and processes, including into the statistical classifications and standards infrastructure that could support a robust data collection process. 
+
+4. FAME needs to revisit the costs and benefits of the severity of its data governance constraints. For FAME data's use as an administrative data source for fisheries statistical reporting, SPC would need to revisit its "General Policies: Governance of fisheries, aquaculture and marine ecosystem data provided to SPC by its members" policy.[^datapolicy] 
+
+The policy provides a framework for how SPC handles any fisheries, aquaculture and marine ecosystems related data including the data handling, ownership, security, sharing, integration and dissemination. However, it is too restrictive and prevents FAME data being used to produce high-quality economic, and fisheries-related statistics for the Pacific.
+
+a. Using administrative data sources for statistics is no longer seen as a "misuse" of administrative data.
+
+Statistics New Zealand faced similar trade-offs in its Integrated Data Infrastructure(IDI)[^IDI] between maintaining the public's trust around the analytical use of confidential information, versus using administrative data for generating more accurate aggregate statistcs that reduce respondent burden. It recently released a proposal to use IDI information as an "administrative data-first" approach to the New Zealand Census.[^Admin] 
+
+The "case for change" focused on the reduced cost, greater resilience, and more efficient reuse of existing government data to make outputs more flexible and frequent.[^caseforchange] The same benefits apply for FAME data sources. Statistics New Zealand's consultative approach might serve as a model for revisiting the rigidity of SPCs existing data policies.
+
+5. The report needs to be modenised and its output be capable of electronic manipulation. Significant effort has gone into _this_ project just to extract numeric information from a pdf-based report. PDF reports as "output" from a research project have no place within the 21st century.
+
+
+\newpage
+
+Table \@ref(tab:ThermaticTopics) below contains the thematic topics extracted from the data.
 
 ```{r ThermaticTopics, echo=FALSE}
 

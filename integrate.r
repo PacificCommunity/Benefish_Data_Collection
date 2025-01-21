@@ -46,6 +46,9 @@
    ##
       library(pdftools)
       library(data.table)
+      
+      library(sysfonts)
+      library(showtext)
    
    ##
    ##    Set working directory
@@ -99,7 +102,8 @@
       ##
       ##    Hoover it all back up again, and make the final tables ready for Giulio
       ##
-         source("Programmes/Hoover_Up_Cleaned_Data.r") # This reads back in all of the cleaned data, and identifies excluded tables
+         source("Programmes/Hoover_Up_Cleaned_Data.r")  # This reads back in all of the cleaned data, and identifies excluded tables
+         source("Programmes/Make_Pictures_and_Check.r") # Make some pretty pictures
          
          
       ##

@@ -38,9 +38,9 @@
       ##    Aquaculture tonnes or pcs... Choose...
       ##       Pieces
       ##
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2007))] <- 0
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2014))] <- .5
-         X$`Volume `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2021))] <- 0
+         X$`Volume  `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2007))] <- 0
+         X$`Volume  `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2014))] <- .5
+         X$`Volume  `[((X$`Harvest sector` == "Aquaculture") & (X$`Year` == 2021))] <- 0
          
          
       X <- reshape2::melt(X[2:nrow(X),],
@@ -52,7 +52,7 @@
       X$variable <- as.character(X$variable)
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
       X$Unit  = ifelse(X$variable == "Nominal value  ", "A$", 
-                  ifelse(X$Harvest_Sector == "Aquaculture","Pieces", "Tonnes"))
+                  ifelse(X$Harvest_Sector == "Aquaculture","Tonnes", "Tonnes"))
       Clean_Tuvalu[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
       
 
