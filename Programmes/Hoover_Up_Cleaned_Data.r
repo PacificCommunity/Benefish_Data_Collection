@@ -239,6 +239,26 @@
    Standard_Dimensions[["Volume of production in 2021"]]
 
    ##
+   ##       I have manually removed Freshwater 2016 from Kiribati, table 9.4. What was it doing there anyway, when 
+   ##       in no other table?
+   ##
+   ##       Also, fix up international
+   ##
+      Ditch_KFW <- Standard_Dimensions[["Estimates by the Benefish studies of annual fisheries harvests"]]
+      Ditch_KFW <- Ditch_KFW[!((Ditch_KFW$Member_Country == "Kiribati") &
+                               (Ditch_KFW$Year == 2016)),]
+      ##
+      ##    Fix up some of the odd Harvest_Sectors
+      ##
+      Ditch_KFW$Harvest_Sector[(Ditch_KFW$Member_Country == "International_Waters")] <- "Offshore Foreign Based"
+      Ditch_KFW$Harvest_Sector[(Ditch_KFW$Member_Country == "Kiribati")&
+                               (Ditch_KFW$Harvest_Sector == "commercial")] <- "Offshore Locally Based"
+      
+      
+      
+      Standard_Dimensions[["Estimates by the Benefish studies of annual fisheries harvests"]] <- Ditch_KFW
+
+   ##
    ##    Save the results
    ##
       Final_Cleaned_Benefish4_Data <- Standard_Dimensions

@@ -47,7 +47,7 @@
 "Fiji","'8-10",56,"Fish Exports",1,"Fish Exports","Captured"
 "French_Polynesia","'21-10",119,"Detailed information on the pearl exports of French Polynesia is given the DRM Statistical Bulletin ",1,"Fish Exports","Captured"
 "French_Polynesia","'21-9",104,"Non-pearl fishery exports of French Polynesia",1,"Fish Exports","Captured"
-"Kiribati","'9-7",68,"Fishery exports of Kiribati (thousands of A$)",1,"Fish Exports","Captured"
+"Kiribati","'9-7",67,"Fishery exports of Kiribati (thousands of A$)",1,"Fish Exports","Captured"
 "Marshall_Islands","'10-8",67,"Fish exports of the Marshall Islands (US$ millions)",1,"Fish Exports","Captured"
 "Marshall_Islands","'10-9",73,"Marshall Islands exports of aquarium products",1,"Fish Exports","Captured"
 "New_Caledonia","'23-8",91,"Fisheries exports of New Caledonia by value (millions of XPF) ",1,"Fish Exports","Captured"
@@ -74,7 +74,7 @@
 "Cook_Islands","'6-5",40,"Fishing contribution to GDP (NZ$ millions)",1,"Fishing contribution to GDP","Captured"
 "Federated_States_of_Micronesia","'7-7",52,"Fisheries contribution to GDP (millions of US$)",1,"Fishing contribution to GDP","Captured"
 "Fiji","'8-6",40,"Official contribution of fishing and aquaculture to GDP (F$ millions)",1,"Fishing contribution to GDP","Captured"
-"Kiribati","'9-5",51,"Fishing contribution to GDP (A$ thousands)",1,"Fishing contribution to GDP","Captured"
+"Kiribati","'9-5",50,"Fishing contribution to GDP (A$ thousands)",1,"Fishing contribution to GDP","Captured"
 "Marshall_Islands","'10-6",52,"Fishing contribution to GDP (US$ millions)",1,"Fishing contribution to GDP","Captured"
 "Nauru","'11-7",72,"Fishing contribution to GDP ",1,"Fishing contribution to GDP","Captured"
 "Palau","'13-7",70,"The fishing contribution to GDP (US$ millions)",1,"Fishing contribution to GDP","Captured"
@@ -87,7 +87,7 @@
 "Federated_States_of_Micronesia","'7-8",57,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
 "Fiji","'7-8",46,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
 "French_Polynesia","'21-8",94,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
-"Kiribati","'9-6",60,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
+"Kiribati","'9-6",59,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
 "Marshall_Islands","'10-7",57,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
 "Nauru","'11-8",78,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
 "New_Caledonia","'23-6",70,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
@@ -131,7 +131,7 @@
 "Kiribati","'9-3",14,"Annual fisheries and aquaculture harvest in Kiribati in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Kiribati","'9-2",8,"Catches by foreign-based vessels in the Kiribati zone",1,NA,NA
 "Kiribati","'9-1",2,"Locally based offshore catches in the waters of Kiribati",1,NA,NA
-"Kiribati","'9-8",75,"The number of people aged 5 and above participating in various types of fishing",1,NA,NA
+"Kiribati","'9-8",74,"The number of people aged 5 and above participating in various types of fishing",1,NA,NA
 "Marshall_Islands","'10-4",16,"Annual fisheries and aquaculture harvest in Marshall Islands in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Marshall_Islands","'10-3",11,"Catches of foreign-based offshore vessels",1,NA,NA
 "Marshall_Islands","'10-1",2,"Catches of the Majuro-based offshore vessels",1,NA,NA
