@@ -8,6 +8,18 @@ output:
       reference_docx: "C:/From BigDisk/GIT/Benefish_Data_Collection/Product_Output/SPC_R_Template.docx"
       toc: false  
       number_sections: false   
+header-includes:
+   - \usepackage[percent]{overpic}   
+   - \usepackage{tikz}
+   - \usetikzlibrary{calc}
+   - \usepackage{graphicx}
+   - \usepackage{placeins}
+   - \usepackage{dcolumn}
+   - \usepackage{fancyhdr}
+   - \pagestyle{fancy}
+   - \fancyhf{}
+   - \addtolength{\headwidth}{\marginparsep}
+   - \addtolength{\headwidth}{\marginparwidth}   
 
 references:
 - id: Benefish4
@@ -56,7 +68,7 @@ references:
       library(kableExtra)
       library(pander)
       library(officer)
-
+      library(stargazer)
 ##
 ##    Grab the reporting datasets
 ##
@@ -65,6 +77,14 @@ references:
    load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/All_Tables.rda")
    load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Cleaned_Table_Names.rda")
    load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Together.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Output/Exchange_Rates.rda")
+
+   ##
+   ##    These data frames were made from Make_Pictures_And_Check.r for reporting purposes
+   ##
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Table_Aggregate_Values.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Table_Aggregate_Volumes.rda")
+   load("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Intermediate/Table_Aquiculture.rda")
    
    
    options(xtable.comment = FALSE)
@@ -85,6 +105,25 @@ references:
    Together$BeneFish_Table_Name <- str_replace_all(Together$BeneFish_Table_Name,"_"," ")
    
    Together$Standardised_Table_Name <- ifelse(is.na(Together$Standardised_Table_Name) & !is.na(Together$BeneFish_Table_Name), "Duplicate Data", Together$Standardised_Table_Name)
+   
+   
+   ##
+   ##    Carve it out, check it out, and make pictures
+   ##
+      Catches_By_Method         <- data.table(Final_Cleaned_Benefish4_Data[["Catches by Method"]])
+      Domestic_Fish_Consumption <- data.table(Final_Cleaned_Benefish4_Data[["Domestic Fish Consumption"]])
+      Benefish_studies          <- data.table(Final_Cleaned_Benefish4_Data[["Estimates by the Benefish studies of annual fisheries harvests"]])
+      Fish_Exports              <- data.table(Final_Cleaned_Benefish4_Data[["Fish Exports"]])
+      Fisheries_Revenue         <- data.table(Final_Cleaned_Benefish4_Data[["Fisheries Revenue"]])
+      Fish_GDP                  <- data.table(Final_Cleaned_Benefish4_Data[["Fishing contribution to GDP"]])
+      Fish_GDP_Var              <- data.table(Final_Cleaned_Benefish4_Data[["Fishing contribution to GDP - VAR Method"]])
+      Fishing_Employment        <- data.table(Final_Cleaned_Benefish4_Data[["Fishing Employment"]])
+      Hhld_Fishing              <- data.table(Final_Cleaned_Benefish4_Data[["Number of households engaged in fishing"]])
+      Price_Measures            <- data.table(Final_Cleaned_Benefish4_Data[["Price Measures"]])
+      Val_of_Prod               <- data.table(Final_Cleaned_Benefish4_Data[["Value of production in 2021"]])
+      Vol_of_Prod               <- data.table(Final_Cleaned_Benefish4_Data[["Volume of fishery production by PICT"]])
+      Vol_of_Prod2021           <- data.table(Final_Cleaned_Benefish4_Data[["Volume of production in 2021"]])         
+   
    
 
 ```
@@ -174,12 +213,402 @@ Other aspects of the report to explore are whether the topics in Table \@ref(tab
 
 Metrics missing from the current Benefish publications, but maybe which should be included, are fishing activity measures; for example, the vessel numbers and change like Figure \@ref(fig:PurseSeineBoats) below from our FAME data
 
-
-```{r PurseSeineBoats, echo=FALSE, fig.pos='h', out.width = '100%', fig.cap = 'Number of Purse Seine Vessels Operating in the WCPFO Purse Seine Fishery'}
+```{r PurseSeineBoats, echo=FALSE, fig.pos='h', out.width = '100%', fig.cap = 'Number of Purse Seine Vessels Operating in the WCPO Purse Seine Fishery'}
 
 knitr::include_graphics(paste0(BaseDir, "Number_of_Purse_Seine_Vessels_Operating_within_the_WCPFC_NoTitles.png"))
 
 ```
+
+
+## Estimates by the Benefish studies of annual fisheries harvests
+
+Of the Benefish tables, the _Estimates by the Benefish Studies of Annual Fisheries Harvests_ is the cleanest and most complete. The 
+
+
+```{r Subsitance, echo=FALSE, fig.pos='h', out.width = '100%', fig.cap = "Importance of Subsistence Fishing within PICTs ordered by World Bank GDP"}
+
+knitr::include_graphics(paste0(BaseDir, "Subsistence_Fishing_NoTitle.png"))
+
+```
+
+\FloatBarrier
+
+
+
+
+
+```{r Values, echo=FALSE}
+
+knitr::kable(Table_Aggregate_Values[Table_Aggregate_Values$Year == 2021, c("Member_Country","Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based","Aquaculture","Total")],
+             row.names = FALSE,
+             format = "markdown",
+             align = c('lrrrrrrr'),
+             format.args = list(decimal.mark = ".", big.mark = ","),
+             digit = 0,
+             booktabs = TRUE,
+             caption= "Electronic Benefish4 Fishery Values - 2021")
+```
+
+
+\FloatBarrier
+
+
+
+```{r Volumes, echo=FALSE}
+
+knitr::kable(Table_Aggregate_Volumes[Table_Aggregate_Volumes$Year == 2021, c("Member_Country","Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based","Total Tonnes (excl Aqua)","Aquaculture","Pieces")] ,
+             row.names = FALSE,
+             format = "markdown",
+             align = c('llllllllll'),
+             format.args = list(decimal.mark = ".", big.mark = ","),
+             digit = 0,
+             booktabs = TRUE,
+             caption= "Electronic Benefish4 Fishery Volumes - 2021")
+
+             
+      knitr::kable(unique(Benefish_studies[,c("Member_Country", "Table")]),
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lc'),
+                   booktabs = TRUE,
+                   caption= "Benefish Tables contributing to Aggregate Value and Volume Metrics")             
+             
+```
+
+
+\FloatBarrier
+
+# Aquaculture
+Gillett, in chapter 35.5, highlighted the scarcity of information about national aquaculture production as a significant finding from the study. One of the most outstanding points about aquaculture in the region – and perhaps one of the most
+remarkable observations during the study – was the lack of knowledge of the overall aquaculture production in almost every PICT. Indeed, he felt: "Considering the enormous amount of development funds and public money spent on promotion of
+aquaculture in the region, it is amazing that there is so little monitoring of the progress of aquaculture development in terms of the total volume and value of production."
+
+## Incompatible Volume and Value Data
+That same lack of confidence in the data is also apparent when the value of aquaculture reconciled against its volume components: tonnes and pieces. The volume and value metrics bear no systematic relationship to each other because, if they did, then techniques like regression analysis or simultaneous equations analysis would estimate a non-negative separate implicit aquaculture prices per tonne and per peice. Attempts to allocate the value to the volumes through estimating an implicit price failed to produce non-negative values, implying that neither the volume nor the value aquaculture measures related to the each other.
+
+
+```{r AquicultureTable, echo=FALSE}
+
+         knitr::kable(Table_Aquiculture,
+                      row.names = FALSE,
+                      format = "markdown",
+                      format.args = list(decimal.mark = ".", big.mark = ","),
+                      digit = 2,
+                      align = c('llrrr'),
+                      booktabs = TRUE,
+                      caption= "Benefish4 Aquiculture Metrics")
+          
+      knitr::kable(unique(Benefish_studies[Harvest_Sector == "Aquaculture",c("Member_Country", "Table")]),
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lc'),
+                   booktabs = TRUE,
+                   caption= "Benefish Tables contributing to Aquiculture Metrics")
+```
+
+
+
+```{r SimPrice, echo=FALSE}
+
+    
+   ##
+   ##    Simultaneous equation to reveal price? Nup - negative prices
+   ##
+      Reduce <- Table_Aquiculture[,
+                          list(`Value (US$)`  = sum(`Value (US$)`, na.rm = TRUE),
+                               Tonnes = sum(Tonnes, na.rm = TRUE),
+                               Pieces = sum(Pieces, na.rm = TRUE)),
+                          key = list(Year = as.numeric(Year))]
+                          
+      knitr::kable(Reduce,
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lrrr'),
+                   booktabs = TRUE,
+                   caption= "Aquaculture $US Value, Quantity (tonnes) and number of Pieces")
+                   
+      names(Reduce)[names(Reduce) == "Value (US$)"] <- "Price"
+      
+      A <- as.matrix(Reduce[,c(3,4,1)])    
+      b <- as.matrix(Reduce[,c(2)]) 
+      
+#      knitr::kable(solve(A, b),
+#                   format = "markdown",
+#                   format.args = list(decimal.mark = ".", big.mark = ","),
+#                   digit = 2,
+#                   align = c('llrrr'),
+#                   booktabs = TRUE,
+#                   caption= "Estimated Price - 2007,2014,2021")
+      
+      A <- as.matrix(Reduce[1:2,c(3,4)])     
+      b <- as.matrix(Reduce[1:2,c(2)])  
+#      knitr::kable(solve(A, b),
+#                   format = "markdown",
+#                   format.args = list(decimal.mark = ".", big.mark = ","),
+#                   digit = 2,
+#                   align = c('llrrr'),
+#                   booktabs = TRUE,
+#                   caption= "Estimated Price - 2007,2021")
+      
+      A <- as.matrix(Reduce[2:3,c(3,4)])     
+      b <- as.matrix(Reduce[2:3,c(2)])  
+#     knitr::kable(solve(A, b),
+#                   format = "markdown",
+#                   format.args = list(decimal.mark = ".", big.mark = ","),
+#                   digit = 2,
+#                   align = c('llrrr'),
+#                   booktabs = TRUE,
+#                   caption= "Estimated Price - 2014,2021")
+       
+      A <- as.matrix(Reduce[c(1,3),c(3,4)])     
+      b <- as.matrix(Reduce[c(1,3),c(2)])  
+#     knitr::kable(solve(A, b),
+#                   format = "markdown",
+#                   format.args = list(decimal.mark = ".", big.mark = ","),
+#                   digit = 2,
+#                   align = c('llrrr'),
+#                   booktabs = TRUE,
+#                   caption= "Estimated Price - 2007,2021")
+       
+      OLS <- lm(`Value (US$)` ~ (-1 + Tonnes + Pieces)*Year, Table_Aquiculture)      
+          
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+stargazer::stargazer(OLS, type = "html", title = "Results", out = "C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Output/pp.html")
+#shiny::includeHTML("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Output/pp.html")      
+```
+
+
+
+
+\newpage
+
+
+
+# Summary of Tables and Their Dimensions
+
+## Catches by Method
+
+
+
+```{r CbyM, echo=FALSE}
+   
+   ##
+   ##    Simultaneous equation to reveal price? Nup - negative prices
+   ##
+      Reduce <- Catches_By_Method[Unit == "Tonnes",
+                          list(Tonnes  = sum(Value, na.rm = TRUE)),
+                          key = list(Member_Country,
+                                     Year = as.numeric(Year),
+                                     Method)]
+      Reduce <- data.table::dcast(Reduce,
+                                   Member_Country + Year~ Method,
+                                   value.var = "Tonnes")
+      Reduce <- data.table::melt(Reduce,
+                                 id = c("Member_Country","Year"))
+                                 
+      Reduce$value[is.na(Reduce$value)] <-0
+
+      Reduce <- data.table::dcast(Reduce,
+                                   Member_Country + Year ~ variable,
+                                   value.var = "value")
+        
+      knitr::kable(Reduce,
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lrrrr'),
+                   booktabs = TRUE,
+                   caption= "Catches by Method")
+                   
+      knitr::kable(unique(Catches_By_Method[,c("Member_Country", "Table")]),
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lc'),
+                   booktabs = TRUE,
+                   caption= "Benefish Tables contributing to Catches By Method Metrics")
+                  
+        
+```
+
+
+\newpage
+
+## Domestic Fish Consumption
+
+Domestic fish consumption is a metric with changing collection metrics across countries, significantly complicating cross-country comparisons. Most of the source information for this component resides in the qualitative elements of the Benefish text. For example, the Kiribati domestic fish consumption metrics are encapsulated as twelve bullet points of reference to other studies spanning a range of time periods between 1989 - 2016, with new infromation included from the 2019/20 Household Income and Expenditure Survey. 
+
+Very little of the fish consumption metrics are quantitative, and where they are (for example below), they are subject to significant cross-country measurement variability.
+
+
+```{r DFC, echo=FALSE}
+   
+   ##
+   ##    Simultaneous equation to reveal price? Nup - negative prices
+   ##
+      Reduce <- Domestic_Fish_Consumption[,
+                          list(Value  = sum(Value, na.rm = TRUE)),
+                          key = list(Member_Country,
+                                     Dimension_Value,
+                                     Metric,
+                                     Unit)]
+
+        
+      knitr::kable(Reduce,
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lrrrr'),
+                   booktabs = TRUE,
+                   caption= "Domestic Fish Consumption")
+                   
+      knitr::kable(unique(Domestic_Fish_Consumption[,c("Member_Country", "Table")]),
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lc'),
+                   booktabs = TRUE,
+                   caption= "Benefish Tables contributing to Domestic Fish Consumption Metrics")
+                  
+        
+```
+
+
+\newpage
+
+## Fish Exports
+
+Fish Exports is another data collection whose metrics are country specific. Table \@ref(tab:FE) below illustrates how the report export dimensions vary by country.
+
+
+```{r FE, echo=FALSE}
+   
+      ##
+      ##    Estimate US$ for non-US$ currencies
+      ##
+        
+      knitr::kable(unique(Fish_Exports[,c("Member_Country", "Dimension_Value")]),
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lr'),
+                   booktabs = TRUE,
+                   caption= "Fish Export Dimensions for each Country")
+                   
+      knitr::kable(unique(Fish_Exports[,c("Member_Country", "Table")]),
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 2,
+                   align = c('lc'),
+                   booktabs = TRUE,
+                   caption= "Benefish Tables contributing to the Fish_Exports Metrics")
+        
+```
+
+
+\newpage
+
+## Fisheries Revenue
+
+
+```{r FR, echo=FALSE}
+   
+      ##
+      ##    Estimate US$ for non-US$ currencies
+      ##
+         Fisheries_Revenue <- merge(Fisheries_Revenue,
+                                   Exchange_Rates,
+                                   by.x = c("Unit", "Year"),
+                                   by.y = c("Currency", "Year"),
+                                   all.x = TRUE)
+                              
+         Fisheries_Revenue$ToUSDollar <- ifelse(Fisheries_Revenue$Unit == "US$", 1, 
+                                          ifelse(Fisheries_Revenue$Unit %in% c("Pieces", "Tonnes"), NA, Fisheries_Revenue$ToUSDollar))
+                                   
+         Fisheries_Revenue$USDollarEquivalent <- Fisheries_Revenue$Value / Fisheries_Revenue$ToUSDollar
+         Fisheries_Revenue <- data.table(Fisheries_Revenue)
+         
+         Aggregate_Values <- Benefish_studies[,
+                                         list(USDollarEquivalent = sum(USDollarEquivalent, na.rm = TRUE)),
+                                         keyby = list(Member_Country ,
+                                                      Year,
+                                                      Harvest_Sector)]
+
+        
+```
+
+
+\newpage
+
+## Fishing contribution to GDP
+
+
+
+\newpage
+
+## Fishing contribution to GDP - VAR Method
+
+
+
+\newpage
+
+## Fishing Employment
+
+
+
+\newpage
+
+## Number of households engaged in fishing
+
+
+
+\newpage
+
+## Price Measures
+
+
+
+\newpage
+
+## Value of production in 2021
+
+
+
+\newpage
+
+## Volume of fishery production by PICT
+
+
+
+\newpage
+
+## Volume of production in 2021
+
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Next Steps

@@ -104,7 +104,7 @@
       X <- X[!is.na(X$Value),]
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
       X$Unit  = ifelse(X$variable == "Value (US$)", "US$", 
-                  ifelse(X$Harvest_Sector == "Aquaculture","Pieces", "Tonnes"))
+                ifelse(X$Harvest_Sector == "Aquaculture",as.character(X$variable), "Tonnes"))
                   
       Clean_Federated_States_of_Micronesia[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 

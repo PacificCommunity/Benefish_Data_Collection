@@ -147,7 +147,7 @@
          X$Dimension       <- "Aggregate Commodity"
          X$Dimension_Value <-X$variable
          X$Measure <- "Fish Exports"
-         X$Unit    <- "ST$"
+         X$Unit    <- "SI$"
       ##
       ##    I don't know... the other Exports?
       ##
@@ -164,7 +164,7 @@
          Y$Dimension       <- "Aggregate Commodity"
          Y$Dimension_Value <- str_trim(Y$variable)
          Y$Unit            <- str_split_fixed(str_trim(Y$variable), "XX",2)[,2]
-         Y$Unit    <- "ST$"
+         Y$Unit    <- "SI$"
          Y$Measure <- "Fish Exports"
          
       ##
@@ -177,7 +177,7 @@
          Z <- reshape2::melt(Z[3:nrow(Z),],
                              id.var = c("Measure","Table", "Year"),
                              factorsAsStrings = FALSE)
-         Z$Value <- as.numeric(str_replace_all(Z$value, ",", ""))*1000000
+         Z$Value <- as.numeric(str_replace_all(Z$value, ",", ""))
          Z <- Z[!is.na(Z$Value),]
          
          Z$Dimension       <- "Aggregate Commodity"
@@ -225,7 +225,7 @@
       Y$Year  <- str_trim(Y$variable)
       Y$Measure <- "Fisheries Revenue"
       Y$Unit    <- "SI$"
-      X$Year    <- 2020
+      Y$Year    <- 2020
       
       X <- rbind(X, Y)
       X <- X[!str_detect(X$Revenue_Source, "Total"),]

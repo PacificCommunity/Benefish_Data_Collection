@@ -83,7 +83,7 @@
       X <- X[!str_detect(X$Harvest_Sector, "Total"),]
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
-      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "$T")
+      X$Unit  = ifelse(X$variable == "VAR", "Proportion", "T$")
       X$GDP_Dimension <- str_trim(X$variable)
       Clean_Tonga[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
@@ -102,7 +102,7 @@
       X$Dimension       <- "Aggregate Commodity"
       X$Dimension_Value <- str_trim(X$`Aggregate Commodity`)
       X$Measure <- "Fish Exports"
-      X$Unit    <- "Y$"
+      X$Unit    <- "T$"
       X$Year    <- as.numeric(str_trim(X$variable))
       Clean_Tonga[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 

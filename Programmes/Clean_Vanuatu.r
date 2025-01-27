@@ -144,7 +144,7 @@
       X$Dimension       <- "Aggregate Commodity"
       X$Dimension_Value <- str_trim(X$variable)
       X$Measure <- "Fish Exports"
-      X$Unit    <- "VT$"
+      X$Unit    <- "VT"
       Clean_Vanuatu[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 
 

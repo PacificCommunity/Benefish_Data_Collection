@@ -9,9 +9,9 @@
 "French_Polynesia","'21-4",31,"Catches of the locally based longliners 2017–2021 (t)",1,"Catches by Method","Captured"
 "Palau","'13-3",21,"Catches by foreign-based longliners in the Palau EEZ (t)",1,"Catches by Method","Captured"
 "Palau","'13-4",28,"Catches by foreign-based purse seiners in the Palau EEZ (t)",1,"Catches by Method","Captured"
-"Papau_New_Guinea","'14-3",16,"Catch of the foreign longliners in the PNG EEZ",1,"Catches by Method","Captured"
-"Papau_New_Guinea","'14-2",9,"Catch of the foreign purse seiners in the PNG EEZ ",1,"Catches by Method","Captured"
-"Papau_New_Guinea","'14-1",2,"Catches of the locally based purse seine fleet (t)",1,"Catches by Method","Captured"
+"Papua_New_Guinea","'14-1",NA,NA,NA,"Catches by Method","Captured"
+"Papua_New_Guinea","'14-2",NA,NA,NA,"Catches by Method","Captured"
+"Papua_New_Guinea","'14-3",NA,NA,NA,"Catches by Method","Captured"
 "Tokelau","'26-3",21,"Recent annual catches by the foreign fleets in the Tokelau EEZ",1,"Catches by Method","Captured"
 "Fiji","'8-14",70," Fishery product consumption at PROCFish sites",1,"Domestic Fish Consumption","Captured"
 "Nauru","'11-11",103,"Consumption of fishery products on Nauru in 2019 according to the Nauru Bureau of Statistics",1,"Domestic Fish Consumption","Captured"
@@ -32,7 +32,7 @@
 "Niue","'12-2",11,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
 "Northern_Marianas_Islands","'24-4",31,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
 "Palau","'13-6",44,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
-"Papau_New_Guinea","'14-5",32,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
+"Papua_New_Guinea","'14-5",NA,NA,NA,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
 "Pitcairn_Islands","'25-2",12,"Results of the Benefish studies for Pitcairn",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
 "Samoa","'15-3",20,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
 "Solomon_Islands","'16-6",33,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,"Estimates by the Benefish studies of annual fisheries harvests","Captured"
@@ -54,7 +54,7 @@
 "New_Caledonia","'23-7",80,"Fisheries exports of New Caledonia by volume (t)",1,"Fish Exports","Captured"
 "Palau","'13-10",89,"Value of the fishery exports of Palau (thousands of US$)",1,"Fish Exports","Captured"
 "Palau","'13-9",84,"Volume of fishery exports of Palau (pounds)",1,"Fish Exports","Captured"
-"Papau_New_Guinea","'14-9",82,"Fishery exports of PNG",1,"Fish Exports","Captured"
+"Papua_New_Guinea","'14-9",NA,NA,NA,"Fish Exports","Captured"
 "Samoa","'15-6",62,"Fish exports of Samoa",1,"Fish Exports","Captured"
 "Samoa","'15-7",69,"Pelagic and non-pelagic fish exports of Samoa",1,"Fish Exports","Captured"
 "Solomon_Islands","'16-12",100,"Fish exports of the Solomon Islands from CBSI reports",1,"Fish Exports","Captured"
@@ -78,7 +78,7 @@
 "Marshall_Islands","'10-6",52,"Fishing contribution to GDP (US$ millions)",1,"Fishing contribution to GDP","Captured"
 "Nauru","'11-7",72,"Fishing contribution to GDP ",1,"Fishing contribution to GDP","Captured"
 "Palau","'13-7",70,"The fishing contribution to GDP (US$ millions)",1,"Fishing contribution to GDP","Captured"
-"Papau_New_Guinea","'14-6",59,"Fishing contribution to PNG’s GDP ",1,"Fishing contribution to GDP","Captured"
+"Papua_New_Guinea","'14-6",NA,NA,NA,"Fishing contribution to GDP","Captured"
 "Solomon_Islands","'16-7",60,"Fishing contribution to GDP in the Solomon Islands",1,"Fishing contribution to GDP","Captured"
 "Tokelau","'26-6",74,"Agriculture and fisheries contribution to the Tokelau GDP (current prices, NZ$)",1,"Fishing contribution to GDP","Captured"
 "Vanuatu","'19-3",41,"Fishing contribution to the Vanuatu GDP (current prices)",1,"Fishing contribution to GDP","Captured"
@@ -94,7 +94,7 @@
 "Niue","'12-4",42,"Fishing contribution to GDP 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
 "Northern_Marianas_Islands","'24-5",59,"Fishing contribution to CNMI GDP in 2021",1,"Fishing contribution to GDP - VAR Method","Captured"
 "Palau","'13-8",75,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
-"Papau_New_Guinea","'14-7",67,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
+"Papua_New_Guinea","'14-7",NA,NA,NA,"Fishing contribution to GDP - VAR Method","Captured"
 "Samoa","'15-5",53,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
 "Solomon_Islands","'16-9",75,"Fishing contribution to GDP in 2021 using an alternative approach",1,"Fishing contribution to GDP - VAR Method","Captured"
 "Tokelau","'26-7",82,"Fishing contribution to Tokelau GDP in 2021",1,"Fishing contribution to GDP - VAR Method","Captured"
@@ -136,8 +136,8 @@
 "Marshall_Islands","'10-3",11,"Catches of foreign-based offshore vessels",1,NA,NA
 "Marshall_Islands","'10-1",2,"Catches of the Majuro-based offshore vessels",1,NA,NA
 "Marshall_Islands","'10-2",6,"Foreign-based vessels licensed to fish in the Marshall Islands exclusive economic zone (EEZ)",1,NA,NA
-"Nauru","'11-3",19,"Catch and effort of Nauru’s national fleet in the Convention Area",1,NA,NA
 "Nauru","'11-4",27,"Foreign fleet catches in Nauru’s EEZ (t)",1,NA,NA
+"Nauru","'11-3",19,"Catch and effort of Nauru’s national fleet in the Convention Area",1,NA,NA
 "Nauru","'11-5",35,"Annual fisheries and aquaculture harvest in Nauru in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Nauru","'11-2",12,"National fleet structure in 2021",1,NA,NA
 "New_Caledonia","'23-4",32,"Annual fisheries and aquaculture harvest in New Caledonia in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
@@ -154,8 +154,15 @@
 "Palau","'13-5",35,"Annual fisheries and aquaculture harvest in Palau in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Palau","'13-1",2,"Estimates of the primary components of the coastal commercial fisheries production  and distribution in Palau",1,NA,NA
 "Palau","'13-2",14,"Number of foreign-based offshore fishing vessels in the Palau EEZ",1,NA,NA
+"Papau_New_Guinea","'14-6",59,"Fishing contribution to PNG’s GDP ",1,NA,NA
 "Papau_New_Guinea","'14-4",23,"Annual fisheries and aquaculture harvest in PNG in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
+"Papau_New_Guinea","'14-3",16,"Catch of the foreign longliners in the PNG EEZ",1,NA,NA
+"Papau_New_Guinea","'14-2",9,"Catch of the foreign purse seiners in the PNG EEZ ",1,NA,NA
+"Papau_New_Guinea","'14-1",2,"Catches of the locally based purse seine fleet (t)",1,NA,NA
 "Papau_New_Guinea","'14-8",76,"Comparing the value added of the official and alternative estimates",1,NA,NA
+"Papau_New_Guinea","'14-5",32,"Estimates by the Benefish studies of annual fisheries/aquaculture harvests",1,NA,NA
+"Papau_New_Guinea","'14-9",82,"Fishery exports of PNG",1,NA,"MAKE THIS AN EXPORT MEASURE"
+"Papau_New_Guinea","'14-7",67,"Fishing contribution to GDP in 2021 using an alternative approach",1,NA,NA
 "Pitcairn_Islands","'25-1",2,"Annual fisheries and aquaculture harvest in Pitcairn in 2021",1,NA,"Captured in 'Estimates by the Benefish studies of annual fisheries harvests'"
 "Pitcairn_Islands","'25-3",21,"Fishing contribution to Pitcairn GDP in 2021",1,NA,NA
 "Samoa","'15-1",2,"Catches by the locally based tuna vessels",1,NA,NA

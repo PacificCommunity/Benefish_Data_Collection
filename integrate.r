@@ -49,6 +49,8 @@
       
       library(sysfonts)
       library(showtext)
+      library(sf)
+      library(stargazer)
    
    ##
    ##    Set working directory

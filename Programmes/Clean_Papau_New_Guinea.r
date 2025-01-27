@@ -1,5 +1,5 @@
 ##
-##    Programme:  Clean_Papau_New_Guinea.R
+##    Programme:  Clean_Papua_New_Guinea.R
 ##
 ##    Objective:  What is this programme designed to do?
 ##
@@ -17,16 +17,16 @@
       load('Data_Intermediate/Country_Data.rda')
       
    ##
-   ##    Collect up and process the Papau_New_Guinea files
+   ##    Collect up and process the Papua_New_Guinea files
    ##
-      Papau_New_Guinea <- Country_Data[["Papau_New_Guinea"]]
+      Papua_New_Guinea <- Country_Data[["Papau_New_Guinea"]]
       
-      Clean_Papau_New_Guinea <- list()
+      Clean_Papua_New_Guinea <- list()
       
    ##
    ##    Estimates by the Benefish studies of annual fisheries harvests - Table6-4
    ##
-      X <- Papau_New_Guinea[["Estimates by the Benefish studies of annual fisheries harvestsXXTable14-5"]]
+      X <- Papua_New_Guinea[["Estimates by the Benefish studies of annual fisheries harvestsXXTable14-5"]]
       for(i in 2:nrow(X))
       {
          X$V1[i] <- ifelse((X$V1[i] == "") &(X$V1[(i-1)] != ""), X$V1[(i-1)], X$V1[i])
@@ -65,13 +65,13 @@
       X$Measure <- "Estimates by the Benefish studies of annual fisheries harvests"
       X$Unit  = ifelse(X$variable == "Nominal value (K)", "K", 
                 ifelse(X$Harvest_Sector == "Aquaculture",as.character(X$variable), "Tonnes"))
-      Clean_Papau_New_Guinea[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Papua_New_Guinea[["Estimates by the Benefish studies of annual fisheries harvests"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
       
 
    ##
-   ##    Fishing contribution to Papau_New_Guinea GDP in 2021 - Table20-5
+   ##    Fishing contribution to Papua_New_Guinea GDP in 2021 - Table20-5
    ##
-      X <- Papau_New_Guinea[["Fishing contribution to GDP in 2021 using an alternative approachXXTable14-7"]]
+      X <- Papua_New_Guinea[["Fishing contribution to GDP in 2021 using an alternative approachXXTable14-7"]]
       names(X) <- X[1,]
  
       X <- reshape2::melt(X[2:nrow(X),],
@@ -85,16 +85,16 @@
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "K")
       X$GDP_Dimension <- str_trim(X$variable)
-      Clean_Papau_New_Guinea[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
+      Clean_Papua_New_Guinea[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
       
       
    ##
-   ##    Catches of the major fisheries in Papau_New_Guinea - Table6-1 & Table6-2
+   ##    Catches of the major fisheries in Papua_New_Guinea - Table6-1 & Table6-2
    ##
       ##
       ##    Table 6-2
       ##
-         X <- Papau_New_Guinea[["Catch of the foreign longliners in the PNG EEZXXTable14-3"]]
+         X <- Papua_New_Guinea[["Catch of the foreign longliners in the PNG EEZXXTable14-3"]]
          X$V1[1] <- "Year"
          names(X) <- X[1,]
          
@@ -112,7 +112,7 @@
       ##
       ##    Table 6-1
       ##
-         Y <- Papau_New_Guinea[["Catch of the foreign purse seiners in the PNG EEZ XXTable14-2"]]
+         Y <- Papua_New_Guinea[["Catch of the foreign purse seiners in the PNG EEZ XXTable14-2"]]
          Y$V1[1] <- "Year"
          names(Y) <- Y[1,]
          Y <- reshape2::melt(Y[2:nrow(Y),],
@@ -129,7 +129,7 @@
       ##
       ##    Locals
       ##
-         Z <- Papau_New_Guinea[["Catches of the locally based purse seine fleet (t)XXTable14-1"]]
+         Z <- Papua_New_Guinea[["Catches of the locally based purse seine fleet (t)XXTable14-1"]]
          Z$V1[1] <- "Species"
          names(Z) <- Z[1,]
          Z <- reshape2::melt(Z[2:nrow(Z),],
@@ -147,17 +147,17 @@
          Combined_Table <- rbind.fill(X,Y,Z)
          Combined_Table$Year <- as.numeric(str_replace_all(Combined_Table$Year, "\\D+", ""))
                      
-         Clean_Papau_New_Guinea[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
-         Clean_Papau_New_Guinea[["Catches by Method"]] <- aggregate(Value ~ Measure + Table + Method + Species + Year + Unit,
-                                                                     data = Clean_Papau_New_Guinea[["Catches by Method"]],
+         Clean_Papua_New_Guinea[["Catches by Method"]] <- Combined_Table[,c("Measure","Table", "Method", "Species", "Year", "Unit", "Value")]
+         Clean_Papua_New_Guinea[["Catches by Method"]] <- aggregate(Value ~ Measure + Table + Method + Species + Year + Unit,
+                                                                     data = Clean_Papua_New_Guinea[["Catches by Method"]],
                                                                      FUN  = sum,
                                                                      na.action = NULL)
 
 
    ##
-   ##    Fishing contribution to Papau_New_Guinea GDP in 2021 - Table7-7
+   ##    Fishing contribution to Papua_New_Guinea GDP in 2021 - Table7-7
    ##
-      X <- Papau_New_Guinea[["Fishing contribution to PNG\x92s GDP XXTable14-6"]]
+      X <- Papua_New_Guinea[["Fishing contribution to PNG\x92s GDP XXTable14-6"]]
       X$V1[1] <- "Harvest sector"
       names(X) <- X[1,]
  
@@ -171,29 +171,29 @@
       X$Year    <- as.numeric(str_replace_all(X$variable, "\\D+", ""))
       X$Measure <- "Fishing contribution to GDP"
       X$Unit    <- "K"
-      Clean_Papau_New_Guinea[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
+      Clean_Papua_New_Guinea[["Fishing contribution to GDP"]] <- X[,c("Measure","Table", "Harvest_Sector", "Year", "Unit", "Value")]
 
 
    ##
    ##    Fish Exports
    ##
-      X <- Papau_New_Guinea[["Fish exportsXXTable14-9"]]
+      X <- Papua_New_Guinea[["Fish exportsXXTable14-9"]]
       X[2,c(1,8,9)] <- c("Product","Measure","Table")
       names(X) <- X[2,]
  
       X <- reshape2::melt(X[2:nrow(X),],
                           id.var = c("Measure","Table", "Product"),
                           factorsAsStrings = FALSE)
-      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))
+      X$Value <- as.numeric(str_replace_all(X$value, ",", ""))*1000000
       X$Dimension       <- "Aggregate Commodity"
       X$Dimension_Value <- str_trim(X$Product)
       X$Year <- str_trim(X$variable)
       X <- X[!is.na(X$Value),]
       X <- X[X$Year != "",]
       X$Measure <- "Fish Exports"
-      X$Unit    <- "K$"
+      X$Unit    <- "K"
       X <- X[!str_detect(X$Dimension_Value, regex("Product", ignore_case = TRUE)),]
-      Clean_Papau_New_Guinea[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
+      Clean_Papua_New_Guinea[["Fish Exports"]] <- X[,c("Measure","Table", "Dimension", "Dimension_Value", "Year", "Unit", "Value")]
 
 
 
@@ -201,7 +201,7 @@
    ##
    ## Save files our produce some final output of something
    ##
-      save(Clean_Papau_New_Guinea, file = 'Data_Intermediate/Clean_Papau_New_Guinea.rda')
+      save(Clean_Papua_New_Guinea, file = 'Data_Intermediate/Clean_Papua_New_Guinea.rda')
 ##
 ##    And we're done
 ##

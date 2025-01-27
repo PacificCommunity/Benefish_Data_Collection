@@ -25,6 +25,9 @@
       load("Data_Intermediate/Together.rda")
       load("Data_Output/Exchange_Rates.rda") 
 
+      load("C:/From BigDisk/GIT/American_Samoa_Tuna_Policy/Data_Spatial/Countries.rda") 
+
+
    ##
    ##    Carve it out, check it out, and make pictures
    ##
@@ -45,7 +48,6 @@
    ##
    ##    Benefish studies
    ##
-
       ##
       ##    Estimate US$ for non-US$ currencies
       ##
@@ -78,6 +80,10 @@
                                                value.var = "USDollarEquivalent")
                                                
          Aggregate_Values[Aggregate_Values$Year == 2021,]                                 
+         Aggregate_Values[Aggregate_Values$Year == 2021, c("Member_Country","Year","Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based","Aquaculture","Total")]  
+         
+         Table_Aggregate_Values <- Aggregate_Values
+         save(Table_Aggregate_Values, file = "Data_Intermediate/Table_Aggregate_Values.rda")
          
          ##
          ##    The following totals are out - All the errors are from the pdf document - comparison to Table 29.2
@@ -121,9 +127,132 @@
                                     Total,
                                     by = c("Member_Country", "Year"))
                                     
-         Aggregate_Volumes$Tonnes <- Aggregate_Volumes$Tonnes - Aggregate_Volumes$Aquaculture 
-         Aggregate_Volumes[Aggregate_Volumes$Year == 2021,]                                 
+         Aggregate_Volumes$`Total Tonnes (excl Aqua)` <- Aggregate_Volumes$Tonnes - Aggregate_Volumes$Aquaculture 
+         Aggregate_Volumes[Aggregate_Volumes$Year == 2021, c("Member_Country","Year","Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based","Total Tonnes (excl Aqua)","Aquaculture","Pieces")]  
+         
+         Table_Aggregate_Volumes <- Aggregate_Volumes
+         save(Table_Aggregate_Volumes, file = "Data_Intermediate/Table_Aggregate_Volumes.rda")
+         
+      ##
+      ##    Lets check something out - how are the proportions of each group changing over time?
+      ##       Drop freakign aquiculture
+      ##
+         Aggregate_Volumes$Tonnes <- Aggregate_Volumes$Tonnes - Aggregate_Volumes$Aquaculture
+         Proportions <- Aggregate_Volumes[,c("Member_Country","Year","Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based","Tonnes")]
 
+         
+         Proportions <- data.table::melt(Proportions,
+                                               id = c("Member_Country", "Year", "Tonnes"))            
+                                               
+                                               
+         Proportions$Proportions <- with(Proportions, value / Tonnes)
+         ProportionsLook <- data.table::dcast(Proportions,
+                                                Member_Country + Year ~ variable,
+                                                value.var = "Proportions")   
+                                                
+         Proportions <- data.frame(Proportions)
+         Subsistence <- Proportions[((Proportions$variable == 'Coastal subsistence') & (Proportions$Member_Country != 'International_Waters')),c("Member_Country", "Year", "Proportions")]
+         
+         Subsistence$StdProportions <- (Subsistence$Proportions - mean(Subsistence$Proportions)) / sd(Subsistence$Proportions)
+         
+         Subsistence$Importance_of_Subsistence <- ifelse(Subsistence$StdProportions  > 2, "Very High",
+                                                  ifelse(Subsistence$StdProportions  > 1, "High",         
+                                                  ifelse((Subsistence$StdProportions < 1) &
+                                                         (Subsistence$StdProportions > -1),"Normal",         
+                                                  ifelse(Subsistence$StdProportions  > -2, "Low","Very Low"))))         
+                                                  
+         Subsistence <- Subsistence[order(Subsistence$StdProportions,Subsistence$Importance_of_Subsistence, Subsistence$Member_Country),]
+         Subsistence$Member_Country <- str_replace_all(Subsistence$Member_Country, "_"," ")
+
+         Subsistence$Member_Country <- ifelse(Subsistence$Member_Country == "Northern Marianas Islands", "Northern Mariana Islands",Subsistence$Member_Country)
+
+         Subsistence <- merge(Subsistence,
+                              st_drop_geometry(Countries),
+                              by.x = "Member_Country",
+                              by.y = "NAME_EN",
+                              all.x = TRUE)
+                              
+         Subsistence$Importance_of_Subsistence <- factor(Subsistence$Importance_of_Subsistence, levels = c("Very High","High","Normal","Low"))
+         Subsistence <- Subsistence[order(Subsistence$GDP_MD_EST),]
+         Subsistence$Member_Country <- as.character(Subsistence$Member_Country)
+         Subsistence$Member_Country <- ifelse(Subsistence$Member_Country == "Federated States of Micronesia", "FSM", 
+                                       ifelse(Subsistence$Member_Country == "Northern Mariana Islands", "Mariana Is.", 
+                                       ifelse(Subsistence$Member_Country == "Papua New Guinea", "PNG", Subsistence$Member_Country)))
+
+      ggplot(Subsistence[!is.na(Subsistence$INCOME_GRP) & Subsistence$Member_Country != "Pitcairn Islands",], 
+             aes(x = reorder(str_wrap(Member_Country, 8), sort(-as.numeric(GDP_MD_EST))), 
+                 y = Proportions,
+                 colour = Year))  + 
+             geom_point(alpha = 1, size = 0.5) +
+             facet_wrap(. ~ Importance_of_Subsistence ,scales = "free_x")+
+             scale_colour_manual(values = SPCColours()) + 
+             scale_y_continuous(breaks = seq(from = 0, to = 1, by =0.2), label = percent) +             
+             labs(title = "Importance of Subsistence Fishing within PICTs",
+                  subtitle = "\nDigitised Benefish 4 Data\n",
+                  caption  = "The Pacific Community (SPC)") +
+             ylab("Subsistence Fishing\n(Proportion of Total Catch)\n") +
+             xlab("") +
+             theme_bw(base_size=12, base_family =  "Calibri") %+replace%
+             theme(legend.title.align=0.5,
+                   plot.margin = unit(c(1,1,1,1),"mm"),
+                   panel.border = element_blank(),
+                   strip.background =  element_rect(fill   = SPCColours("Light_Blue")),
+                   strip.text = element_text(colour = "white", 
+                                             size   = 10,
+                                             family = "MyriadPro-Bold",
+                                             margin = margin(1.25,.25,1.25,0.25, unit = "mm")),
+                   panel.spacing = unit(1, "lines"),                                              
+                   legend.text   = element_text(size = 6, family = "MyriadPro-Regular"),
+                   legend.title  = element_text(size = 6, family = "MyriadPro-Regular"),
+                   plot.title    = element_text(size = 12, colour = SPCColours("Dark_Blue"),  family = "MyriadPro-Light"),
+                   plot.subtitle = element_text(size = 8, colour = SPCColours("Light_Blue"), family = "MyriadPro-Light"),
+                   plot.caption  = element_text(size = 6,  colour = SPCColours("Dark_Blue"), family = "MyriadPro-Light", hjust = 1.0),
+                   plot.tag      = element_text(size =  9, colour = SPCColours("Red")),
+                   axis.title    = element_text(size = 10, colour = SPCColours("Dark_Blue")),
+                   axis.text.x   = element_text(size =  6, colour = SPCColours("Dark_Blue"), angle = 90,  margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "pt")),
+                   axis.text.y   = element_text(size =  6, colour = SPCColours("Dark_Blue"), angle = 00),
+                   legend.key.width = unit(0, "mm"),
+                   legend.spacing.y = unit(0, "mm"),
+                   legend.margin = margin(0, 0, 0, 0),
+                   legend.position  = "bottom")         
+          ggsave(paste0("Graphical_Output/Subsistence_Fishing.png"), height =15.13, width = 20.66, dpi = 265, units = c("cm"))
+         
+     ggplot(Subsistence[!is.na(Subsistence$INCOME_GRP) & Subsistence$Member_Country != "Pitcairn Islands",], 
+             aes(x = reorder(str_wrap(Member_Country, 8), sort(-as.numeric(GDP_MD_EST))), 
+                 y = Proportions,
+                 colour = Year))  + 
+             geom_point(alpha = 1, size = 0.7) +
+             facet_wrap(. ~ Importance_of_Subsistence ,scales = "free_x")+
+             scale_colour_manual(values = SPCColours()) + 
+             scale_y_continuous(breaks = seq(from = 0, to = 1, by =0.2), label = percent) +             
+             ylab("Subsistence Fishing\n(Proportion of Total Catch)\n") +
+             xlab("") +
+             theme_bw(base_size=12, base_family =  "Calibri") %+replace%
+             theme(legend.title.align=0.5,
+                   plot.margin = unit(c(1,1,1,1),"mm"),
+                   panel.border = element_blank(),
+                   strip.background =  element_rect(fill   = SPCColours("Light_Blue")),
+                   strip.text = element_text(colour = "white", 
+                                             size   = 10,
+                                             family = "MyriadPro-Bold",
+                                             margin = margin(1.25,.25,1.25,0.25, unit = "mm")),
+                   panel.spacing = unit(1, "lines"),                                              
+                   legend.text   = element_text(size = 8, family = "MyriadPro-Regular"),
+                   legend.title  = element_text(size = 8, family = "MyriadPro-Regular"),
+                   plot.title    = element_text(size = 12, colour = SPCColours("Dark_Blue"),  family = "MyriadPro-Light"),
+                   plot.subtitle = element_text(size = 8, colour = SPCColours("Light_Blue"), family = "MyriadPro-Light"),
+                   plot.caption  = element_text(size = 6,  colour = SPCColours("Dark_Blue"), family = "MyriadPro-Light", hjust = 1.0),
+                   plot.tag      = element_text(size =  9, colour = SPCColours("Red")),
+                   axis.title    = element_text(size = 10, colour = SPCColours("Dark_Blue")),
+                   axis.text.x   = element_text(size = 8, colour = SPCColours("Dark_Blue"), angle = 90,  margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "pt")),
+                   axis.text.y   = element_text(size = 10, colour = SPCColours("Dark_Blue"), angle = 00),
+                   legend.key.width = unit(0, "mm"),
+                   legend.spacing.y = unit(0, "mm"),
+                   legend.margin = margin(0, 0, 0, 0),
+                   legend.position  = "bottom")         
+          ggsave(paste0("Graphical_Output/Subsistence_Fishing_NoTitle.png"), height =12.13, width = 23.66, dpi = 265, units = c("cm"))
+         
+         
       ##
       ##    No errors in the volume data.
       ##       I manually removed Freshwater 2016 from Kiribati, table 9.4. What was it doing there anyway, when 
@@ -150,21 +279,53 @@
                                        value.var = "value")
          Together$Average_Price <- Together$Nominal / Together$Volumes
 
-      ##
-      ##    Aquiculture
-      ##
-         Aquiculture <- merge(Together[Together$variable %in% c("Aquaculture"), c("Member_Country", "Year", "Nominal", "Volumes")],
-                              Together[Together$variable %in% c("Pieces"),      c("Member_Country", "Year", "Nominal", "Volumes")],
-                              by = c("Member_Country", "Year"))
-      
+         ##
+         ##    Aquiculture - complete rubbish
+         ##
+            Aquiculture <- merge(Together[Together$variable %in% c("Aquaculture"), c("Member_Country", "Year", "Nominal", "Volumes")],
+                                 Together[Together$variable %in% c("Pieces"),      c("Member_Country", "Year", "Volumes")],
+                                 by = c("Member_Country", "Year"))
+            names(Aquiculture) <- c("Member_Country", "Year", "Value (US$)", "Tonnes", "Pieces")
+            Aquiculture <- Aquiculture[((Aquiculture$`Value (US$)` > 0) & !is.na(Aquiculture$`Value (US$)`)),]
+            
+            Table_Aquiculture <- Aquiculture
+            save(Table_Aquiculture, file = "Data_Intermediate/Table_Aquiculture.rda")
+            
+            ##
+            ##    Simultaneous equation to reveal price? Nup - negative prices
+            ##
+               Reduce <- Aquiculture[,
+                                   list(Value  = sum(`Value (US$)`, na.rm = TRUE),
+                                        Tonnes = sum(Tonnes, na.rm = TRUE),
+                                        Pieces = sum(Pieces, na.rm = TRUE)),
+                                   key = list(Year = as.numeric(Year))]
+               Reduce
+               
+               A <- as.matrix(Reduce[,c(3,4,1)])     
+               b <- as.matrix(Reduce[,c(2)])  
+               solve(A, b)
+               
+
+               
+               A <- as.matrix(Reduce[1:2,c(3,4)])     
+               b <- as.matrix(Reduce[1:2,c(2)])  
+               solve(A, b)
+               
+               A <- as.matrix(Reduce[2:3,c(3,4)])     
+               b <- as.matrix(Reduce[2:3,c(2)])  
+               solve(A, b)
+               
+               A <- as.matrix(Reduce[c(1,3),c(3,4)])     
+               b <- as.matrix(Reduce[c(1,3),c(2)])  
+               solve(A, b)
+               
+            ##
+            ##    Regression to reveal price? Nup - negative prices. Me thinks the data is very wrong.
+            ##
+               OLS <- lm(`Value (US$)` ~ (-1 + Tonnes + Pieces)*Year, Aquiculture)
+               summary(OLS)
 
 
-
-   ##
-   ## Save files our produce some final output of something
-   ##
-      save(xxxx, file = 'Data_Intermediate/xxxxxxxxxxxxx.rda')
-      save(xxxx, file = 'Data_Output/xxxxxxxxxxxxx.rda')
 ##
 ##    And we're done
 ##
