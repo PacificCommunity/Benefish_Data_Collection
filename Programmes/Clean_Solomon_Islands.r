@@ -85,7 +85,7 @@
       X$Year    <- 2021
       X$Measure <- "Fishing contribution to GDP - VAR Method"
       X$Unit  = ifelse(X$variable == "VAR", "Proportion", "SI$")
-      X$GDP_Dimension <- str_trim(X$variable)
+      X$GDP_Dimension <- ifelse(X$variable == "Value (SI$)  (from Table 16-5)", "Gross Value of Production", str_trim(X$variable))
       Clean_Solomon_Islands[["Fishing contribution to GDP - VAR Method"]] <- X[,c("Measure","Table", "Harvest_Sector", "GDP_Dimension", "Year", "Unit", "Value")]
   
 

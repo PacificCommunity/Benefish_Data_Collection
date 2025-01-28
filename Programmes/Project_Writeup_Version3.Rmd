@@ -135,11 +135,13 @@ references:
    
 
 ```
+[^Compendium]: It was here: https://www.ffa.int/publications-and-statistics/statistics/ but is now not :(
 [^authors]: Robert Gillett and Merelesita Fong
 [^datapolicy]: https://www.spc.int/digitallibrary/get/o4wf6
 [^IDI]: https://www.stats.govt.nz/integrated-data/
 [^Admin]: https://www.stats.govt.nz/corporate/cabinet-papers-modernising-and-transforming-the-2028-census-public-consultation-on-an-administrative-data-first-approach-for-census/
 [^caseforchange]: https://www.stats.govt.nz/assets/Uploads/Corporate/Cabinet-papers/Modernising-our-approach-to-the-2028-Census/2.Appendix-1_-Modernising-and-transforming-the-approach-to-census.pdf
+[^CROP]: https://forumsec.org/council-regional-organisations-pacific-crop
 
 <!-- 
 ##
@@ -148,101 +150,219 @@ references:
 
 # Overview
 
-The most comprehensive and definitive set of metrics on the importance of the fisheries for Pacific Countries is the Benefish reports, with @Benefish4's _FISHERIES in the ECONOMIES of Pacific Island Countries and Territories_ being the latest publication in a series of four. Significant effort went into compiling and publishing the report. Weighing in at 705 pages, Benefish4 is indeed a meaty tomb.
+_FISHERIES in the ECONOMIES of Pacific Island Countries and Territories_ is a publication involving two consultants[^authors] visiting the fisheries and statistical agencies of 24 Pacific Island Countries and Territories (PICTs) collecting and ground-truthing a myriad of fisheries-related statistics. Ultimately, their work was summarised into a picture of the pacific economy and its change over the 16 years of the publication's series. 
 
-The process involved two consultants[^authors] visiting the fisheries and statistical agencies of 24 Pacific Island Countries and Territories (PICTs) to collect and ground-truth the myriad of different metrics they sought to collect. In-country time was limited to a couple of days within each PICT, together with lead up and post-visit engagement with the specialists from each area; however, the _scale_ of the report included: 
+The latest in the series, Benefish4 (@Benefish4) clocks in as a 705-physical page pdf report.
 
-* A fisheries-oriented discussion of macroeconomics, 
-
-* Country information on specific topics (fisheries production, contribution to gross domestic product [GDP], etc.), 
-
-* A discussion of important topics across all countries (e.g. the regional significance of access and exports of fishery products), 
-
-* Comparisons with results of previous Benefish studies, some important features of the benefits from fisheries that have emerged from this study, and 
-
-* Recommendations on improving the measurement of fisheries benefits and assuring the continuity of those benefits. 
+The current piece of work on digitising Benefish4's data is a bit more modest then the Benefish reports sort to achieve. This project's focus has been on extracting as much data from the published pdf report as possible and making the electronic information available for researchers. 
 
 
-This project focused on extracting as much data as possible from Benefish4 pdf publication and making it available electronically. During the process, inconsistancies have been addressed as much as practical.
+## Adherence to Statistical Standards and Measurement Consistency
+
+This project’s complexity lays in the share volume and breadth of information within the physical report, and the inconsistencies in the different metrics for the same things collected from the PICTs.
+
+A "classifications and standards" approach has been taken to try and retrospectively apply data consistency principles to the metrics and make them as cross-country comparable as possible. For example, significant effort went into making consistent units of measure. Unfortunately, significant variation in some measures, for example within [Fish Exports], has been inevitable because of the nature of the original source material.
+
+
+
+## Observations from the Data Extraction Process
+
+The Pacific region's analytical capability has developed in the sixteen years the Benefish reports have been compiled. The growth of reliable pacific internet connectivity, and increased information technology skills within countries and organisations suggest alternative data sources and approaches might be considered for future Benefish-type data collections and reports.
+
+Some suggestions are:
+
+*	Working more formally with Council of Regional Organisations of the Pacific (CROP)  agencies to advance Benefish-type data collections with other organisations;
+
+*	Working more explicitly with SPC’s Statistics for Development Division (SDD), its internal statistical office, and
+
+*	Exploring the value of FAME administrative-collected data sources.
+
+Others include taking a sharper focus on what are the minimum analytical / information "functional requirements" of future reports: what analysis do they need to be able to support, and how are future reports intended to be used, and adjusting the report format and content respectively.
+
+Future reports should consider the scope of what’s being collected, and focus more attention on collecting data from each. The report itself, in “Chapter 36 Recommendations”, reached a similar conclusion.
+
+
+
+### Sharpening the Report's Focus
+
+The Benefish publication, as a single report, is too broad to do justice to all the topics inside it. The report's breadth comes at the cost of it being _comprehensive_ on its topics.
+
+Quite simply, the report contains "too much stuff". It collects and reports economics statistics, social statistics, industry statistics; however, none of each area receives an in-depth analytical focus or cross-country analysis it deserves. 
+
+
+
+### Cross FFA / SPC Data Collection Processes
+
+Some of the measures in the Benefish4 report are better measured elsewhere across the more broadly defined "Pacific Statistical System". 
+
+For Pacific economies, tuna is a significant source of food nutrition, government revenue and economic production. The Pacific Island's Forum Fisheries Agency's (FFA) mandate to is to help its 17 members manage, control and develop their sustainable offshore fisheries including through facilitating regional cooperation. Not all FFA members are SPC members, but pooling effort between SPC and FFA and working more explicitly together on enduring data collections that better measure the value of fisheries to pacific country economies must be in both organisation's shared interests. 
+
+Already, better statistics are collected through the FFA than within the Benefish reports. For example, the section on [Fisheries Revenue] compares Benefish4's measures to the Forum Fisheries Agency's "FFA Compendium of Economic and Development Statistics 2022.xlsx".[^Compendium] The coverage of the Compendium includes more countries and for a longer timeseries.
+
+The FFA is one of eight CROP members which might be able to better supply alternative Benefish metrics.
+
+ 
+
+### Working in with SPC's Statistics for Development Division
+
+SPC's own SDD regularly and frequently engages with pacific island countries National Statistical Offices. Co-ordinating efforts with SDD offers a path for quicker and consistent data collection on some key Benefish metrics.
+
+SDD might be best placed to supply more comprehensive and timely measures of [Fish Exports] and [Fishing contribution to GDP] than are currently collected through Benefish's four-year interval collection and reporting process. SDD's subject matter experts for each of these areas might also be able to provide deeper insight into the changes occurring within each area across the pacific.
+
+
+
+### Exploring FAME Administrative Data Sources
+
+Other more fisheries-related measures might be better derived from FAME's administrative data sources; for example, "Catches by Method" might be derived from FAME's Catch and Effort statistics and our coastal data. Currently, FAME's internal data policies are too restrictive for its data to become a source for producing high-quality economic, and fisheries-related statistics for the Pacific.
+
+SPC would need to revisit its "General Policies: Governance of fisheries, aquaculture and marine ecosystem data provided to SPC by its members" policy[^datapolicy]. The policy provides a framework for how SPC handles any fisheries, aquaculture and marine ecosystems related data including the data handling, ownership, security, sharing, integration and dissemination. 
+
+
+## Next Steps
+At the start of this project, the plan was to upload the cleaned Benefish data int SPC's .Stat system. However, after discussions with SDD, the cleaned data might be better suited being uploaded into SPC's Data Hub as the CSV files they're currently existing as. The move from .Stat to the Data Hub recognises the variables within the tables are still quite idiosyncratic for each country source, despite being grouped thematically.
+
+Secondly, more planning around the structure and the content of the next Benefish report is needed, to be able to identify which elements might be replaced with administrative data, which components can come from other sources, like SDD, and which components need a dedicated data collection system developed that supports the on-going collection of data.
 
 \newpage
 
-# Recommendations for Future Reports.
 
-1. The Benefish publications, as a single report, is too broad to do justice to all the topics inside it. Quite simply the report contains too much stuff. Its breadth comes at the cost of being _comprehensive_ on its covered topics; for example, the treatment of aquaculture.  
 
-Future reports should consider the scope of what's being collected, and focus more attention on collecting data from each. The report itself, in "Chapter 36 Recommendations", reaches a similar conclusion.
+# Benefish Summary Tables
 
-2. Alternative data collection processes need to be developed to both shorten the compiliation time, and improve data quality, again echoing Chapter 36.2 of the report.
+Of the Benefish tables, the Summary Tables of Tables 29-1, 29-2, 29-7 are the most useful since were designed to enable cross-PICT comparisons to be drawn
 
-Every report involves a large amount of lead-up time and in-country data collection. Four year data collection processes introduce the high risk that every new Benefish report is like a new box of chocolates to the member country supply data into SPC: you just never know what will be found. Repeated data collections are needed to build up both a feel inside of SPC and memeber countries for what the true metrics are, and "muscle memory" associated with regular statistical reporting according to a common set of metrics. 
 
-3. More use of administrative data sources need considered. For example, FAME data on data sheet log collections, and Vessel Monitoring Systems should be able to reconcile with PICT systems. If they do, then reporting from FAME data sources might replace in-country data collection processes.
+### Volume of production in 2021
 
-Before the project could head down this path, significant effort needs to be invested in data collection systems and processes, including into the statistical classifications and standards infrastructure that could support a robust data collection process. 
 
-4. FAME needs to revisit the costs and benefits of the severity of its data governance constraints. For FAME data's use as an administrative data source for fisheries statistical reporting, SPC would need to revisit its "General Policies: Governance of fisheries, aquaculture and marine ecosystem data provided to SPC by its members" policy.[^datapolicy] 
+```{r VolofProd21, echo=FALSE}
+   
+      ##
+      ##    Estimate US$ for non-US$ currencies
+      ##
+       Print_Me <- data.table::dcast(Vol_of_Prod2021[Vol_of_Prod2021$PICT != "Total",],
+                                     PICT ~ Metric,
+                                     value.var = "Value")
+       Print_Me$`Total (Excl Aquaculture)` <- rowSums(Print_Me[,c("Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based")])
+       
+       Print_Me <- Print_Me[order(-Print_Me$`Total (Excl Aquaculture)`),]
 
-The policy provides a framework for how SPC handles any fisheries, aquaculture and marine ecosystems related data including the data handling, ownership, security, sharing, integration and dissemination. However, it is too restrictive and prevents FAME data being used to produce high-quality economic, and fisheries-related statistics for the Pacific.
+       knitr::kable(Print_Me[,c("PICT", "Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based","Total (Excl Aquaculture)", "Aquaculture - Tonnes", "Aquaculture - Pieces")],
+                    format = "markdown",
+                    format.args = list(decimal.mark = ".", big.mark = ","),
+                    digit = 0,
+                    align = c('lrrrrrrrrrr'),
+                    booktabs = TRUE,
+                    caption= "Volume of Production - 2021")
+```
 
-a. Using administrative data sources for statistics is no longer seen as a "misuse" of administrative data.
+```{r VolofProd21unique, echo=FALSE}
+        
 
-Statistics New Zealand faced similar trade-offs in its Integrated Data Infrastructure(IDI)[^IDI] between maintaining the public's trust around the analytical use of confidential information, versus using administrative data for generating more accurate aggregate statistcs that reduce respondent burden. It recently released a proposal to use IDI information as an "administrative data-first" approach to the New Zealand Census.[^Admin] 
+       knitr::kable(unique(Vol_of_Prod2021[,c("Member_Country", "Table")]),
+                    format = "markdown",
+                    format.args = list(decimal.mark = ".", big.mark = ","),
+                    digit = 0,
+                    align = c('lcr'),
+                    booktabs = TRUE,
+                    caption= "Benefish Tables contributing to the Volume of Production - 2021 Measure")
+        
+        
+```
 
-The "case for change" focused on the reduced cost, greater resilience, and more efficient reuse of existing government data to make outputs more flexible and frequent.[^caseforchange] The same benefits apply for FAME data sources. Statistics New Zealand's consultative approach might serve as a model for revisiting the rigidity of SPCs existing data policies.
+\newpage
 
-5. The report needs to be modenised and its output be capable of electronic manipulation. Significant effort has gone into _this_ project just to extract numeric information from a pdf-based report. PDF reports as "output" from a research project have no place within the 21st century.
+
+
+### Value of production in 2021
+
+
+```{r ValofProd, echo=FALSE}
+   
+      ##
+      ##    Estimate US$ for non-US$ currencies
+      ##
+       Print_Me <- data.table::dcast(Val_of_Prod[Val_of_Prod$PICT != "Total",],
+                                     PICT ~ Metric,
+                                     value.var = "Value")
+       Print_Me$Total <- rowSums(Print_Me[,2:length(Print_Me)])
+         
+       Print_Me <- Print_Me[order(-Print_Me$Total),]
+
+      knitr::kable(Print_Me,
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 0,
+                   align = c('lrrrrrrrrr'),
+                   booktabs = TRUE,
+                   caption= "Value of production in 2021 - US$")
+        
+```
+
+```{r ValofProdunique, echo=FALSE}
+        
+
+      knitr::kable(unique(Val_of_Prod[,c("Member_Country", "Table")]),
+                   format = "markdown",
+                   format.args = list(decimal.mark = ".", big.mark = ","),
+                   digit = 0,
+                   align = c('lcr'),
+                   booktabs = TRUE,
+                   caption= "Benefish Tables contributing to the Value of Production in 2021 Measure")
+        
+        
+```
+
 
 
 \newpage
 
-Table \@ref(tab:ThermaticTopics) below contains the thematic topics extracted from the data.
 
-```{r ThermaticTopics, echo=FALSE}
 
-Thermatics <- data.frame(Thermatics = unique(Together$Standardised_Table_Name))
-Thermatics <- data.frame(Thermatics = Thermatics[order(Thermatics$Thermatics),])
+### Volume of fishery production by PICT
 
-knitr::kable(Thermatics[Thermatics$Thermatics != "Duplicate Data",],
-             row.names = FALSE,
-             format = "markdown",
-             align = c('llllll'),
-             booktabs = TRUE,
-             caption= "Benefish4 Thematic Topics")
-             
+
+```{r VolofProd, echo=FALSE}
+   
+      ##
+      ##    Estimate US$ for non-US$ currencies
+      ##
+       Print_Me <- data.table::dcast(Vol_of_Prod[Vol_of_Prod$PICT != "Total",],
+                                     PICT + Year ~ Metric,
+                                     value.var = "Value")
+       Print_Me$Total <- rowSums(Print_Me[,3:length(Print_Me)])
+         
+       Print_Me <- Print_Me[order(Print_Me$Year, -Print_Me$Total),]
+
+       knitr::kable(Print_Me,
+                    format = "markdown",
+                    format.args = list(decimal.mark = ".", big.mark = ","),
+                    digit = 0,
+                    align = c('lcrrrrrrrrr'),
+                    booktabs = TRUE,
+                    caption= "Volume of Production - Tonnes")
+        
+```
+
+```{r VolofProdunique, echo=FALSE}
+
+       knitr::kable(unique(Vol_of_Prod[,c("Member_Country", "Table")]),
+                    format = "markdown",
+                    format.args = list(decimal.mark = ".", big.mark = ","),
+                    digit = 0,
+                    align = c('lcr'),
+                    booktabs = TRUE,
+                    caption= "Benefish Tables contributing to the Volume of Production Measure")
+        
+        
 ```
 
 
-Some of these metrics are best replaced with measures from FAME's administrative data sources; for example, "Catches by Method" might be derived from FAME's Catch and Effort statistics and our coastal data.
 
-Similarly, SDD might have better, more timely and more comprehensive measures of Fish Exports than currently collected through the Benefish publications.
-
-Other aspects of the report to explore are whether the topics in Table \@ref(tab:ThermaticTopics) are the correct topics for data collection around. Fishing contributions to GDP, with two different approaches might be metrics collected through SDD efforts related to expanding National Accounting collections within the Pacific. 
-
-Metrics missing from the current Benefish publications, but maybe which should be included, are fishing activity measures; for example, the vessel numbers and change like Figure \@ref(fig:PurseSeineBoats) below from our FAME data
-
-```{r PurseSeineBoats, echo=FALSE, fig.pos='h', out.width = '100%', fig.cap = 'Number of Purse Seine Vessels Operating in the WCPO Purse Seine Fishery'}
-
-knitr::include_graphics(paste0(BaseDir, "Number_of_Purse_Seine_Vessels_Operating_within_the_WCPFC_NoTitles.png"))
-
-```
+\newpage
 
 
-## Estimates by the Benefish studies of annual fisheries harvests
-
-Of the Benefish tables, the _Estimates by the Benefish Studies of Annual Fisheries Harvests_ is the cleanest and most complete. The 
-
-
-```{r Subsitance, echo=FALSE, fig.pos='h', out.width = '100%', fig.cap = "Importance of Subsistence Fishing within PICTs ordered by World Bank GDP"}
-
-knitr::include_graphics(paste0(BaseDir, "Subsistence_Fishing_NoTitle.png"))
-
-```
-
-\FloatBarrier
-
-
-
+# Benefish Detailed Tables
 
 
 ```{r Values, echo=FALSE}
@@ -272,7 +392,10 @@ knitr::kable(Table_Aggregate_Volumes[Table_Aggregate_Volumes$Year == 2021, c("Me
              digit = 0,
              booktabs = TRUE,
              caption= "Electronic Benefish4 Fishery Volumes - 2021")
+             
+```
 
+```{r Volumesunique, echo=FALSE}
              
       knitr::kable(unique(Benefish_studies[,c("Member_Country", "Table")]),
                    format = "markdown",
@@ -287,12 +410,15 @@ knitr::kable(Table_Aggregate_Volumes[Table_Aggregate_Volumes$Year == 2021, c("Me
 
 \FloatBarrier
 
-# Aquaculture
+
+\newpage
+
+
+## Aquaculture
 Gillett, in chapter 35.5, highlighted the scarcity of information about national aquaculture production as a significant finding from the study. One of the most outstanding points about aquaculture in the region – and perhaps one of the most
 remarkable observations during the study – was the lack of knowledge of the overall aquaculture production in almost every PICT. Indeed, he felt: "Considering the enormous amount of development funds and public money spent on promotion of
 aquaculture in the region, it is amazing that there is so little monitoring of the progress of aquaculture development in terms of the total volume and value of production."
 
-## Incompatible Volume and Value Data
 That same lack of confidence in the data is also apparent when the value of aquaculture reconciled against its volume components: tonnes and pieces. The volume and value metrics bear no systematic relationship to each other because, if they did, then techniques like regression analysis or simultaneous equations analysis would estimate a non-negative separate implicit aquaculture prices per tonne and per peice. Attempts to allocate the value to the volumes through estimating an implicit price failed to produce non-negative values, implying that neither the volume nor the value aquaculture measures related to the each other.
 
 
@@ -306,7 +432,11 @@ That same lack of confidence in the data is also apparent when the value of aqua
                       align = c('llrrr'),
                       booktabs = TRUE,
                       caption= "Benefish4 Aquiculture Metrics")
-          
+             
+```
+
+```{r Aquicultureunique, echo=FALSE}
+                   
       knitr::kable(unique(Benefish_studies[Harvest_Sector == "Aquaculture",c("Member_Country", "Table")]),
                    format = "markdown",
                    format.args = list(decimal.mark = ".", big.mark = ","),
@@ -392,14 +522,8 @@ stargazer::stargazer(OLS, type = "html", title = "Results", out = "C:/From BigDi
 #shiny::includeHTML("C:/From BigDisk/GIT/Benefish_Data_Collection/Data_Output/pp.html")      
 ```
 
-
-
-
 \newpage
 
-
-
-# Summary of Tables and Their Dimensions
 
 ## Catches by Method
 
@@ -434,7 +558,13 @@ stargazer::stargazer(OLS, type = "html", title = "Results", out = "C:/From BigDi
                    align = c('lrrrr'),
                    booktabs = TRUE,
                    caption= "Catches by Method")
-                   
+                  
+        
+```
+
+
+```{r CbyMUnique, echo=FALSE}
+                      
       knitr::kable(unique(Catches_By_Method[,c("Member_Country", "Table")]),
                    format = "markdown",
                    format.args = list(decimal.mark = ".", big.mark = ","),
@@ -451,7 +581,7 @@ stargazer::stargazer(OLS, type = "html", title = "Results", out = "C:/From BigDi
 
 ## Domestic Fish Consumption
 
-Domestic fish consumption is a metric with changing collection metrics across countries, significantly complicating cross-country comparisons. Most of the source information for this component resides in the qualitative elements of the Benefish text. For example, the Kiribati domestic fish consumption metrics are encapsulated as twelve bullet points of reference to other studies spanning a range of time periods between 1989 - 2016, with new infromation included from the 2019/20 Household Income and Expenditure Survey. 
+Domestic fish consumption is a metric with changing collection metrics across countries, significantly complicating cross-country comparisons. Most of the source information for this component resides in the qualitative elements of the Benefish text. For example, the Kiribati domestic fish consumption metrics are encapsulated as twelve bullet points of reference to other studies spanning a range of time periods between 1989 - 2016, with new information included from the 2019/20 Household Income and Expenditure Survey. 
 
 Very little of the fish consumption metrics are quantitative, and where they are (for example below), they are subject to significant cross-country measurement variability.
 
@@ -473,7 +603,12 @@ Very little of the fish consumption metrics are quantitative, and where they are
                    align = c('lrrrr'),
                    booktabs = TRUE,
                    caption= "Domestic Fish Consumption")
-                   
+        
+```
+
+
+```{r DFCUnique, echo=FALSE}
+                            
       knitr::kable(unique(Domestic_Fish_Consumption[,c("Member_Country", "Table")]),
                    format = "markdown",
                    format.args = list(decimal.mark = ".", big.mark = ","),
@@ -506,6 +641,11 @@ Fish Exports is another data collection whose metrics are country specific. Tabl
                    align = c('lr'),
                    booktabs = TRUE,
                    caption= "Fish Export Dimensions for each Country")
+        
+```
+
+
+```{r FEUnique, echo=FALSE}
                    
       knitr::kable(unique(Fish_Exports[,c("Member_Country", "Table")]),
                    format = "markdown",
@@ -619,6 +759,11 @@ Fish_GDP
                    booktabs = TRUE,
                    caption= "Benefish Fisheries GDP Metrics")
         
+```
+
+
+```{r FGDPUnique, echo=FALSE}
+                    
 
       knitr::kable(unique(Fish_GDP[,c("Member_Country", "Table")]),
                    format = "markdown",
@@ -667,6 +812,11 @@ Fish_GDP
                    booktabs = TRUE,
                    caption= "Benefish Fisheries GDP (Value Added Ratio Measure)")
         
+```
+
+
+```{r FGDPVarUnique, echo=FALSE}
+             
 
       knitr::kable(unique(Fish_GDP_Var[,c("Member_Country", "Table")]),
                    format = "markdown",
@@ -699,6 +849,11 @@ Fish_GDP
                    booktabs = TRUE,
                    caption= "Benefish Fishing Employment")
         
+```
+
+
+```{r FempUnique, echo=FALSE}
+              
 
       knitr::kable(unique(Fishing_Employment[,c("Member_Country", "Table")]),
                    format = "markdown",
@@ -730,6 +885,12 @@ Fish_GDP
                    align = c('llcrr'),
                    booktabs = TRUE,
                    caption= "Benefish Households Engaged in Fishing")
+        
+```
+
+
+```{r householdsUnique, echo=FALSE}
+              
         
 
       knitr::kable(unique(Hhld_Fishing[,c("Member_Country", "Table")]),
@@ -763,6 +924,12 @@ Fish_GDP
                    booktabs = TRUE,
                    caption= "Benefish Price Measures")
         
+```
+
+
+```{r priceUnique, echo=FALSE}
+              
+               
 
       knitr::kable(unique(Price_Measures[,c("Member_Country", "Table")]),
                    format = "markdown",
@@ -778,154 +945,11 @@ Fish_GDP
 
 
 
-\newpage
-
-## Value of production in 2021
-
-
-```{r ValofProd, echo=FALSE}
-   
-      ##
-      ##    Estimate US$ for non-US$ currencies
-      ##
-       Print_Me <- data.table::dcast(Val_of_Prod[Val_of_Prod$PICT != "Total",],
-                                     PICT ~ Metric,
-                                     value.var = "Value")
-       Print_Me$Total <- rowSums(Print_Me[,2:length(Print_Me)])
-         
-       Print_Me <- Print_Me[order(-Print_Me$Total),]
-
-      knitr::kable(Print_Me,
-                   format = "markdown",
-                   format.args = list(decimal.mark = ".", big.mark = ","),
-                   digit = 0,
-                   align = c('lrrrrrrrrr'),
-                   booktabs = TRUE,
-                   caption= "Value of production in 2021 - US$")
-        
-
-      knitr::kable(unique(Val_of_Prod[,c("Member_Country", "Table")]),
-                   format = "markdown",
-                   format.args = list(decimal.mark = ".", big.mark = ","),
-                   digit = 0,
-                   align = c('lcr'),
-                   booktabs = TRUE,
-                   caption= "Benefish Tables contributing to the Value of Production in 2021 Measure")
-        
-        
-```
 
 
 
-\newpage
-
-## Volume of fishery production by PICT
-
-
-```{r VolofProd, echo=FALSE}
-   
-      ##
-      ##    Estimate US$ for non-US$ currencies
-      ##
-       Print_Me <- data.table::dcast(Vol_of_Prod[Vol_of_Prod$PICT != "Total",],
-                                     PICT + Year ~ Metric,
-                                     value.var = "Value")
-       Print_Me$Total <- rowSums(Print_Me[,3:length(Print_Me)])
-         
-       Print_Me <- Print_Me[order(Print_Me$Year, -Print_Me$Total),]
-
-       knitr::kable(Print_Me,
-                    format = "markdown",
-                    format.args = list(decimal.mark = ".", big.mark = ","),
-                    digit = 0,
-                    align = c('lcrrrrrrrrr'),
-                    booktabs = TRUE,
-                    caption= "Volume of Production - Tonnes")
-        
-
-       knitr::kable(unique(Vol_of_Prod[,c("Member_Country", "Table")]),
-                    format = "markdown",
-                    format.args = list(decimal.mark = ".", big.mark = ","),
-                    digit = 0,
-                    align = c('lcr'),
-                    booktabs = TRUE,
-                    caption= "Benefish Tables contributing to the Volume of Production Measure")
-        
-        
-```
-
-
-
-\newpage
-
-## Volume of production in 2021
-
-
-
-```{r VolofProd21, echo=FALSE}
-   
-      ##
-      ##    Estimate US$ for non-US$ currencies
-      ##
-       Print_Me <- data.table::dcast(Vol_of_Prod2021[Vol_of_Prod2021$PICT != "Total",],
-                                     PICT ~ Metric,
-                                     value.var = "Value")
-       Print_Me$`Total (Excl Aquaculture)` <- rowSums(Print_Me[,c("Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based")])
-       
-       Print_Me <- Print_Me[order(-Print_Me$`Total (Excl Aquaculture)`),]
-
-       knitr::kable(Print_Me[,c("PICT", "Coastal commercial","Coastal subsistence","Freshwater","Offshore Foreign Based","Offshore Locally Based","Total (Excl Aquaculture)", "Aquaculture - Tonnes", "Aquaculture - Pieces")],
-                    format = "markdown",
-                    format.args = list(decimal.mark = ".", big.mark = ","),
-                    digit = 0,
-                    align = c('lrrrrrrrrrr'),
-                    booktabs = TRUE,
-                    caption= "Volume of Production - 2021")
-        
-
-       knitr::kable(unique(Vol_of_Prod2021[,c("Member_Country", "Table")]),
-                    format = "markdown",
-                    format.args = list(decimal.mark = ".", big.mark = ","),
-                    digit = 0,
-                    align = c('lcr'),
-                    booktabs = TRUE,
-                    caption= "Benefish Tables contributing to the Volume of Production - 2021 Measure")
-        
-        
-```
-
-
-\newpage
-
-
-
-
-
-
-
-# Next Steps
-At the start of this project, the plan was to upload the cleaned Benefish data int SPC's .Stat system. However, after discussions with SDD, the cleaned data might be better suited being uploaded into SPC's Data Hub as the CSV files they're currently existing as. The move from .Stat to the Data Hub recognises the variables within the tables are still quite idiosyncratic for each country source, despite being grouped thermatically.
-
-Secondly, more planning around the structure and the content of the next Benefish report is needed, to be able to identify which elements might be replaced with administrative data, which components can come from other sources, like SDD, and which components need a dedicated data collection system developed that supports the on-going collection of data.
-
-\newpage
-# Results
-The following are the Benefish4 tables, and how they've been collected together into a thermatic topic.
-
-
-```{r Captured, echo=FALSE}
-
-knitr::kable(Together[!is.na(Together$In_Captured),c("Country","Table", "BeneFish_Table_Name", "Standardised_Table_Name")],
-             row.names = FALSE,
-             format = "markdown",
-             align = c('llllll'),
-             booktabs = TRUE,
-             caption= "Treatment of Benefish4 Tables")
-             
-```
-
-\newpage
-Not all of the Benefish4 tables could be collected together. These are tables which were either too idiosyncratic in content, or replicated elsewhere.
+# Benefish Tables Excluded from Electronic Transformation
+Not all of the Benefish4 tables could be collected together. These are tables which were either too idiosyncratic in content, or were replicated elsewhere.
 
 ```{r Missed, echo=FALSE}
 
@@ -937,7 +961,6 @@ knitr::kable(Together[is.na(Together$In_Captured),c("Country","Table", "BeneFish
              caption= "Tables that Couldn't be Compared")
              
 ```
-
 
 
 \newpage
