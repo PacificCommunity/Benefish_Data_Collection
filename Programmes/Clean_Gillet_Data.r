@@ -802,7 +802,7 @@
    save(Fisheries_Harvest, file = "Data_Intermediate/Fisheries_Harvest.rda") 
    save(All_Data, file = "Data_Intermediate/All_Data.rda") 
    save(Exchange_Rates, file = "Data_Output/Exchange_Rates.rda") 
-   write.table(Exchange_Rates, file="Data_Output/Exchange_Rates.csv", sep = ",", row.names = FALSE)
+   write.table(Exchange_Rates, file="Data_Output/OUTPUT_Exchange_Rates.csv", sep = ",", row.names = FALSE)
 
  
 ##

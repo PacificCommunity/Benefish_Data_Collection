@@ -270,12 +270,12 @@
       write.table(Standard_Dimensions[["Fishing contribution to GDP"]],  file = "Data_Output/OUTPUT_Fishing_contribution_to_GDP.csv", row.names = FALSE, sep= ",")
       write.table(Standard_Dimensions[["Fishing Employment"]],           file = "Data_Output/OUTPUT_Fishing_Employment.csv", row.names = FALSE, sep= ",")
       write.table(Standard_Dimensions[["Price Measures"]],               file = "Data_Output/OUTPUT_Price_Measures.csv", row.names = FALSE, sep= ",")
-      write.table(Standard_Dimensions[["Value of production in 2021"]],  file = "Data_Output/OUTPUT_Value_of_production_in_2021.csv", row.names = FALSE, sep= ",")
-      write.table(Standard_Dimensions[["Volume of production in 2021"]], file = "Data_Output/OUTPUT_Volume_of_production_in_2021.csv", row.names = FALSE, sep= ",")
+      write.table(Standard_Dimensions[["Value of production in 2021"]],  file = "Data_Output/OUTPUT_SUMMARY_TABLE_Value_of_production_in_2021.csv", row.names = FALSE, sep= ",")
+      write.table(Standard_Dimensions[["Volume of production in 2021"]], file = "Data_Output/OUTPUT_SUMMARY_TABLE_Volume_of_production_in_2021.csv", row.names = FALSE, sep= ",")
       
       write.table(Standard_Dimensions[["Fishing contribution to GDP - VAR Method"]],file = "Data_Output/OUTPUT_Fishing_contribution_to_GDP_VAR_Method.csv", row.names = FALSE, sep= ",")
-      write.table(Standard_Dimensions[["Volume of fishery production by PICT"]],    file = "Data_Output/OUTPUT_Volume_of_fishery_production_by_PICT.csv", row.names = FALSE, sep= ",")
       write.table(Standard_Dimensions[["Number of households engaged in fishing"]], file = "Data_Output/OUTPUT_Number_of_households_engaged_in_fishing.csv", row.names = FALSE, sep= ",")
+      write.table(Standard_Dimensions[["Volume of fishery production by PICT"]],    file = "Data_Output/OUTPUT_SUMMARY_TABLE_Volume_of_fishery_production_by_PICT.csv", row.names = FALSE, sep= ",")
       
       write.table(Standard_Dimensions[["Estimates by the Benefish studies of annual fisheries harvests"]], file = "Data_Output/OUTPUT_Estimates_by_the_Benefish_studies_of_annual_fisheries_harvests.csv", row.names = FALSE, sep= ",")
 
